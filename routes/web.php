@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// backend
+Route::group(['middleware' => ['auth','CheckRole:admin']], function () {
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::get('/create',[UserController::class,'create'])->name('create');
+        Route::post('/create',[UserController::class,'store']);
+        Route::put('/edit',[UserController::class,'edit']);
+        Route::put('/delete',[UserController::class,'delete']);
+    });
 });
