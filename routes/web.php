@@ -24,3 +24,11 @@ Route::get('/register',function(){
     return view('frontend.auth.register');
 
 });
+Route::get('/profil',function(){
+    return view('frontend.profil.profil');
+
+});
+Route::get('/barang',function(){
+    return view('frontend.barang.barang');
+
+});
