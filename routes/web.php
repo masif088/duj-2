@@ -32,3 +32,11 @@ Route::group(['middleware' => ['auth','CheckRole:admin']], function () {
         Route::put('/delete',[UserController::class,'delete']);
     });
 });
+Route::get('/profil',function(){
+    return view('frontend.profil.profil');
+
+});
+Route::get('/barang',function(){
+    return view('frontend.barang.barang');
+
+});
