@@ -23,3 +23,7 @@ class UserService
 
     }
 }
+
+ // if(isset($request->validator) && $request->validator->fails()){
+        //     return redirect()->back()->withErrors($request->validator->messages());
+        // }
