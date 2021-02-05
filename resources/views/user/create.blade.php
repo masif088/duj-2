@@ -29,11 +29,17 @@
                   <label for="exampleFormControlSelect9">Role</label>
                   <select name="role" class="form-control digits" id="exampleFormControlSelect9">
                     <option disabled selected hidden></option>
+                    @if (auth()->user()->role == 'admin')
                     <option value="admin">admin</option>
-                    <option value="teknisi">teknisi</option>
-                    <option value="ketua">ketua cabang</option>
                     <option value="head">Head office</option>
+                    <option value="teknisi">teknisi</option>
+                    @endif
+                    @if (auth()->user()->role == "head")
+                    <option value="ketua">ketua cabang</option>
+                    @endif
+                    @if (auth()->user()->role == "ketua")
                     <option value="checker">Checker</option>
+                    @endif
 
                   </select>
                 </div>

@@ -10,9 +10,14 @@ use Services\User\UserService;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $user = auth()->user();
+        return view('user.profil',compact('user'));
+    }
     public function create()
     {
-        return view('backend.user');
+        return view('user.create');
     }
     public function edit($id)
     {
@@ -21,10 +26,12 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         if(isset($request->validator) && $request->validator->fails()){
+            $request->flash();
             return redirect()->back()->withErrors($request->validator->messages());
         }
         if(auth()->user()->role == 'admin'){
             if(!in_array($request->role,['admin','head','teknisi'])){
+                dd('haloo');
                 return redirect()->back();
             } 
         }elseif(auth()->user()->role == 'head'){
@@ -44,10 +51,13 @@ class UserController extends Controller
     public function update(UpdateRequest $request,User $id)
     {
         if(isset($request->validator) && $request->validator->fails()){
+            $request->flash();
+            dd($request->validator->messages());
             return redirect()->back()->withErrors($request->validator->messages());
         }
         if(auth()->user()->role == 'admin'){
             if(!in_array($request->role,['admin','head','teknisi'])){
+                dd('h');
                 return redirect()->back();
             } 
         }elseif(auth()->user()->role == 'head'){
