@@ -2,9 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Suplier\StoreRequest;
 use Illuminate\Http\Request;
+use Services\Suplier\SuplierService;
 
 class SuplierController extends Controller
 {
-    //
+    public function create()
+    {
+        return view('backend.suplier');
+    }
+    public function store(StoreRequest $request)
+    {
+        if(isset($request->validator) && $request->validator->fails()){
+            return redirect()->back()->withErrors($request->validator->messages());
+        }
+        SuplierService::store($request);
+        return redirect()->back();
+    }
 }

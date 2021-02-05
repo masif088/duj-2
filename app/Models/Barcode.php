@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Barang extends Model
+class Barcode extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function masuk()
+    {
+        return $this->belongsTo(Masuk::class);
+    }
 }

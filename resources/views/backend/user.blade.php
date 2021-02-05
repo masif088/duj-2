@@ -8,11 +8,13 @@
 </head>
 <body>
     
-    <form action="{{route('user.create')}}" method="post">
+    <form action="{{route('user.edit',$id)}}" method="post">
     @csrf
+    @method('put')
     <input type="text" name="name">
     <input type="email" name="email">
-    <input type="text" name="password">
+    <input type="password" name="password">
+    <input type="hidden" name="shop[id]" value="{{ $id }}">
     @error('name')
         {{$message}}
     @enderror
