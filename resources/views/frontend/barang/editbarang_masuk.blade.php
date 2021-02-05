@@ -10,8 +10,9 @@
       <div class="row">
         <!-- Default Textbox start-->
         <div class="col-md-12">
-          <form action="{{route('masuk.create')}}" method="post">
+          <form action="{{route('masuk.edit',$id->id)}}" method="post">
           @csrf
+          @method('put')
           <div class="card">
             <div class="card-header">
               <h5 class="card-title">Barang Masuk</h5>
@@ -21,7 +22,7 @@
                 <div class="col-form-label">Suplier</div>
                 <select name="suplier" class="js-example-basic-single col-sm-12">
                   @foreach ($suplier as $s)
-                  <option value="{{$s->id}}">{{$s->name}}</option>
+                  <option value="{{$s->id}}" {!!$id->suplier_id == $s->id ? 'selected' : null  !!}>{{$s->name}}</option>
                       
                   @endforeach  
                 </select>
@@ -30,13 +31,14 @@
                 <div class="col-form-label">Gudang</div>
                 <select name="gudang" class="js-example-basic-single col-sm-12">
                   @foreach ($gudang as $g)
-                  <option value="{{$g->id}}">{{$g->name}}</option>
+                  <option value="{{$g->id}}" {!!$id->gudang_id == $g->id ? 'selected' : null  !!}>{{$g->name}}</option>
                       
                   @endforeach  
                 </select>
               </div>
               <br>
-              <button class="btn btn-success btn-lg" type="button" id="add_form">Add</button>
+
+              {{-- <button class="btn btn-success btn-lg" type="button" id="add_form">Add</button> --}}
               <br><br>
               <div class="row container1">
                 <div class="col-md-2 mb-3">
@@ -59,34 +61,34 @@
                   <label for="validationServer01">Total</label>
 
                 </div>
-                <div class="col-md-2 mb-3">
+                {{-- <div class="col-md-2 mb-3">
                   <label for="validationServer02">Action</label>
 
-                </div>
+                </div> --}}
               </div>
               <div class="row">
                   <div class="col-md-2 mb-3">
-                    <select name="barang[]" class="js-example-basic-single col-sm-12">
+                    <select name="barang" class="js-example-basic-single col-sm-12">
                       @foreach ($barang as $b)
-                  <option value="{{$b->id}}">{{$b->name}}</option>
+                  <option value="{{$b->id}}" {!!$id->barang_id == $b->id ? 'selected' : null  !!}>{{$b->name}}</option>
                   @endforeach
                     </select>
                   </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control" name="kode_akuntan[]"  type="text" placeholder="kode akuntan" required="">
+                  <input class="form-control" name="kode_akuntan" value="{{$id->kode_akuntan}}"  type="text" placeholder="kode akuntan" required="">
                 </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control" name="kuantiti[]"  type="number" placeholder="kuantiti" required="">
+                  <input class="form-control" name="kuantiti" value="{{$id->kuantiti}}"  type="number" placeholder="kuantiti" required="">
                 </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control" name="harga[]" type="number" placeholder="harag satuan" required="">
+                  <input class="form-control" name="harga" value="{{$id->harga_satuan}}" type="number" placeholder="harag satuan" required="">
                 </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control" id="total" placeholder="total"  type="text" readonly>
+                  <input class="form-control" id="total" placeholder="total" value="{{$id->harga_satuan*$id->kuantiti}}" type="text" readonly>
                 </div>
-                <div class="col-md-2 mb-3">
+                {{-- <div class="col-md-2 mb-3">
                   <button type="button" class="btn btn-danger btn-sm delete" >Delete</button>
-                </div>
+                </div> --}}
               </div>
               <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">selesai</button>
@@ -119,18 +121,18 @@
           $(wrapper).append(`
           <div class="row">
           <div class="col-md-2 mb-3">
-                    <select name="barang[]" class="js-example-basic-single col-sm-12">
+                    <select name="barang" class="js-example-basic-single col-sm-12">
                     ${dataBarang}
                     </select>
                   </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control" name="kode_akuntan[]"  type="text" placeholder="kode akuntan" required="">
+                  <input class="form-control" name="kode_akuntan"  type="text" placeholder="kode akuntan" required="">
                 </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control" name="kuantiti[]"  type="text" placeholder="kuantiti" required="">
+                  <input class="form-control" name="kuantiti"  type="text" placeholder="kuantiti" required="">
                 </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control" name="harga[]" type="text" placeholder="harag satuan" required="">
+                  <input class="form-control" name="harga" type="text" placeholder="harag satuan" required="">
                 </div>
                 <div class="col-md-2 mb-3">
                   <input class="form-control" id="total" placeholder="total"  type="text" readonly>

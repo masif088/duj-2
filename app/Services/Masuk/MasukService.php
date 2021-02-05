@@ -53,13 +53,10 @@ class MasukService
             $masuk->barcode()->take($masuk->kuantiti - $data->kuantiti)->delete();
         } elseif ($masuk->kuantiti < $data->kuantiti) {
             for ($i = 0; $i < $data->kuantiti - $masuk->kuantiti; $i++) {
-                Barcode::create([
-                    'masuk_id' => $data->id,
-                    'kode' => mt_rand(10000000, 99999999),
+                $masuk->barcode()->create([
+                    'kode' => mt_rand(10000000, 99999999)
                 ]);
             }
-        } else {
-            return 'error';
         }
         $masuk->update([
             'suplier_id' => $data->suplier,
