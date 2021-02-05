@@ -27,3 +27,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/delete',[ApiUserController::class,'delete']);
     });
 });
+Route::get('/isAuth', [ApiUserController::class, 'isAuth']);
+Route::post('/login', [ApiUserController::class, 'login']);

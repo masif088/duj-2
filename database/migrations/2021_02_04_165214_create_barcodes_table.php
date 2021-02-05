@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSupliersTable extends Migration
+class CreateBarcodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateSupliersTable extends Migration
      */
     public function up()
     {
-        Schema::create('supliers', function (Blueprint $table) {
+        Schema::create('barcodes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('no_hp',13);
-            $table->string('alamat');
-            $table->softDeletes();
+            $table->foreignId('masuk_id')->references('id')->on('masuks');
+            $table->string('kode')->unique();
+            $table->enum('status',['nonaktif','aktif'])->default('nonaktif');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateSupliersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supliers');
+        Schema::dropIfExists('barcodes');
     }
 }

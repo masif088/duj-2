@@ -19,9 +19,9 @@ class CreateMasuksTable extends Migration
             $table->foreignId('barang_id')->references('id')->on('barangs');
             $table->foreignId('gudang_id')->references('id')->on('gudangs');
             $table->foreignId('suplier_id')->references('id')->on('supliers');
-            $table->string('kode_barang');
-            $table->string('kondisi');
-            $table->enum('status',['pindah','terjual','ready','rusak']);
+            $table->string('kode_akuntan');
+            $table->bigInteger('harga_satuan');
+            $table->bigInteger('kuantiti');
             $table->timestamps();
         });
     }
