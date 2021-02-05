@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Barang;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -26,5 +27,10 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required| string|max:50',
         ];
+    }
+    public $validator = null;
+    protected function failedValidation(Validator $validator)
+    {
+        $this->validator = $validator;
     }
 }

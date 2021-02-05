@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Suplier;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -28,5 +29,10 @@ class StoreRequest extends FormRequest
             'no_hp' => 'required| string|max:50',
             'alamat' =>'required| string|min:4',
         ];
+    }
+    public $validator = null;
+    protected function failedValidation(Validator $validator)
+    {
+        $this->validator = $validator;
     }
 }

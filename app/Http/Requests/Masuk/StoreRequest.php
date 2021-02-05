@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Masuk;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -31,5 +32,10 @@ class StoreRequest extends FormRequest
             'kuantiti.*' => 'required| integer',
             'kode_akuntan.*' => 'required| string',
         ];
+    }
+    public $validator = null;
+    protected function failedValidation(Validator $validator)
+    {
+        $this->validator = $validator;
     }
 }
