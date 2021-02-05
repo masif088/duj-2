@@ -19,7 +19,14 @@
             </div>
           </li>
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="profil"><i data-feather="users"> </i><span>Profile</span></a></li>
-            <li class="dropdown"><a class="nav-link menu-title link-nav" href="barang"><i data-feather="users"> </i><span>Barang</span></a></li>
+          <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="airplay"></i><span class="lan-6">Kelola Barang</span></a>
+            <ul class="nav-submenu menu-content">
+              <li><a href="barang">Input Barang</a></li>
+              <li><a href="barang_masuk">Barang Masuk</a></li>
+            </ul>
+          </li>
+
+          {{-- <li class="dropdown"><a class="nav-link menu-title link-nav" href="barang"><i data-feather="users"> </i><span>Barang</span></a></li> --}}
         </div>
       <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
     </div>

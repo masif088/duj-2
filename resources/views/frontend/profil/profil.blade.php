@@ -1,15 +1,6 @@
 @extends('frontend.layouts.master')
 @section('content')
   <div class="page-header">
-    {{-- <div class="row">
-      <div class="col-6">
-        <h3>Edit Profile</h3>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
-          <li class="breadcrumb-item">Users</li>
-        </ol>
-      </div>
-    </div> --}}
   </div>
   <div class="container-fluid">
     <div class="edit-profile">
@@ -21,7 +12,7 @@
               <div class="card-options"><a class="card-options-collapse" href="#" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-toggle="card-remove"><i class="fe fe-x"></i></a></div>
             </div>
             <div class="card-body">
-              <form>
+              <form class="form theme-form">
                 <div class="row mb-2">
                   <div class="col-auto"><img class="img-70 rounded-circle" alt="" src="{{asset('/assets/images/user/7.jpg')}}"></div>
                   <div class="col">
@@ -30,16 +21,63 @@
                   </div>
                 </div>
                 <div class="form-group mb-3">
+                  <label class="col-form-label">Nama</label>
+                  <input  id="nama" type="text"
+                                class="form-control @error('nama') is-invalid @enderror" placeholder="Nama" name="nama"
+                                value="{{ old('nama') }}" required autocomplete="nama"  autofocus>
+                  @error('nama')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="form-group mb-3">
                   <label class="form-label">Email-Address</label>
-                  <input class="form-control" placeholder="your-email@domain.com">
+                  <input  id="email" type="email"
+                                class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email"
+                                value="{{ old('email') }}" required autocomplete="email"  autofocus>
+                  @error('email')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
                 <div class="form-group mb-3">
                   <label class="form-label">Password</label>
-                  <input class="form-control" type="password" value="password">
+                  <input id="password" type="password"
+                                 class="form-control @error('password') is-invalid @enderror" name="password"
+                                 required autocomplete="current-password">
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
                 <div class="form-group mb-3">
                   <label class="form-label">Alamat</label>
-                  <textarea class="form-control" rows="5">On the other hand, we denounce with righteous indignation</textarea>
+                  <textarea rows="5"  id="alamat" type="text"
+                                class="form-control @error('alamat') is-invalid @enderror" placeholder="Alamat" name="alamat"
+                                value="{{ old('alamat') }}" required autocomplete="alamat"  autofocus></textarea>
+                  @error('alamat')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="form-group mb-3">
+                  <label class="col-form-label">No HP</label>
+                  <input  id="nohp" type="text"
+                                class="form-control @error('nohp') is-invalid @enderror" placeholder="No HP" name="nohp"
+                                value="{{ old('nohp') }}" required autocomplete="nohp"  autofocus>
+                  @error('nohp')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 col-form-label">Foto</label>
+                  <input class="form-control" type="file">
                 </div>
                 <div class="form-footer">
                   <div class="form-group">
