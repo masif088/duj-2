@@ -14,7 +14,7 @@ class MasukController extends Controller
 {
     public function create()
     {
-        return view('backend.masuk',MasukService::create());
+        return view('frontend.barang.barang_masuk',MasukService::create());
     }
     public function index()
     {

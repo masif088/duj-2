@@ -24,12 +24,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'suplier' => 'required| integer',
-            'barang' => 'required| integer',
-            'gudang' => 'required| integer',
-            'harga' => 'required| integer',
-            'kuantiti' => 'required| integer',
-            'kode_akuntan' => 'required| string',
+            'suplier.*' => 'required| integer',
+            'barang.*' => 'required| integer',
+            'gudang.*' => 'required| integer',
+            'harga.*' => 'required| integer',
+            'kuantiti.*' => 'required| integer',
+            'kode_akuntan.*' => 'required| string',
         ];
     }
 }

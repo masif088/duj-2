@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required| string|max:50',
             'email' => ['required', 'string', 'email', 'max:255',Rule::unique('users')->ignore($this->route('id'))],
-            'password' => 'required|string|min:1',
+            'password' => 'nullable|string|min:1',
             'img' => 'nullable|image|max:2042',
             'alamat' => 'nullable|string|min:5',
             'no_hp' => 'nullable|string|min:11',

@@ -42,6 +42,7 @@ class UserService
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
+                'img' => $fileName,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
                 'role' => $request->role,

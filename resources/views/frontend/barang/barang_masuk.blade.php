@@ -10,6 +10,8 @@
       <div class="row">
         <!-- Default Textbox start-->
         <div class="col-md-12">
+          <form action="{{route('masuk.create')}}" method="post">
+          @csrf
           <div class="card">
             <div class="card-header">
               <h5 class="card-title">Barang Masuk</h5>
@@ -17,12 +19,20 @@
             <div class="card-body">
               <div class="mb-2 col-md-4">
                 <div class="col-form-label">Suplier</div>
-                <select class="js-example-basic-single col-sm-12">
-                    <option value="AL">Alabama</option>
-                    <option value="WY">Wyoming</option>
-                    <option value="WY">Peter</option>
-                    <option value="WY">Hanry Die</option>
-                    <option value="WY">John Doe</option>
+                <select name="suplier" class="js-example-basic-single col-sm-12">
+                  @foreach ($suplier as $s)
+                  <option value="{{$s->id}}">{{$s->name}}</option>
+                      
+                  @endforeach  
+                </select>
+              </div>
+              <div class="mb-2 col-md-4">
+                <div class="col-form-label">Gudang</div>
+                <select name="gudang" class="js-example-basic-single col-sm-12">
+                  @foreach ($gudang as $g)
+                  <option value="{{$g->id}}">{{$g->name}}</option>
+                      
+                  @endforeach  
                 </select>
               </div>
               <br>
@@ -55,29 +65,37 @@
                 </div>
               </div>
               <div class="row">
+                  <div class="col-md-2 mb-3">
+                    <select name="barang[]" class="js-example-basic-single col-sm-12">
+                      @foreach ($barang as $b)
+                  <option value="{{$b->id}}">{{$b->name}}</option>
+                  @endforeach
+                    </select>
+                  </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control"  type="text" value="Mark" required="">
+                  <input class="form-control" name="kode_akuntan[]"  type="text" placeholder="kode akuntan" required="">
                 </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control"  type="text" value="1" required="">
+                  <input class="form-control" name="kuantiti[]"  type="number" placeholder="kuantiti" required="">
                 </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control"  type="text" value="Mark" required="">
+                  <input class="form-control" name="harga[]" type="number" placeholder="harag satuan" required="">
                 </div>
                 <div class="col-md-2 mb-3">
-                  <input class="form-control"  type="text" value="Otto" required="">
-                </div>
-                <div class="col-md-2 mb-3">
-                  <input class="form-control"  type="text" value="Mark" required="">
+                  <input class="form-control" id="total" placeholder="total"  type="text" readonly>
                 </div>
                 <div class="col-md-2 mb-3">
                   <button type="button" class="btn btn-danger btn-sm delete" >Delete</button>
                 </div>
               </div>
-
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary-">selesai</button>
+              </div>
             </div>
           </div>
         </div>
+      </form>
+          
         <!-- Input Groups end-->
       </div>
     </div>
@@ -93,11 +111,35 @@
       var add_button      = $("#add_form");
 
       var x = 1;
+      var dataBarang = '@foreach ($barang as $b) <option value="{{$b->id}}">{{$b->name}}</option> @endforeach'
       $(add_button).click(function(e){
         e.preventDefault();
         if(x < max_fields){
           x++;
-          $(wrapper).append('<div class="col-md-2 mb-3"><input class="form-control"  type="text" value="Mark" required=""></div><div class="col-md-2 mb-3"><input class="form-control"  type="text" value="Mark" required=""></div><div class="col-md-2 mb-3"><input class="form-control"  type="text" value="Mark" required=""></div><div class="col-md-2 mb-3"><input class="form-control"  type="text" value="Mark" required=""></div><div class="col-md-2 mb-3"><input class="form-control"  type="text" value="Mark" required=""></div><div class="col-md-2 mb-3"><button type="button" class="btn btn-danger btn-sm delete" >Delete</button></div>'); //add input box
+          $(wrapper).append(`
+          <div class="row">
+          <div class="col-md-2 mb-3">
+                    <select name="barang[]" class="js-example-basic-single col-sm-12">
+                    ${dataBarang}
+                    </select>
+                  </div>
+                <div class="col-md-2 mb-3">
+                  <input class="form-control" name="kode_akuntan[]"  type="text" placeholder="kode akuntan" required="">
+                </div>
+                <div class="col-md-2 mb-3">
+                  <input class="form-control" name="kuantiti[]"  type="text" placeholder="kuantiti" required="">
+                </div>
+                <div class="col-md-2 mb-3">
+                  <input class="form-control" name="harga[]" type="text" placeholder="harag satuan" required="">
+                </div>
+                <div class="col-md-2 mb-3">
+                  <input class="form-control" id="total" placeholder="total"  type="text" readonly>
+                </div>
+                <div class="col-md-2 mb-3">
+                  <button type="button" class="btn btn-danger btn-sm delete" >Delete</button>
+                </div>
+                </div>
+          `); //add input box
 
 
         }

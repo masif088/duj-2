@@ -13,5 +13,12 @@ class BarangService
         ]);
         return $data;
     }
+    static public function update($data,$barang)
+    {   
+        $barang->update([
+            'name' => $data->name,
+        ]);
+        return $data;
+    }
   
 }

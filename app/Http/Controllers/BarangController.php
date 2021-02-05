@@ -12,7 +12,7 @@ class BarangController extends Controller
     public function create()
     {
         $barang = Barang::get();
-        return view('backend.barang',compact('barang'));
+        return view('barang.index',compact('barang'));
     }
     public function store(StoreRequest $request)
     {
@@ -20,6 +20,11 @@ class BarangController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         BarangService::store($request);
+        return redirect()->back();
+    }
+    public function update(StoreRequest $request,Barang $id)
+    {
+        BarangService::update($request,$id);
         return redirect()->back();
     }
 }
