@@ -44,7 +44,7 @@ class MasukService
                     'barang_id' => $data->barang[$i],
                     'kuantiti' => (int)$data->kuantiti[$i],
                     'harga_satuan' => (int)$data->harga[$i],
-                    'kode_akuntan' => $data->kode_akuntan[$i].Str::random(2),
+                    'kode_akuntan' => $data->kode_akuntan[$i],
                 ]);
                 for ($z = 0; $z < $ss->kuantiti; $z++) {
                     BarcodeService::store($ss);

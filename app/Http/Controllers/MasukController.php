@@ -15,7 +15,7 @@ class MasukController extends Controller
 {
     public function create()
     {
-        return view('frontend.barang.barang_masuk',MasukService::create());
+        return view('barang.create',MasukService::create());
     }
     public function index()
     {
@@ -40,6 +40,6 @@ class MasukController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         MasukService::update($request,$id);
-        return redirect()->back();
+        return redirect()->route('masuk.index');
     }
 }
