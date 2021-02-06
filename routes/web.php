@@ -30,7 +30,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // backend
-Route::group(['middleware' => ['auth','CheckRole:admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['CheckRole:admin']], function () {
+    
+    
+    });
+    Route::group(['middleware' => ['CheckRole:head']], function () {
+    
+    
+    });
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/',[UserController::class,'index'])->name('index');
         Route::get('/create',[UserController::class,'create'])->name('create');

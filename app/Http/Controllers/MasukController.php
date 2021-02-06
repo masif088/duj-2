@@ -19,7 +19,7 @@ class MasukController extends Controller
     }
     public function index()
     {
-        return view('backend.listbarang',MasukService::index());
+        return view('barang.list-barang',MasukService::index());
     }
     public function store(StoreRequest $request)
     {
@@ -27,7 +27,7 @@ class MasukController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         MasukService::store($request);
-        return redirect()->back();
+        return redirect()->route('masuk.index');
     }
     public function edit(Masuk $id)
     {
