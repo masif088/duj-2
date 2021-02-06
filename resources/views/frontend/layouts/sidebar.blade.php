@@ -17,8 +17,8 @@
         <li class="dropdown"><a class="nav-link menu-title link-nav" href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
             <ul class="nav-submenu menu-content">
               <li><a href="barang">Nama Barang</a></li>
-              <li><a href="p">Barang Masuk</a></li>
-              <li><a href="barang_masuk">List Barang</a></li>
+              {{-- <li><a href="p">Barang Masuk</a></li> --}}
+              <li><a href="barang_masuk">List Barang Masuk</a></li>
             </ul>
           </li>
 

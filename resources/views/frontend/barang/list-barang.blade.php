@@ -12,7 +12,17 @@
           </div>
           <div class="card-body">
 
+            <!-- Tool -->
+              <div class="dropdown-basic">
+                <div class="row justify-content-end">
+                  <div style="padding-right: 10px;">
+                    <a href="p" ><button class="btn btn-success btn-lg" type="button">Add</button></a>
 
+                </div>
+              </div>
+
+            </div>
+            <!-- End Tool -->
             <hr>
             <div class="table-responsive invoice-table" id="table">
               <table class="table table-bordered table-striped">
