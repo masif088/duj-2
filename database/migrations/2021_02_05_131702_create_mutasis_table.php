@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarcodesTable extends Migration
+class CreateMutasisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateBarcodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('barcodes', function (Blueprint $table) {
+        Schema::create('mutasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('masuk_id')->references('id')->on('masuks');
-            $table->string('kode')->unique();
-            $table->enum('status',['nonaktif','aktif','mutasi'])->default('nonaktif');
+            $table->foreignId('barcode_id')->references('id')->on('barcodes');
+            $table->foreignId('gudang_id')->references('id')->on('gudangs');
+            $table->string('kode_mutasi');
+            $table->enum('status',['proses','diterima','batal'])->default('proses');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateBarcodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barcodes');
+        Schema::dropIfExists('mutasis');
     }
 }

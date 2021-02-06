@@ -19,6 +19,7 @@
                 <th>Kode Akuntan</th>
                 <th>Kuantiti</th>
                 <th>Jumlah Aktif</th>
+                <th>Jumlah mutasi</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -34,6 +35,7 @@
                 <td>{{$m->kode_akuntan}}</td>
                 <td>{{$m->kuantiti}}</td>
                 <td>{{$m->barcode()->where('status','aktif')->count()}}</td>
+                <td>{{$m->barcode()->where('status','mutasi')->count()}}</td>
                 <td><a href="{{route('barcode.index',$m->id)}}">Lihat/print Barcode</a></td>
                 <td><a href="{{route('masuk.edit',$m->id)}}">Edit</a></td>
             </tr>

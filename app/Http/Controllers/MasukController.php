@@ -31,15 +31,12 @@ class MasukController extends Controller
     }
     public function edit(Masuk $id)
     {
-        $barang = Barang::get();
-        $gudang = Gudang::get();
-        $suplier = Suplier::get();
-        return view('frontend.barang.editbarang_masuk',compact(['barang','gudang','suplier','id']));
+        
+        return view('frontend.barang.editbarang_masuk',MasukService::edit($id));
     }
     public function update(UpdateRequest $request,Masuk $id)
     {
         if(isset($request->validator) && $request->validator->fails()){
-            dd($request->validator->messages());
             return redirect()->back()->withErrors($request->validator->messages());
         }
         MasukService::update($request,$id);

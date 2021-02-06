@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\MasukController;
+use App\Http\Controllers\MutasiController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -70,10 +71,18 @@ Route::group(['middleware' => ['auth','CheckRole:admin']], function () {
     Route::prefix('barcode')->name('barcode.')->group(function () {
         Route::get('/create',[BarcodeController::class,'create'])->name('create');
         Route::post('/create',[BarcodeController::class,'store']);
-        Route::get('/edit/{id}',[BarcodeController::class,'edit'])->name('edit');
-        Route::put('/edit/{id}',[BarcodeController::class,'update']);
+        Route::get('/aktifasi',[BarcodeController::class,'edit'])->name('edit');
+        Route::put('/aktifasi',[BarcodeController::class,'update']);
         Route::delete('/delete',[BarcodeController::class,'delete']);
         Route::get('/{id}',[BarcodeController::class,'index'])->name('index');
+    });
+    Route::prefix('mutasi')->name('mutasi.')->group(function () {
+        Route::get('/',[MutasiController::class,'index'])->name('index');
+        Route::get('/create',[MutasiController::class,'create'])->name('create');
+        Route::post('/create',[MutasiController::class,'store']);
+        Route::get('/edit/{id}',[MutasiController::class,'edit'])->name('edit');
+        Route::put('/edit/{id}',[MutasiController::class,'update']);
+        Route::delete('/delete',[MutasiController::class,'delete']);
     });
 });
 Route::get('/profil',function(){

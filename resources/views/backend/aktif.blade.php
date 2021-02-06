@@ -7,13 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    @foreach ($barcode as $b)
-    <div style="display:inline-block; margin: 20px;">
-        {!! QrCode::size(100)->generate($b->kode); !!}
-        <p>Nama: {{$b->masuk->barang->name}}</p>
-        <p>kode: {{$b->kode}}</p>
+    <form action="{{route('barcode.edit')}}" method="post">
+        @csrf
+        @method('put')
+        <input type="text" placeholder="barcode" name="kode">
+    <button type="submit">submit</button>
+    </form>
 
-    </div>
-    @endforeach
 </body>
 </html>
