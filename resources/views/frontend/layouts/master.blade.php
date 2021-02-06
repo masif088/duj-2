@@ -123,7 +123,10 @@
         </footer>
       </div>
     </div>
-
+    
+    @jquery
+    @toastr_js
+    @toastr_render
     <!-- latest jquery-->
     <script src="{{asset('/assets/js/jquery-3.5.1.min.js')}}"></script>
     <!-- Bootstrap js-->
@@ -154,15 +157,12 @@
     <script src="{{asset('/assets/js/typeahead-search/handlebars.js')}}"></script>
     <script src="{{asset('/assets/js/typeahead-search/typeahead-custom.j')}}s"></script>
     <script src="{{asset('/assets/js/tooltip-init.js')}}"></script>
+    @yield('script')
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{asset('/assets/js/script.js')}}"></script>
     {{-- <script src="{{asset('/assets/js/theme-customizer/customizer.js')}}"></script> --}}
     <!-- login js-->
     <!-- Plugin used-->
-    @yield('script')
-    @jquery
-    @toastr_js
-    @toastr_render
   </body>
 </html>
