@@ -79,58 +79,54 @@
                         </td>
                       </tr>
 
-                  {{-- Modal edit --}}
-                  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Edit Barang</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            </div>
-                            <div class="modal-body">
-                                <form class="theme-form" action="" method="POST" enctype="multipart/form-data">
-                                  @csrf
-
-                                  <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Nama Barang" name="name">
+                        {{-- Modal edit --}}
+                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title">Edit Barang</h5>
+                                      <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                   </div>
-                                    <div class="modal-footer ">
-                                      <button class="btn btn-primary">Add</button>
-                                      <button class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
-                                    </div>
-                                </form>
+                                  <div class="modal-body">
+                                      <form class="theme-form" action="" method="POST" enctype="multipart/form-data">
+                                        @csrf
+
+                                        <div class="form-group">
+                                          <input class="form-control" type="text" placeholder="Nama Barang" name="name">
+                                        </div>
+                                          <div class="modal-footer ">
+                                            <button class="btn btn-primary">Add</button>
+                                            <button class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      {{-- end modal edit --}}
+
+                      {{-- Modal Delete --}}
+                      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete Reward</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="theme-form" action="" method="POST" enctype="multipart/form-data">
+                                      @csrf
+                                      <h1>Apakah anda yakin akan menghapus "Tittle"?</h1>
+                                        <div class="modal-footer ">
+                                          <button class="btn btn-primary">Delete</button>
+                                          <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{-- end modal edit --}}
-
-                {{-- Modal Delete --}}
-                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h5 class="modal-title">Delete Reward</h5>
-                              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                          </div>
-                          <div class="modal-body">
-                              <form class="theme-form" action="" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <h1>Apakah anda yakin akan menghapus "Tittle"?</h1>
-                                  <div class="modal-footer ">
-                                    <button class="btn btn-primary">Delete</button>
-                                    <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
-                                  </div>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              {{-- end modal Delete --}}
-
-
-
-
+                    {{-- end modal Delete --}}
                   </tbody>
               </table>
             </div>

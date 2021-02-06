@@ -91,11 +91,20 @@ Route::get('/profil',function(){
     return view('frontend.profil.profil');
 
 });
+
 Route::get('/barang',function(){
     return view('frontend.barang.barang');
 
 });
 Route::get('/barang_masuk',function(){
-    return view('frontend.barang.barang_masuk');
+    return view('frontend.barang.list-barang');
+
+});
+Route::get('/list-masuk',function(){
+    return view('frontend.barang.p');
+
+});
+Route::get('/p',function(){
+    return view('frontend.barang.p');
 
 });
