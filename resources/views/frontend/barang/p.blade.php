@@ -62,6 +62,7 @@
                                   <option>test 1</option>
                                   <option>test 2</option>
                                   <option>test 3</option>
+                                  <option>test 4</option>
                                 </select>
                               </div>
 
