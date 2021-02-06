@@ -9,6 +9,7 @@ use App\Models\Masuk;
 use App\Models\Suplier;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Services\Barcode\BarcodeService;
 
 class MasukService
 {
@@ -24,6 +25,14 @@ class MasukService
         $suplier = Suplier::get();
         return compact(['barang', 'gudang', 'suplier']);
     }
+    static public function edit($id)
+    {
+        $barang = Barang::get();
+        $gudang = Gudang::get();
+        $suplier = Suplier::get();
+        return compact(['barang','gudang','suplier','id']);
+
+    }
     static public function store($data)
     {
         DB::transaction(function () use ($data) {
@@ -37,11 +46,8 @@ class MasukService
                     'harga_satuan' => (int)$data->harga[$i],
                     'kode_akuntan' => $data->kode_akuntan[$i].Str::random(2),
                 ]);
-                for ($z = 0; $z < (int)$ss->kuantiti; $z++) {
-                    Barcode::create([
-                        'masuk_id' => $ss->id,
-                        'kode' => mt_rand(10000000, 99999999),
-                    ]);
+                for ($z = 0; $z < $ss->kuantiti; $z++) {
+                    BarcodeService::store($ss);
                 }
             }
         });
@@ -53,9 +59,7 @@ class MasukService
             $masuk->barcode()->take($masuk->kuantiti - $data->kuantiti)->delete();
         } elseif ($masuk->kuantiti < $data->kuantiti) {
             for ($i = 0; $i < $data->kuantiti - $masuk->kuantiti; $i++) {
-                $masuk->barcode()->create([
-                    'kode' => mt_rand(10000000, 99999999)
-                ]);
+                BarcodeService::store($masuk);
             }
         }
         $masuk->update([
