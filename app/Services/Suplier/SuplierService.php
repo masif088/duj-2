@@ -15,4 +15,13 @@ class SuplierService
         ]);
         return $data;
     }
+    static public function update($request,$data)
+    {   
+        $data->update([
+            'name' => $request->name,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat
+        ]);
+        return $data;
+    }
 }

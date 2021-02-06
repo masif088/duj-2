@@ -13,4 +13,11 @@ class GudangService
         ]);
         return $data;
     }
+    static public function update($data,$gudang)
+    {   
+        $gudang->update([
+            'name' => $data->name,
+        ]);
+        return $data;
+    }
 }

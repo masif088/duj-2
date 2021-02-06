@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required| string|max:50',
-            'no_hp' => 'required| string|max:50',
+            'no_hp' => 'required| string|max:13',
             'alamat' =>'required| string|min:4',
         ];
     }

@@ -36,6 +36,7 @@
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/responsive.css')}}">
     @yield('head')
+    @toastr_css
   </head>
   <body onload="startTime()">
     <!-- tap on top starts-->
@@ -376,5 +377,8 @@
     <!-- login js-->
     <!-- Plugin used-->
     @yield('script')
+    @jquery
+    @toastr_js
+    @toastr_render
   </body>
 </html>
