@@ -57,7 +57,6 @@ class UserController extends Controller
         }
         if(auth()->user()->role == 'admin'){
             if(!in_array($request->role,['admin','head','teknisi'])){
-                dd('h');
                 return redirect()->back();
             } 
         }elseif(auth()->user()->role == 'head'){

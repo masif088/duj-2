@@ -47,18 +47,20 @@ Route::group(['middleware' => ['auth','CheckRole:admin']], function () {
         Route::delete('/delete',[BarangController::class,'delete']);
     });
     Route::prefix('gudang')->name('gudang.')->group(function () {
+        Route::get('/',[GudangController::class,'index'])->name('index');
         Route::get('/create',[GudangController::class,'create'])->name('create');
         Route::post('/create',[GudangController::class,'store']);
         Route::get('/edit/{id}',[GudangController::class,'edit'])->name('edit');
         Route::put('/edit/{id}',[GudangController::class,'update']);
-        Route::delete('/delete',[GudangController::class,'delete']);
+        Route::delete('/delete/{id}',[GudangController::class,'delete'])->name('delete');
     });
     Route::prefix('suplier')->name('suplier.')->group(function () {
+        Route::get('/',[SuplierController::class,'index'])->name('index');
         Route::get('/create',[SuplierController::class,'create'])->name('create');
         Route::post('/create',[SuplierController::class,'store']);
         Route::get('/edit/{id}',[SuplierController::class,'edit'])->name('edit');
         Route::put('/edit/{id}',[SuplierController::class,'update']);
-        Route::delete('/delete',[SuplierController::class,'delete']);
+        Route::delete('/delete/{id}',[SuplierController::class,'delete'])->name('delete');
     });
     Route::prefix('masuk')->name('masuk.')->group(function () {
         Route::get('/',[MasukController::class,'index'])->name('index');
