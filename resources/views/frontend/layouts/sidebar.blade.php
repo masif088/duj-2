@@ -13,18 +13,18 @@
             <div class="mobile-back text-right"><span>Back</span><i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
           </li>
 
-          <li class="dropdown"><a class="nav-link menu-title link-nav" href="profil"><i data-feather="users"> </i><span>Profile</span></a></li>
+          <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('user.index')}}"><i data-feather="users"> </i><span>Profile</span></a></li>
         <li class="dropdown"><a class="nav-link menu-title link-nav" href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
             <ul class="nav-submenu menu-content">
-              <li><a href="barang">Nama Barang</a></li>
-              {{-- <li><a href="p">Barang Masuk</a></li> --}}
-              <li><a href="barang_masuk">List Barang Masuk</a></li>
+              <li><a href="{{route('barang.create')}}">Nama Barang</a></li>
+              @if (auth()->user()->role != 'teknisi')
+              <li><a href="{{route('masuk.index')}}">List Barang Masuk</a></li>
+              @endif
             </ul>
           </li>
-
-          <li class="dropdown"><a class="nav-link menu-title link-nav" href=""><i data-feather="monitor"> </i><span>Kelola Gudang</span></a></li>
-          <li class="dropdown"><a class="nav-link menu-title link-nav" href=""><i data-feather="monitor"> </i><span>Kelola Suplier</span></a></li>
-
+          <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('gudang.index')}}"><i data-feather="monitor"> </i><span>Kelola Gudang</span></a></li>
+          <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('suplier.index')}}"><i data-feather="monitor"> </i><span>Kelola Suplier</span></a></li>
+              
         </div>
       <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
     </div>

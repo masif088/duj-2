@@ -52,7 +52,6 @@ class UserController extends Controller
     {
         if(isset($request->validator) && $request->validator->fails()){
             $request->flash();
-            dd($request->validator->messages());
             return redirect()->back()->withErrors($request->validator->messages());
         }
         if(auth()->user()->role == 'admin'){

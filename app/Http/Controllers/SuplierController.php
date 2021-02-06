@@ -11,7 +11,6 @@ class SuplierController extends Controller
 {
     public function index()
     {
-        toastr('halo','warning');
         $suplier = Suplier::get();
         return view('suplier.index',compact('suplier'));
     }
