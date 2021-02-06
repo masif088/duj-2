@@ -88,3 +88,7 @@ Route::get('/barang_masuk',function(){
     return view('frontend.barang.barang_masuk');
 
 });
+Route::get('/p',function(){
+    return view('frontend.barang.p');
+
+});

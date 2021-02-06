@@ -19,7 +19,7 @@
             </div>
           </li>
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="profil"><i data-feather="users"> </i><span>Profile</span></a></li>
-          <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="airplay"></i><span class="lan-6">Kelola Barang</span></a>
+        <li class="dropdown"><a class="nav-link menu-title link-nav" href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
             <ul class="nav-submenu menu-content">
               <li><a href="barang">Input Barang</a></li>
               <li><a href="barang_masuk">Barang Masuk</a></li>
