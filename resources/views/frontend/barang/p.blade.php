@@ -1,6 +1,8 @@
 @extends('frontend.layouts.master')
 @section('head')
 <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/select2.css')}}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 @endsection
 @section('content')
   <div class="page-header">
@@ -94,6 +96,7 @@
   </div>
 @endsection
 @section('script')
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="{{asset('/assets/js/select2/select2.full.min.js')}}"></script>
   <script src="{{asset('/assets/js/select2/select2-custom.js')}}"></script>
   <script>
@@ -102,7 +105,8 @@
     tags: true,
     placeholder: "Select an Option",
     allowClear: true,
-    width: '100%'
+    width: '100%',
+
   });
 }
 $(document).ready(function() {
