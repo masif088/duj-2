@@ -100,7 +100,7 @@
       <!-- Page Body Start-->
       <div class="page-body-wrapper sidebar-icon">
         <!-- Page Sidebar Start-->
-        @include('frontend.layouts.sidebar')
+        @include('frontend.layout-frontend.sidebar')
         <!-- Page Sidebar Ends-->
         <div class="page-body">
 

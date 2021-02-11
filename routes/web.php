@@ -106,7 +106,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::delete('/delete/{id}',[ServiceInfraController::class, 'delete'])->name('delete');
             Route::get('/barcode/{b}', [ServiceInfraController::class, 'barcode'])->name('barcode');
             Route::get('/setuju/{id}', [ServiceInfraController::class, 'setuju'])->name('setuju');
-        
+
         });
         Route::prefix('after')->name('after.')->group(function () {
             Route::get('/', [AfterController::class, 'index'])->name('index');
@@ -117,7 +117,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::delete('/delete/{id}',[AfterController::class, 'delete'])->name('delete');
             Route::get('/barcode/{b}', [AfterController::class, 'barcode'])->name('barcode');
             Route::get('/setuju/{id}', [AfterController::class, 'setuju'])->name('setuju');
-            
+
         });
         Route::prefix('service-after')->name('serviceAfter.')->group(function () {
             Route::get('/', [ServiceAfterController::class, 'index'])->name('index');
@@ -143,7 +143,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/{id}', [BarcodeController::class, 'index'])->name('index');
         });
     });
-    
+
 });
 Route::get('/profil', function () {
     return view('frontend.profil.profil');
@@ -160,4 +160,42 @@ Route::get('/list-masuk', function () {
 });
 Route::get('/p', function () {
     return view('frontend.barang.p');
+});
+Route::get('/keluar', function () {
+    return view('frontend.barang.keluar.index');
+});
+// barang keluar
+Route::get('/list', function () {
+    return view('frontend.barang.keluar.list');
+});
+Route::get('/keluar-create', function () {
+    return view('frontend.barang.keluar.create');
+});
+Route::get('/keluar-edit', function () {
+    return view('frontend.barang.keluar.create');
+});
+///end barang keluar
+
+//infrastruktur
+Route::get('/infrastruktur', function () {
+    return view('frontend.infrastruktur.infra');
+});
+Route::get('/infrastruktur-create', function () {
+    return view('frontend.infrastruktur.create');
+});
+Route::get('/infrastruktur-edit', function () {
+    return view('frontend.infrastruktur.edit');
+});
+//end infra
+
+//service
+Route::get('/service', function () {
+    return view('frontend.service.service');
+});
+Route::get('/service-teknisi', function () {
+    return view('frontend.service.service-r-teknisi');
+});
+//after
+Route::get('/after', function () {
+    return view('frontend.after.index');
 });
