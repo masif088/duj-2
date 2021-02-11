@@ -7,15 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{route('mutasi.create')}}" method="post">
+    <form action="{{route('mutasi.edit',$id->id)}}" method="post">
     @csrf
+    @method('put')
     <label for="">Gudang Tujuan</label>
     <select name="gudang" id="">
         @foreach ($gudang as $g)
-        <option value="{{$g->id}}">{{$g->name}}</option>
+        <option value="{{$g->id}}" {!!$id->gudang_id == $g->id ? 'selected' : null!!}>{{$g->name}}</option>
         @endforeach
     </select>
-    <input type="text" placeholder="barcode" name="kode">
+    <input type="text" placeholder="barcode" name="kode" value="{{$id->barcode->kode}}">
     <button type="submit">submit</button>
     </form>
 </body>

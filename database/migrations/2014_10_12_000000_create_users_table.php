@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('img')->nullable();
             $table->softDeletes();
+            $table->foreignId('gudang_id')->references('id')->on('gudangs');
             $table->string('no_hp')->nullable();
             $table->string('alamat')->nullable();
             $table->string('sidik')->nullable();

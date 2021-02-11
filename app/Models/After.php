@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Barcode extends Model
+class After extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function masuk()
+    public function serviceAfter()
     {
-        return $this->belongsTo(Masuk::class);
+        return $this->hasOne(ServiceAfter::class);
     }
-    public function mutasi()
+    public function barcode()
     {
-        return $this->hasOne(Mutasi::class);      
+        return $this->belongsTo(Barcode::class);
     }
 }

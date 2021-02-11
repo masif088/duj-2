@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMutasisTable extends Migration
+class CreateAftersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateMutasisTable extends Migration
      */
     public function up()
     {
-        Schema::create('mutasis', function (Blueprint $table) {
+        Schema::create('afters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('barcode_id')->references('id')->on('barcodes');
-            $table->foreignId('gudang_id')->references('id')->on('gudangs');
-            $table->string('kode_mutasi');
-            $table->enum('status',['proses','diterima','batal'])->default('proses');
+            $table->string('nama_pembeli');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateMutasisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mutasis');
+        Schema::dropIfExists('afters');
     }
 }

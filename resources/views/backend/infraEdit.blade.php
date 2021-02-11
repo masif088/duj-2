@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{route('barcode.edit')}}" method="post">
+    <form action="{{route('infra.edit',$id->id)}}" method="post">
         @csrf
         @method('put')
-        <input type="text" placeholder="barcode" name="kode">
-    <button type="submit">submit</button>
+        <input type="text" name="name" value="{{$id->name}}" placeholder="Nama">
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
