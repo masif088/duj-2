@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-header">
             <!-- <div class="pull-right mr-4"><a href="#">Edit Profile Playlist</a></div> -->
-            <h5>Barang</h5>
+            <h5>Suplier</h5>
           </div>
           <div class="card-body">
 
@@ -16,13 +16,14 @@
               <div class="dropdown-basic">
                 <div class="row justify-content-end">
                   <div style="padding-right: 10px;">
+                    @if(auth()->user()->role == 'head')
                     <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#addReward">Add</button>
                     {{-- Modal add --}}
                     <div class="modal fade" id="addReward" tabindex="-1" role="dialog" aria-labelledby="addReward" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                               <div class="modal-header">
-                                  <h5 class="modal-title">Tambah barang</h5>
+                                  <h5 class="modal-title">Tambah Suplier</h5>
                                   <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                               </div>
                               <div class="modal-body">
@@ -35,7 +36,7 @@
                                         <input class="form-control" type="text" placeholder="No Hp" name="no_hp">
                                     </div>
                                     <div class="form-group">
-                                      <textarea class="form-control" name="alamat" cols="30" rows="10"></textarea>
+                                      <textarea class="form-control" placeholder="alamat" name="alamat" cols="30" rows="10"></textarea>
                                       
                                   </div>
                                       <div class="modal-footer ">
@@ -47,6 +48,7 @@
                           </div>
                       </div>
                   </div>
+                  @endif
                   {{-- end modal add --}}
                     {{-- <div class="dropdown">
                       <div class="btn-group mb-0">
@@ -69,7 +71,9 @@
                           <th>Nama</th>
                           <th>No Hp</th>
                           <th>Alamat</th>
+                          @if(auth()->user()->role == 'head')
                           <th>action</th>
+                          @endif
                       </tr>
                       </thead>
                   <tbody>
@@ -80,6 +84,7 @@
                       <td>{{$b->name}}</td>
                       <td>{{$b->no_hp}}</td>
                       <td>{{$b->alamat}}</td>
+                      @if(auth()->user()->role == 'head')
                       <td>
                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal{{$b->id}}">Edit</button>
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{$b->id}}">Delete</button>
@@ -140,6 +145,7 @@
                     </div>
                 </div>
               </div>
+              @endif
               {{-- end modal Delete --}}
               @endforeach
                   </tbody>

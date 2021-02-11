@@ -80,17 +80,21 @@
                   @enderror
                 </div>
                 <input type="text" name="role" value="{{$user->role}}" hidden>
+                @if(auth()->user()->role == 'admin')
                 <div class="form-group">
                   <label class="col-sm-3 col-form-label">Foto</label>
                   <input class="form-control" type="file" name="img">
                 </div>
+                @endif
                 <div class="form-footer">
                   <div class="form-group">
                       <div class="col-md-6 col-md-offset-4">
+                        @if(auth()->user()->role == 'admin')
                         <input type="button" id="confirmedit" class="btn btn-danger" value="Edit"/>
                         <button type="submit" class="btn btn-primary" id="btnupdate" data-toggle="modal" data-target="#modalEdit">
                             Update
                         </button>
+                        @endif
                       </div>
                   </div>
                 </div>

@@ -16,7 +16,7 @@ class CreateSupliersTable extends Migration
         Schema::create('supliers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('no_hp',13);
+            $table->string('no_hp');
             $table->string('alamat');
             $table->softDeletes();
             $table->timestamps();

@@ -15,9 +15,10 @@ class CreateBarcodesTable extends Migration
     {
         Schema::create('barcodes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('masuk_id')->references('id')->on('masuks');
             $table->string('kode')->unique();
-            $table->enum('status',['nonaktif','aktif','mutasi'])->default('nonaktif');
+            $table->enum('status',['nonaktif','aktif','mutasi','rusak'])->default('nonaktif');
             $table->timestamps();
         });
     }

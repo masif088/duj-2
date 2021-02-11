@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\AfterController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\GudangController;
+use App\Http\Controllers\InfraController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\MutasiController;
+use App\Http\Controllers\ServiceAfterController;
+use App\Http\Controllers\ServiceInfraController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,23 +43,6 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/create', [UserController::class, 'create'])->name('create');
             Route::post('/create', [UserController::class, 'store']);
             Route::delete('/delete', [UserController::class, 'delete']);
-        });
-    });
-    Route::group(['middleware' => ['CheckRole:admin,head']], function () {
-        Route::prefix('barang')->name('barang.')->group(function () {
-            Route::get('/create', [BarangController::class, 'create'])->name('create');
-        });
-        Route::prefix('gudang')->name('gudang.')->group(function () {
-            Route::get('/', [GudangController::class, 'index'])->name('index');
-        });
-        Route::prefix('suplier')->name('suplier.')->group(function () {
-            Route::get('/', [SuplierController::class, 'index'])->name('index');
-        });
-        Route::prefix('masuk')->name('masuk.')->group(function () {
-            Route::get('/', [MasukController::class, 'index'])->name('index');
-        });
-        Route::prefix('barcode')->name('barcode.')->group(function () {
-            Route::get('/{id}', [BarcodeController::class, 'index'])->name('index');
         });
     });
     Route::group(['middleware' => ['CheckRole:head']], function () {
@@ -99,9 +86,64 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::post('/create', [MutasiController::class, 'store']);
             Route::get('/edit/{id}', [MutasiController::class, 'edit'])->name('edit');
             Route::put('/edit/{id}', [MutasiController::class, 'update']);
-            Route::delete('/delete', [MutasiController::class, 'delete']);
+            Route::get('/batal/{id}', [MutasiController::class, 'batal'])->name('batal');
+        });
+        Route::prefix('infra')->name('infra.')->group(function () {
+            Route::get('/', [InfraController::class, 'index'])->name('index');
+            Route::get('/create', [InfraController::class, 'create'])->name('create');
+            Route::post('/create', [InfraController::class, 'store']);
+            Route::get('/edit/{id}', [InfraController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [InfraController::class, 'update']);
+            Route::delete('/delete/{id}',[InfraController::class, 'delete'])->name('delete');
+            Route::get('/barcode/{b}', [InfraController::class, 'barcode'])->name('barcode');
+        });
+        Route::prefix('service-infra')->name('serviceInfra.')->group(function () {
+            Route::get('/', [ServiceInfraController::class, 'index'])->name('index');
+            Route::get('/create/{id}', [ServiceInfraController::class, 'create'])->name('create');
+            Route::post('/create/{id}', [ServiceInfraController::class, 'store']);
+            Route::get('/edit/{id}', [ServiceInfraController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [ServiceInfraController::class, 'update']);
+            Route::delete('/delete/{id}',[ServiceInfraController::class, 'delete'])->name('delete');
+            Route::get('/barcode/{b}', [ServiceInfraController::class, 'barcode'])->name('barcode');
+            Route::get('/setuju/{id}', [ServiceInfraController::class, 'setuju'])->name('setuju');
+        
+        });
+        Route::prefix('after')->name('after.')->group(function () {
+            Route::get('/', [AfterController::class, 'index'])->name('index');
+            Route::get('/create', [AfterController::class, 'create'])->name('create');
+            Route::post('/create', [AfterController::class, 'store']);
+            Route::get('/edit/{id}', [AfterController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [AfterController::class, 'update']);
+            Route::delete('/delete/{id}',[AfterController::class, 'delete'])->name('delete');
+            Route::get('/barcode/{b}', [AfterController::class, 'barcode'])->name('barcode');
+            Route::get('/setuju/{id}', [AfterController::class, 'setuju'])->name('setuju');
+            
+        });
+        Route::prefix('service-after')->name('serviceAfter.')->group(function () {
+            Route::get('/', [ServiceAfterController::class, 'index'])->name('index');
+            Route::get('/edit/{id}', [ServiceAfterController::class, 'edit'])->name('edit');
+            Route::put('/edit/{id}', [ServiceAfterController::class, 'update']);
+            Route::delete('/delete/{id}',[ServiceAfterController::class, 'delete'])->name('delete');
         });
     });
+    Route::group(['middleware' => ['CheckRole:admin,head']], function () {
+        Route::prefix('barang')->name('barang.')->group(function () {
+            Route::get('/create', [BarangController::class, 'create'])->name('create');
+        });
+        Route::prefix('gudang')->name('gudang.')->group(function () {
+            Route::get('/', [GudangController::class, 'index'])->name('index');
+        });
+        Route::prefix('suplier')->name('suplier.')->group(function () {
+            Route::get('/', [SuplierController::class, 'index'])->name('index');
+        });
+        Route::prefix('masuk')->name('masuk.')->group(function () {
+            Route::get('/', [MasukController::class, 'index'])->name('index');
+        });
+        Route::prefix('barcode')->name('barcode.')->group(function () {
+            Route::get('/{id}', [BarcodeController::class, 'index'])->name('index');
+        });
+    });
+    
 });
 Route::get('/profil', function () {
     return view('frontend.profil.profil');
