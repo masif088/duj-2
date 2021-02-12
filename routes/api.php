@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\MasukController;
 use App\Http\Controllers\Api\UserController as ApiUserController;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\CheckController;
+use App\Http\Controllers\Api\InfraController;
 use App\Http\Controllers\Api\MutasiController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,7 +42,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/create',[MutasiController::class,'store']);
     });
     Route::prefix('check')->group(function () {
+        Route::get('/riwayat',[CheckController::class,'riwayat']);
         Route::post('/create',[CheckController::class,'store']);
+    });
+    Route::prefix('infra')->group(function () {
+        Route::get('/',[InfraController::class,'index']);
     });
 });
 Route::get('/isAuth', [ApiUserController::class, 'isAuth']);

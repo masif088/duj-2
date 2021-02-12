@@ -9,7 +9,7 @@ class ServiceAfterController extends Controller
 {
     public function edit(ServiceAfter $id)
     {
-        return view('backend.after.edit',compact('id'));
+        return view('service.after.perbaiki',compact('id'));
     }
     public function update(Request $request,ServiceAfter $id)
     {

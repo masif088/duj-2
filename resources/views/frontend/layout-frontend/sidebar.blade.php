@@ -15,7 +15,7 @@
 
           <li class="dropdown"><a class="nav-link menu-title" href="dashboard"><i data-feather="home"></i><span>Dashboard</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title " href="{{route('user.index')}}"><i data-feather="users"> </i><span class="lan-3">Profile</span></a></li>
-          <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Aktifasi Barcode</span></a>
+          <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Aktifasi Barcode</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
             <ul class="nav-submenu menu-content">
               <li><a href="{{route('barang.create')}}">Nama Barang</a></li>

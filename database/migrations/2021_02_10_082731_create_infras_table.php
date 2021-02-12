@@ -15,6 +15,7 @@ class CreateInfrasTable extends Migration
     {
         Schema::create('infras', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('gudang_id')->references('id')->on('gudangs');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('name');
             $table->string('kode');

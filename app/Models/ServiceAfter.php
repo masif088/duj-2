@@ -13,4 +13,8 @@ class ServiceAfter extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function after()
+    {
+        return $this->belongsTo(After::class);
+    }
 }

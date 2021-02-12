@@ -9,6 +9,18 @@ use Illuminate\Http\Request;
 
 class CheckController extends Controller
 {
+    public function riwayat()
+    {
+        $b = Barcode::whereHas('masuk',function($x){
+            return $x->where('gudang_id',auth('sanctum')->user()->gudang_id);
+        })->with(['check','masuk' => function($z){
+            $z->with('barang');
+        }])->get();
+        return response()->json([
+            'status' => 'ok',
+            'data' => $b
+        ]);
+    }
     public function store(Request $request)
     {
         $b = Barcode::where('kode',$request->kode)->whereHas('masuk',function($z){

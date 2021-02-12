@@ -62,7 +62,6 @@
                           <a class="btn btn-success" href="{{route('barcode.index',$m->id)}}">Barcode</a>
                     
                           @if(auth()->user()->role == 'head')
-                          <a class="btn btn-success" href="{{route('barcode.edit')}}">Aktifasi</a>
                           <a class="btn btn-warning" href="{{route('masuk.edit',$m->id)}}">Edit</a></td>
                           @endif
                         </tr>

@@ -16,6 +16,7 @@
           <div class="card-body">
             <form action="{{route('mutasi.create')}}" method="POST" class="form theme-form">
               @csrf  
+              <div class="form-group mb-3">
               <div class="col-form-label">Gudang Tujuan</div>
                 <select name="gudang" class="js-example-basic-single col-sm-12 @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="gudang"
                 value="{{ old('gudang') }}" required autocomplete="gudang"  autofocus>
@@ -29,6 +30,7 @@
                     <strong>{{ $message }}</strong>
                   </span>
                 @enderror
+              </div>
                 <div class="form-group mb-3">
                   <label class="col-form-label">kode</label>
                   <input  id="kode" type="text"
