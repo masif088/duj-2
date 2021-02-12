@@ -4,30 +4,34 @@ google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawBasic);
 function drawBasic() {
   if ($("#column-chart1").length > 0) {
-      var a = google.visualization.arrayToDataTable([
-        ["Year", "Sales", "Expenses", "Profit"],
-        ["2018", 1e3, 400, 250],
-        ["2019", 1170, 460, 300],
-        ["2020", 660, 1120, 400],
-        ["2021", 1030, 540, 450]
-      ]),
+    var a = google.visualization.arrayToDataTable([
+      ["User","total"],
+      ["Admin", 2],
+      ["Ketua Cabang", 5],
+      ["Teknisi", 8]
+
+    ]),
       b = {
         chart: {
-          title: "Company Performance",
-          subtitle: "Sales, Expenses, and Profit: 2014-2017"
+          // title: "Company Performance",
+          // subtitle: "Sales, Expenses, and Profit: 2014-2017"
         },
         bars: "vertical",
         vAxis: {
           format: "decimal"
         },
-        height: 400,
+        height: 300,
         width:'100%',
           colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary , "#51bb25"]
 
 
       },
     c = new google.charts.Bar(document.getElementById("column-chart1"));
-    c.draw(a, google.charts.Bar.convertOptions(b))
+    c.draw(a, google.charts.Bar.convertOptions(b));
+
+    // var chart = new google.charts.Bar(document.getElementById('chart_div'));
+    // chart.draw(data, google.charts.Bar.convertOptions(options));
+    window.addEventListener('resize', drawBasic, false);
   }
   if ($("#column-chart2").length > 0) {
       var a = google.visualization.arrayToDataTable([

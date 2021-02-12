@@ -163,9 +163,9 @@ Route::get('/list-masuk', function () {
 Route::get('/p', function () {
     return view('frontend.barang.p');
 });
-Route::get('/keluar', function () {
-    return view('frontend.barang.keluar.index');
-});
+// Route::get('/keluar', function () {
+//     return view('frontend.barang.keluar.index');
+// });
 // barang keluar
 Route::get('/list', function () {
     return view('frontend.barang.keluar.list');
@@ -197,7 +197,14 @@ Route::get('/service', function () {
 Route::get('/service-teknisi', function () {
     return view('frontend.service.service-r-teknisi');
 });
+Route::get('/service-perbaiki', function () {
+    return view('frontend.service.perbaiki');
+});
 //after
 // Route::get('/after', function () {
 //     return view('frontend.after.index');
 // });
+//dashboard
+Route::get('/dashboard', function () {
+    return view('frontend.dashboard.HO');
+});
