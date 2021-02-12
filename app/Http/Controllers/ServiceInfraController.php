@@ -41,7 +41,7 @@ class ServiceInfraController extends Controller
     }
     function edit(ServiceInfra $id)
     {
-        return view('backend.serviceInfraEdit',compact('id'));
+        return view('service.infra.perbaiki',compact('id'));
     }
     public function update(Request $request,ServiceInfra $id)
     {

@@ -28,7 +28,21 @@
                   </span>
                 @enderror
               </div>
-
+              <div class="form-group mb-3">
+                <div class="col-form-label">Gudang Tujuan</div>
+                  <select name="gudang" class="js-example-basic-single col-sm-12 @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="gudang"
+                  value="{{ old('gudang') }}" required autocomplete="gudang"  autofocus>
+                  @foreach ($gudang as $g)
+                  <option value="{{$g->id}}" {!!$id->gudang_id == $g->id ? 'selected' : null !!}>{{$g->name}}</option>
+                      
+                  @endforeach  
+                  </select>
+                  @error('gudang')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
               <div class="form-footer">
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">

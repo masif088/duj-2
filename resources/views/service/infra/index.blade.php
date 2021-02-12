@@ -99,7 +99,7 @@
                         <td>{{$s->status}}</td>
                         <td>
                             {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#DetailModal">Detail</button> --}}
-                            @if (auth()->user()->role == 'teknisi' && ($s->user_id == null || $s->user_id == auth()->user()->id))
+                            @if (auth()->user()->role == 'teknisi' && ($s->user_id == null || $s->user_id == auth()->user()->id) && $s->status == 'tidak')
                             <a href="{{route('serviceInfra.edit',$s->id)}}">
                               <button type="button" class="btn btn-info btn-sm" >Ambil</button>
                             </a>
@@ -111,7 +111,7 @@
                             </a>
                                 
                             @endif
-                            @if (auth()->user()->role == 'admin')
+                            @if (auth()->user()->role == 'admin' && $s->status == 'pengajuan')
                                 <a href="{{route('serviceInfra.setuju',$s->id)}}">
                                   <button type="button" class="btn btn-danger btn-sm" >setuju</button>
                                 </a>

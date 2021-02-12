@@ -19,6 +19,9 @@ class UserSeeder extends Seeder
         Gudang::create([
             'name' => 'pusat'
         ]);
+        Gudang::create([
+            'name' => 'gudang A'
+        ]);
         User::create([
             'name' => 'HO',
             'email' => 'h@h.com',
@@ -45,11 +48,11 @@ class UserSeeder extends Seeder
             'password' => bcrypt('k'),
             'no_hp' => '0836347637',
             'alamat' => 'jl. malysia',
-            'gudang_id' => 1,
+            'gudang_id' => 2,
             'role' => 'ketua',
         ]);
         User::create([
-            'gudang_id' => 1,
+            'gudang_id' => 2,
             'name' => 'checker',
             'email' => 'c@c.com',
             'password' => bcrypt('c'),
@@ -64,7 +67,7 @@ class UserSeeder extends Seeder
             'no_hp' => '0836347637',
             'alamat' => 'jl. mayang',
             'role' => 'teknisi',
-            'gudang_id' => 1,
+            'gudang_id' =>2,
 
         ]);
     }

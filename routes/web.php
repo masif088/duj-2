@@ -78,6 +78,8 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::post('/create', [BarcodeController::class, 'store']);
             Route::get('/aktifasi', [BarcodeController::class, 'edit'])->name('edit');
             Route::put('/aktifasi', [BarcodeController::class, 'update']);
+            Route::get('/terjual', [BarcodeController::class, 'jual'])->name('terjual');
+            Route::put('/terjual', [BarcodeController::class, 'terjual']);
             Route::delete('/delete', [BarcodeController::class, 'delete']);
         });
         Route::prefix('mutasi')->name('mutasi.')->group(function () {
