@@ -23,6 +23,7 @@ class UserService
             'no_hp' => $data->no_hp,
             'role' => $data->role,
             'sidik' => $data->sidik,
+            'gudang_id' => $data->gudang,
         ]);
         return $data;
     }

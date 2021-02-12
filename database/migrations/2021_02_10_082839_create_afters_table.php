@@ -18,6 +18,8 @@ class CreateAftersTable extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('barcode_id')->references('id')->on('barcodes');
             $table->string('nama_pembeli');
+            $table->string('no_hp');
+            $table->string('alamat');
             $table->timestamps();
         });
     }

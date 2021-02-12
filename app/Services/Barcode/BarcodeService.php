@@ -20,9 +20,14 @@ class BarcodeService
         ]);
         return $data;
     }
-    static public function find($data)
+    static public function find($d,$status = null)
     {   
-        $data = Barcode::where('kode',$data)->first();
+        $data = Barcode::query();
+        if($status != null){
+            $data->where('status',$status);
+        }
+        $data = $data->where('kode',$d)->first();
+        
         return $data;
     }
 }

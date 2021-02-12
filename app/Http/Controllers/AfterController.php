@@ -12,7 +12,7 @@ class AfterController extends Controller
     public function index()
     {
         $after = After::get();
-        return view('backend.after.index',compact('after'));
+        return view('service.after.index',compact('after'));
     }
     public function create()
     {
@@ -20,16 +20,31 @@ class AfterController extends Controller
     }
     public function store(Request $request)
     {
-        $data = BarcodeService::find($request->kode);
-        if ($data == null) return 'tidak ditemukan';
-        if ($data->status == 'nonaktif') return 'barang masih nonaktif';
+        $data = BarcodeService::find($request->kode,'terjual');
+        if($data == null){
+            toastr()->warning('maaf kode yang anda masukan salah');
+        }
+        if($request->file == null){
+            toastr()->warning('maaf file yang anda masukan salah');
+        }
+        if($data == null || $request->file == null){
+            return redirect()->back();
+        }
+        $fileName = null;
+            $file = $request->file('file');
+            $fileName = substr(md5(microtime()), 0, 100).'.'.$file->getClientOriginalExtension();
+            $request->file('file')->storeAs('public/after/',$fileName);
+        
         $after = After::create([
             'user_id' => auth()->user()->id,
             'barcode_id' => $data->id,
-            'nama_pembeli' => $request->nama_pembeli
+            'nama_pembeli' => $request->nama_pembeli,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp
         ]);
         ServiceAfter::create([
-            'after_id' => $after->id
+            'after_id' => $after->id,
+            'file' => $fileName
         ]);
         return redirect()->back();
     }
