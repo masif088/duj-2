@@ -17,4 +17,8 @@ class Barcode extends Model
     {
         return $this->hasOne(Mutasi::class);      
     }
+    public function check()
+    {
+        return $this->hasOne(Check::class);      
+    }
 }

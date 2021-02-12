@@ -53,6 +53,26 @@ class MasukService
         });
         return true;
     }
+    static public function storeMutasi($b)
+    {
+        $masuk = Masuk::create([
+                'suplier_id' => $b->masuk->suplier->id,
+                'gudang_id' => auth('sanctum')->user()->gudang_id,
+                'user_id' => auth('sanctum')->user()->id,
+                'barang_id' => $b->masuk->barang->id,
+                'kuantiti' => 1,
+                'harga_satuan' => $b->masuk->harga_satuan,
+                'kode_akuntan' => $b->masuk->kode_akuntan,
+        ]);
+        $masuk->barcode()->create([
+                'user_id' => auth('sanctum')->user()->id,
+                'kode' => $b->kode,
+                'status' => 'aktif'
+            ]);
+            $b->mutasi()->update([
+                'status' => 'diterima'
+            ]);
+    }
     static public function update($data, $masuk)
     {
         if ($masuk->kuantiti > $data->kuantiti) {

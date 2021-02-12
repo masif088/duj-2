@@ -15,17 +15,18 @@ class MutasiController extends Controller
 {
     public function index()
     {
-        $mutasis = Barcode::where('status', 'mutasi')->whereHas('masuk', function ($s) {
-            return $s->where('gudang_id', auth()->user()->gudang_id);
-        })->whereHas('mutasi', function ($m) {
-            return $m->where('status', '!=', 'batal');
-        })->with(['mutasi', 'masuk'])->get();
-        return view('backend.listkeluar', compact('mutasis'));
+        // Barcode::where('status', 'mutasi')->whereHas('masuk', function ($s) {
+        //     return $s->where('gudang_id', auth()->user()->gudang_id);
+        // })->whereHas('mutasi', function ($m) {
+        //     return $m->where('status', '!=', 'batal');
+        // })->with(['mutasi', 'masuk'])
+        $mutasis = Mutasi::get();
+        return view('mutasi.list', compact('mutasis'));
     }
     public function create()
     {
         $gudang = Gudang::get();
-        return view('backend.mutasi', compact('gudang'));
+        return view('mutasi.create', compact('gudang'));
     }
     public function store(StoreRequest $request)
     {
@@ -33,8 +34,14 @@ class MutasiController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         $data = BarcodeService::find($request->kode);
-        if ($data == null) return 'tidak ditemukan';
-        if ($data->status == 'nonaktif' || $data->status == 'mutasi') return 'barang masih nonaktif/telahh termutasi';
+        if ($data == null){
+            toastr()->warning('Tidak ditemukan');
+             return redirect()->back();
+        }
+        if ($data->status == 'nonaktif' || $data->status == 'mutasi'){
+            toastr()->warning('barang masih nonaktif/telahh termutasi'); 
+            return redirect()->back();
+        }
         DB::transaction(function() use($data,$request){
             BarcodeService::update($data, 'mutasi');
             MutasiService::store($request, $data->id);
@@ -45,7 +52,7 @@ class MutasiController extends Controller
     public function edit(Mutasi $id)
     {
         $gudang = Gudang::get();
-        return view('backend.editmutasi', compact(['gudang', 'id']));
+        return view('mutasi.edit', compact(['gudang', 'id']));
     }
     public function update(StoreRequest $request, Mutasi $id)
     {

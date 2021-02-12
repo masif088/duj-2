@@ -11,14 +11,30 @@ class ServiceInfraController extends Controller
     public function index()
     {
         $service  = ServiceInfra::get();
-        return view('backend.serviceInfra',compact('service'));
+        return view('service.infra.index',compact('service'));
     }
-    public function store(Infra $id)
+    public function store(Request $request)
     {
+        $id = Infra::where('kode',$request->kode)->first();
+        if($id == null){
+            toastr()->warning('maaf kode yang anda masukan salah');
+        }
+        if($request->file == null){
+            toastr()->warning('maaf file yang anda masukan salah');
+        }
+        if($id == null || $request->file == null){
+            return redirect()->back();
+        }
+        $fileName = null;
+            $file = $request->file('file');
+            $fileName = substr(md5(microtime()), 0, 100).'.'.$file->getClientOriginalExtension();
+            $request->file('file')->storeAs('public/infra/',$fileName);
+        
         $id->update([
             'status' => 'rusak',
             ]);
         ServiceInfra::create([
+            'file' => $fileName,
             'infra_id' => $id->id
         ]);
         return redirect()->back();
@@ -48,6 +64,14 @@ class ServiceInfraController extends Controller
         $id->update([
             'status' => 'tidak',
         ]);
+        return redirect()->back();
+    }
+    public function batal(ServiceInfra $id)
+    {
+        $id->infra()->update([
+            'status' => 'ready'
+        ]);
+        $id->delete();
         return redirect()->back();
     }
 }

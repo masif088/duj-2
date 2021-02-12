@@ -14,7 +14,9 @@ class UserController extends Controller
 {
     function login(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::where(function($z){
+            $z->where('role','ketua')->orWhere('role','checker');
+        })->where('email', $request->email)->first();
         // print_r($data);
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
@@ -57,37 +59,8 @@ class UserController extends Controller
                 'data' => $request->validator->messages(),
             ],400);
         }
-        if(auth('sanctum')->user()->role == 'admin'){
-            if(!in_array($request->role,['admin','head','teknisi'])){
-                return response()->json([
-                    'status' => 'error',
-                    'msg' => 'role yang anda maskan tidak sesuai',
-            ],404);
-
-            } 
-        }elseif(auth('sanctum')->user()->role == 'head'){
-            if($request->role != 'ketua'){
-                return response()->json([
-                    'status' => 'error',
-                    'msg' => 'role yang anda maskan tidak sesuai',
-            ],404);
-
-            } 
-        }elseif(auth('sanctum')->user()->role == 'ketua'){
-            if($request->role != 'checker'){
-                return response()->json([
-                    'status' => 'error',
-                    'msg' => 'role yang anda maskan tidak sesuai',
-            ],404);
-
-            } 
-        }else{
-            return response()->json([
-                'status' => 'error',
-                'msg' => 'role yang anda maskan tidak sesuai',
-        ],404);
-
-        }
+        $request['role'] = 'checker';
+        $request['gudang'] = auth('sanctum')->user()->gudang_id;
         $user = UserService::store($request);
         return response()->json([
             'status' => 'ok',

@@ -17,8 +17,8 @@ class CreateBarcodesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('masuk_id')->references('id')->on('masuks');
-            $table->string('kode')->unique();
-            $table->enum('status',['nonaktif','aktif','mutasi','rusak'])->default('nonaktif');
+            $table->string('kode');
+            $table->enum('status',['terjual','nonaktif','aktif','mutasi','rusak'])->default('nonaktif');
             $table->timestamps();
         });
     }

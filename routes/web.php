@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::delete('/delete', [UserController::class, 'delete']);
         });
     });
-    Route::group(['middleware' => ['CheckRole:head']], function () {
+    Route::group(['middleware' => ['CheckRole:head,admin,teknisi']], function () {
         Route::prefix('barang')->name('barang.')->group(function () {
             Route::post('/create', [BarangController::class, 'store']);
             Route::get('/edit/{id}', [BarangController::class, 'edit'])->name('edit');
@@ -99,12 +99,13 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
         });
         Route::prefix('service-infra')->name('serviceInfra.')->group(function () {
             Route::get('/', [ServiceInfraController::class, 'index'])->name('index');
-            Route::get('/create/{id}', [ServiceInfraController::class, 'create'])->name('create');
-            Route::post('/create/{id}', [ServiceInfraController::class, 'store']);
+            Route::get('/create', [ServiceInfraController::class, 'create'])->name('create');
+            Route::post('/create', [ServiceInfraController::class, 'store']);
             Route::get('/edit/{id}', [ServiceInfraController::class, 'edit'])->name('edit');
             Route::put('/edit/{id}', [ServiceInfraController::class, 'update']);
             Route::delete('/delete/{id}',[ServiceInfraController::class, 'delete'])->name('delete');
             Route::get('/barcode/{b}', [ServiceInfraController::class, 'barcode'])->name('barcode');
+            Route::get('/batal/{id}', [ServiceInfraController::class, 'batal'])->name('batal');
             Route::get('/setuju/{id}', [ServiceInfraController::class, 'setuju'])->name('setuju');
 
         });
@@ -124,6 +125,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/edit/{id}', [ServiceAfterController::class, 'edit'])->name('edit');
             Route::put('/edit/{id}', [ServiceAfterController::class, 'update']);
             Route::delete('/delete/{id}',[ServiceAfterController::class, 'delete'])->name('delete');
+            Route::get('/batal/{id}', [ServiceAfterController::class, 'batal'])->name('batal');
         });
     });
     Route::group(['middleware' => ['CheckRole:admin,head']], function () {
@@ -199,9 +201,9 @@ Route::get('/service-perbaiki', function () {
     return view('frontend.service.perbaiki');
 });
 //after
-Route::get('/after', function () {
-    return view('frontend.after.index');
-});
+// Route::get('/after', function () {
+//     return view('frontend.after.index');
+// });
 //dashboard
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.HO');

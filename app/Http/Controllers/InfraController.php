@@ -13,11 +13,11 @@ class InfraController extends Controller
     public function index()
     {
         $infra = Infra::get();
-        return view('backend.infra',compact('infra'));
+        return view('infra.infra',compact('infra'));
     }
     public function create()
     {
-        return view('backend.infraCreate');
+        return view('infra.create');
     }
     public function store(StoreRequest $request)
     {
@@ -25,7 +25,7 @@ class InfraController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         InfraService::store($request);
-        return redirect()->back();
+        return redirect()->route('infra.index');
     }
     public function barcode(Infra $b)
     {
@@ -33,7 +33,7 @@ class InfraController extends Controller
     }
     public function edit(Infra $id)
     {
-        return view('backend.infraEdit',compact('id'));
+        return view('infra.edit',compact('id'));
     }
     public function update(StoreRequest $request,Infra $id)
     {

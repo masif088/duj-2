@@ -21,4 +21,11 @@ class ServiceAfterController extends Controller
         ]);
         return redirect()->back();
     }
+    public function batal(ServiceAfter $id)
+    {
+        $id->update([
+            'status' => 'batal'
+        ]);
+        return redirect()->back();
+    }
 }

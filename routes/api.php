@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\MasukController;
 use App\Http\Controllers\Api\UserController as ApiUserController;
+use App\Http\Controllers\Api\BarangController;
+use App\Http\Controllers\Api\CheckController;
+use App\Http\Controllers\Api\MutasiController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +29,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/create',[ApiUserController::class,'store']);
         Route::put('/edit',[ApiUserController::class,'edit']);
         Route::put('/delete',[ApiUserController::class,'delete']);
+    });
+    Route::prefix('masuk')->group(function () {
+        Route::get('/riwayat',[MasukController::class,'riwayat']);
+        Route::post('/create',[MasukController::class,'store']);
+    });
+    Route::prefix('barang')->group(function () {
+        Route::get('/',[BarangController::class,'index']);
+    });
+    Route::prefix('mutasi')->group(function () {
+        Route::post('/create',[MutasiController::class,'store']);
+    });
+    Route::prefix('check')->group(function () {
+        Route::post('/create',[CheckController::class,'store']);
     });
 });
 Route::get('/isAuth', [ApiUserController::class, 'isAuth']);

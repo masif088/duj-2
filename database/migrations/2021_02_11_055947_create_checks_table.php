@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiceInfrasTable extends Migration
+class CreateChecksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateServiceInfrasTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_infras', function (Blueprint $table) {
+        Schema::create('checks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->references('id')->on('users');
-            $table->foreignId('infra_id')->references('id')->on('infras');
-            $table->text('sparepart')->nullable();
-            $table->integer('lama')->nullable();
-            $table->string('file')->nullable();
-            $table->enum('status',['batal','pengajuan','selesai','tidak'])->default('pengajuan');
+            $table->foreignId('barcode_id')->nullable()->references('id')->on('barcodes');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateServiceInfrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_infras');
+        Schema::dropIfExists('checks');
     }
 }
