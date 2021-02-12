@@ -88,16 +88,9 @@
                                         </span>
                                       @enderror
                                     </div>
-                                    <div class="form-gorup mb-3">
-                                      <select  class="js-example-basic-single form-control @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="barang"
-                                      value="{{ old('barang') }}" required autocomplete="barang"  autofocus>
-                                        <option value="" disabled selected>Status</option>
-                                        <option value="">Rusak</option>
-                                        <option value="">Bagus</option>
-                                      </select>
-                                    </div>
+
                                     <div class="form-group mb-3">
-                                      <label class="col-form-label">Lama Pengerjaan</label>
+                                      <label class="col-form-label">Lama Pengerjaan (Hari)</label>
                                       <input class="form-control" type="number" placeholder="Lama Pengerjaan" name="name" >
                                       {{-- <input  id="barang" type="text"
                                                     class="form-control @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="barang"
@@ -108,12 +101,32 @@
                                         </span>
                                       @enderror
                                     </div>
-                                      <div class="form-group row">
+                                    <div class="form-group mb-3">
+                                      <label class="form-label">Sparepart</label>
+                                      <textarea rows="5"  id="Sparepart" type="text"
+                                                    class="form-control @error('sparepart') is-invalid @enderror" placeholder="sparepart" name="sparepart"
+                                                    value="{{ old('sparepart') }}" required autocomplete="sparepart"  autofocus></textarea>
+                                      @error('sparepart')
+                                        <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                        </span>
+                                      @enderror
+                                    </div>
+                                    <div class="form-gorup mb-3">
+                                      <label class="form-label">Status Pengerjaan</label>
+                                      <select  class="js-example-basic-single form-control @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="barang"
+                                      value="{{ old('barang') }}" required autocomplete="barang"  autofocus>
+                                        <option value="" disabled selected>Status</option>
+                                        <option value="">Selesai</option>
+                                        <option value="">Belum</option>
+                                      </select>
+                                    </div>
+                                      {{-- <div class="form-group row">
                                           <label class="col-sm-3 col-form-label">File</label>
                                           <div class="col-sm-9">
                                             <input class="form-control" type="file" id="thumbnail" name="image">
                                           </div>
-                                      </div>
+                                      </div> --}}
 
 
                                       <div class="modal-footer ">
