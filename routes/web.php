@@ -206,6 +206,15 @@ Route::get('/service-perbaiki', function () {
 // Route::get('/after', function () {
 //     return view('frontend.after.index');
 // });
+
+ //list user
+ Route::get('/list', function () {
+     return view('frontend.list-user.list');
+ });
+ //semua barang
+ Route::get('/semua', function () {
+     return view('frontend.barang.semua-barang');
+ });
 //aktif barcode
 Route::get('/aktif-bar', function () {
     return view('frontend.aktif.barcode');
