@@ -13,4 +13,8 @@ class Barang extends Model
     {
         return $this->hasMany(Masuk::class);
     }
+    public function barcode()
+    {
+        return $this->hasManyThrough(Barcode::class, Masuk::class);
+    }
 }
