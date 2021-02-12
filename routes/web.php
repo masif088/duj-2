@@ -204,6 +204,10 @@ Route::get('/service-perbaiki', function () {
 // Route::get('/after', function () {
 //     return view('frontend.after.index');
 // });
+//aktif barcode
+Route::get('/aktif-bar', function () {
+    return view('frontend.aktif.barcode');
+});
 //dashboard
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.HO');
