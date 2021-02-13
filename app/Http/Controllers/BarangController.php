@@ -9,6 +9,11 @@ use Services\Barang\BarangService;
 
 class BarangController extends Controller
 {
+    public function detail(Barang $id)
+    {
+        $barcode = $id->barcodes()->get();
+        return view('backend.barcode',compact('barcode'));
+    }
     public function index()
     {
         $barang = Barang::get();

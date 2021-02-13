@@ -22,17 +22,21 @@
                           <th>Stock aktif</th>
                           <th>Stock nonaktif</th>
                           <th>Harga</th>
+                          <th>Action</th>
                       </tr>
                       </thead>
                   <tbody>
                     @foreach ($barang as $i=>$b)
-                        
                     <tr>
                       <td>{{$i+1}}</td>
                       <td>{{$b->name}}</td>
                       <td>{{$b->barcodes()->where('status','aktif')->count()}}</td>
                       <td>{{$b->barcodes()->where('status','nonaktif')->count()}}</td>
-                      <td>Rp 20000</td>
+                      <td>
+                        {{min($b->masuk()->pluck('harga_satuan')->toArray())}}-
+                        {{max($b->masuk()->pluck('harga_satuan')->toArray())}}
+                      </td>
+                      <td><a href="{{route('barang.detail',$b->id)}}" class="btn btn-sm btn-primary">Detail</a> </td>
                     </tr>
                     @endforeach
                     
