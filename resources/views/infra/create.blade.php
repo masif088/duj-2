@@ -1,4 +1,4 @@
-@extends('frontend.layout-frontend.master')
+@extends('frontend.layouts.master')
 @section('head')
 <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/select2.css')}}">
 @endsection

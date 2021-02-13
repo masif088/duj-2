@@ -12,7 +12,8 @@
         {!! QrCode::size(100)->generate($b->kode); !!}
         <p>Nama: {{$b->masuk->barang->name}}</p>
         <p>kode: {{$b->kode}}</p>
-
+        <p>status: {{$b->status}}</p>
+        <p>harga: {{$b->masuk->harga_satuan}}</p>
     </div>
     @endforeach
 </body>
