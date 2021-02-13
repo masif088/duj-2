@@ -208,3 +208,6 @@ Route::get('/service-perbaiki', function () {
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.HO');
 });
+Route::get('/dashboard_admin', function () {
+    return view('frontend.dashboard.Admin');
+});
