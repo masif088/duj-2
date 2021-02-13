@@ -28,7 +28,6 @@
                 <div class="form-group">
                   <label for="exampleFormControlSelect9">Role</label>
                   <select name="role" class="form-control digits" id="exampleFormControlSelect9">
-                    <option disabled selected hidden></option>
                     @if (auth()->user()->role == 'admin')
                     <option value="admin">admin</option>
                     <option value="head">Head office</option>
@@ -41,6 +40,15 @@
                     <option value="checker">Checker</option>
                     @endif
 
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect9">Penempatan gudang</label>
+                  <select name="gudang" class="form-control digits" id="exampleFormControlSelect9">
+                    @foreach ($gudang as $g)
+                    <option value="{{$g->id}}">{{$g->name}}</option>
+                        
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group mb-3">

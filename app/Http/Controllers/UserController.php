@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Models\Gudang;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Services\User\UserService;
@@ -13,15 +14,27 @@ class UserController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('user.profil',compact('user'));
+        $gudang = Gudang::get();
+        return view('user.profil',compact(['user','gudang']));
+    }
+    public function all()
+    {
+        $user = User::where('role' ,'!=','admin')->get();
+        return view('user.list',compact('user'));
     }
     public function create()
     {
-        return view('user.create');
+        $gudang = Gudang::get();
+        return view('user.create',compact('gudang'));
     }
-    public function edit($id)
+    public function edit(User $id)
     {
-        return view('backend.user',compact('id'));
+        $user = $id;
+        if(auth()->user()->role != 'admin'){
+            $user = auth()->user();
+        }
+        $gudang = Gudang::get();
+        return view('user.profil',compact(['user','gudang']));
     }
     public function store(StoreUserRequest $request)
     {
@@ -54,28 +67,9 @@ class UserController extends Controller
             $request->flash();
             return redirect()->back()->withErrors($request->validator->messages());
         }
-        if(auth()->user()->role == 'admin'){
-            if(!in_array($request->role,['admin','head','teknisi'])){
+        if(auth()->user()->role != 'admin'){
                 return redirect()->back();
-            } 
-        }elseif(auth()->user()->role == 'head'){
-            if(!in_array($request->role,['ketua','head'])){
-                return redirect()->back();
-            } 
-        }elseif(auth()->user()->role == 'ketua'){
-            if(!in_array($request->role,['ketua','checker'])){
-                return redirect()->back();
-            } 
-        }elseif(auth()->user()->role == 'checker'){
-            if($request->role != 'checker'){
-                return redirect()->back();
-            } 
-        }elseif(auth()->user()->role == 'teknisi'){
-            if($request->role != 'teknisi'){
-                return redirect()->back();
-            } 
-        }else{
-            return redirect()->back();
+          
         }
         UserService::edit($request,$id);
         return redirect()->back();

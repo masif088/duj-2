@@ -21,7 +21,7 @@
             <ul class="nav-submenu menu-content">
               <li><a href="{{route('barang.create')}}">Nama Barang</a></li>
               {{-- @if (auth()->user()->role != 'teknisi') --}}
-              <li><a href="{{route('masuk.index')}}">List Barang Masuk</a></li>
+              <li><a href="{{route('masuk.index')}}">Barang Masuk</a></li>
               {{-- @endif --}}
             </ul>
           </li>

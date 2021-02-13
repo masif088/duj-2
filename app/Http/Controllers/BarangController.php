@@ -9,6 +9,11 @@ use Services\Barang\BarangService;
 
 class BarangController extends Controller
 {
+    public function index()
+    {
+        $barang = Barang::get();
+        return view('barang.semuabarang',compact('barang'));
+    }
     public function create()
     {
         $barang = Barang::get();
