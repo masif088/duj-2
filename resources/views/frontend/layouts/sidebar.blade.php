@@ -14,6 +14,10 @@
           </li>
 
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('user.index')}}"><i data-feather="users"> </i><span>Profile</span></a></li>
+          @if (auth()->user()->role == 'admin')
+          <li class="dropdown"><a class="nav-link menu-title" href="{{route('barang.index')}}"><i data-feather="file-text"></i><span>Semua Barang</span></a></li>
+          <li class="dropdown"><a class="nav-link menu-title" href="{{route('user.all')}}"><i data-feather="users"></i><span>User</span></a></li>
+          @endif
           <li class="dropdown"><a class="nav-link menu-title" href="{{route('barcode.edit')}}"><i data-feather="box"> </i><span>Aktifasi Barcode</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title" href="{{route('barcode.terjual')}}"><i data-feather="box"> </i><span>barang terjual</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
@@ -22,6 +26,7 @@
               @if (auth()->user()->role != 'teknisi')
               <li><a href="{{route('masuk.index')}}">List Barang Masuk</a></li>
               @endif
+              <li><a href="{{route('barang.index')}}">semua barang</a></li>
             </ul>
           </li>
           <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Kelola Mutasi</span></a>

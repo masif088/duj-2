@@ -106,10 +106,10 @@ class UserSeeder extends Seeder
                 ]);
             }
         }
-       Barcode::take(5)->update([
+       Barcode::take(10)->update([
            'status' => 'aktif'
        ]);
-        $cc = Barcode::where('status','aktif')->get();
+        $cc = Barcode::where('status','aktif')->take(5)->get();
         foreach ($cc as $value) {
             $value->update([
                 'status' => 'mutasi'

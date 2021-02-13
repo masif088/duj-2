@@ -38,11 +38,14 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-        Route::put('/edit/{id}', [UserController::class, 'update']);
         Route::group(['middleware' => ['CheckRole:admin,head,ketua']], function () {
             Route::get('/create', [UserController::class, 'create'])->name('create');
             Route::post('/create', [UserController::class, 'store']);
             Route::delete('/delete', [UserController::class, 'delete']);
+        });
+        Route::group(['middleware' => ['CheckRole:admin']], function () {
+            Route::get('/all', [UserController::class, 'all'])->name('all');
+            Route::put('/edit/{id}', [UserController::class, 'update']);
         });
     });
     Route::group(['middleware' => ['CheckRole:head,admin,teknisi']], function () {
@@ -132,6 +135,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
     });
     Route::group(['middleware' => ['CheckRole:admin,head']], function () {
         Route::prefix('barang')->name('barang.')->group(function () {
+            Route::get('/', [BarangController::class, 'index'])->name('index');
             Route::get('/create', [BarangController::class, 'create'])->name('create');
         });
         Route::prefix('gudang')->name('gudang.')->group(function () {
@@ -153,7 +157,7 @@ Route::get('/profil', function () {
     return view('frontend.profil.profil');
 });
 
-Route::get('/barang', function () {
+Route::get('/barang/barang', function () {
     return view('frontend.barang.barang');
 });
 Route::get('/barang_masuk', function () {
