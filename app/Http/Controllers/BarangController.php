@@ -11,12 +11,24 @@ class BarangController extends Controller
 {
     public function detail(Barang $id)
     {
-        $barcode = $id->barcodes()->get();
+        if(auth()->user()->role != 'admin'){
+            $barcode = $id->barcodes()->whereHas('masuk',function($m){
+               return $m->where('gudang_id',auth()->user()->gudang_id); 
+            })->get();
+        }else{
+            $barcode = $id->barcodes()->get();
+        }
         return view('backend.barcode',compact('barcode'));
     }
     public function index()
     {
-        $barang = Barang::get();
+        if(auth()->user()->role == 'admin'){
+            $barang = Barang::get();
+        }else{
+            $barang = Barang::whereHas('masuk',function($z){
+                return $z->where('gudang_id',auth()->user()->gudang_id);
+            })->get();
+        }
         return view('barang.semuabarang',compact('barang'));
     }
     public function create()

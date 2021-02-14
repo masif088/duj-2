@@ -20,7 +20,15 @@ class MutasiController extends Controller
         // })->whereHas('mutasi', function ($m) {
         //     return $m->where('status', '!=', 'batal');
         // })->with(['mutasi', 'masuk'])
-        $mutasis = Mutasi::get();
+        if(auth()->user()->role != 'admin'){
+            $mutasis = Mutasi::whereHas('barcode', function ($m) {
+                return $m->whereHas('masuk', function($z){
+                    return $z->where('gudang_id',auth()->user()->gudang_id);
+                });
+            })->get();
+        }else{
+            $mutasis = Mutasi::get();
+        }
         return view('mutasi.list', compact('mutasis'));
     }
     public function create()
@@ -33,7 +41,7 @@ class MutasiController extends Controller
         if (isset($request->validator) && $request->validator->fails()) {
             return redirect()->back()->withErrors($request->validator->messages());
         }
-        $data = BarcodeService::find($request->kode);
+        $data = BarcodeService::find($request->kode,null,auth()->user()->gudang_id);
         if ($data == null){
             toastr()->warning('Tidak ditemukan');
              return redirect()->back();

@@ -21,8 +21,10 @@
                 <select name="gudang" class="js-example-basic-single col-sm-12 @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="gudang"
                 value="{{ old('gudang') }}" required autocomplete="gudang"  autofocus>
                 @foreach ($gudang as $g)
+                @if ($g->id != auth()->user()->gudang_id)
                 <option value="{{$g->id}}">{{$g->name}}</option>
                     
+                @endif
                 @endforeach  
                 </select>
                 @error('gudang')

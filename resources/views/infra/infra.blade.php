@@ -16,11 +16,12 @@
                     <div class="dropdown-basic">
                         <div class="row justify-content-end">
                             <div style="padding-right: 10px;">
+                                @if (auth()->user()->role != 'admin')
                                 <a href="{{route('infra.create')}}">
                                     <button class="btn btn-success btn-lg" type="button" data-toggle="modal"
                                         data-target="#addReward">Tambah</button>
-
                                 </a>
+                                @endif
                             </div>
                         </div>
 
@@ -50,9 +51,12 @@
                                     <td>{{$in->created_at->format('d-M-Y')}}</td>
                                     <td>{{$in->status}}</td>
                                     <td>
+                                        @if (auth()->user()->role == 'head')
                                         <a href="{{route('infra.edit',$in->id)}}">
                                             <button type="button" class="btn btn-info btn-sm">Edit</button>
                                         </a>
+                                            
+                                        @endif
                                         <a href="{{route('infra.barcode',$in->id)}}">
                                             <button type="button" class="btn btn-danger btn-sm">Barcode</button>
                                         </a>

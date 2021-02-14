@@ -10,7 +10,13 @@ class ServiceInfraController extends Controller
 {
     public function index()
     {
-        $service  = ServiceInfra::get();
+        if(auth()->user()->role != 'admin'){
+            $service  = ServiceInfra::whereHas('infra',function($x){
+                return $x->where('gudang_id',auth()->user()->gudang_id);
+            })->get();
+        }else{
+            $service = ServiceInfra::get();
+        }
         return view('service.infra.index',compact('service'));
     }
     public function store(Request $request)

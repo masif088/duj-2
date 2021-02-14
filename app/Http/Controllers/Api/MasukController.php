@@ -21,7 +21,7 @@ class MasukController extends Controller
     public function store(Request $request)
     {
         $b = BarcodeService::find($request->kode,'mutasi');
-        if($b == null || (auth('sanctum')->user()->gudang_id != $b->mutasi->gudang_id) || $b->mutasi->status != 'proses'){
+        if($b == null || (auth('sanctum')->user()->gudang_id != $b->mutasi->gudang_id) || ($b->mutasi->status != 'proses')){
             return response()->json([
                 'status' => 'error',
                 'msg' => 'tidak ditemukan'

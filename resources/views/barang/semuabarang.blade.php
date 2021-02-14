@@ -19,8 +19,8 @@
                       <tr>
                           <th>No</th>
                           <th>Nama Barang</th>
-                          <th>Stock aktif</th>
-                          <th>Stock nonaktif</th>
+                          <th>Aktif</th>
+                          <th>Nonaktif</th>
                           <th>Harga</th>
                           <th>Action</th>
                       </tr>
