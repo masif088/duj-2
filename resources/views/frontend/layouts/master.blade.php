@@ -129,7 +129,7 @@
       </div>
     </div>
 
-    {{-- @jquery --}}
+    @jquery
     @toastr_js
     @toastr_render
     <!-- latest jquery-->

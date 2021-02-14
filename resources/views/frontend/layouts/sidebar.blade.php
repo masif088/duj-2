@@ -26,12 +26,18 @@
               @if (auth()->user()->role != 'teknisi')
               <li><a href="{{route('masuk.index')}}">List Barang Masuk</a></li>
               @endif
+              @if (auth()->user()->role == 'head')
               <li><a href="{{route('barang.index')}}">semua barang</a></li>
+                  
+              @endif
             </ul>
           </li>
           <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Kelola Mutasi</span></a>
             <ul class="nav-submenu menu-content">
+              @if (auth()->user()->role == 'head')
               <li><a href="{{route('mutasi.create')}}">Mutasi</a></li>
+                  
+              @endif
               {{-- @if (auth()->user()->role != 'teknisi') --}}
               <li><a href="{{route('mutasi.index')}}">Riwayat Mutasi</a></li>
               {{-- @endif --}}

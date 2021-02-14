@@ -16,6 +16,7 @@ class CreateAftersTable extends Migration
         Schema::create('afters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('gudang_id')->references('id')->on('gudangs');
             $table->foreignId('barcode_id')->references('id')->on('barcodes');
             $table->string('nama_pembeli');
             $table->string('no_hp');

@@ -19,9 +19,15 @@ class BarcodeController extends Controller
     }
     public function update(Request $request)
     {
-        $data = BarcodeService::find($request->kode);
-        if ($data == null) return 'tidak ditemukan';
-        if ($data->status == 'aktif') return 'barang telah aktif';
+        $data = BarcodeService::find($request->kode,'aktif',auth()->user()->gudang_id);
+        if ($data == null) {
+            toastr()->warning('barang telah aktif/termutasi');
+            return redirect()->back();
+        }
+        if ($data->status == 'aktif' || $data->status == 'mutasi'){
+            toastr()->warning('barang telah aktif/termutasi');
+            return redirect()->back();
+        } 
         BarcodeService::update($data,'aktif');
         return redirect()->back();
     }
@@ -31,7 +37,7 @@ class BarcodeController extends Controller
     }
     public function terjual(Request $request)
     {
-        $data = BarcodeService::find($request->kode,'aktif');
+        $data = BarcodeService::find($request->kode,'aktif',auth()->user()->gudang_id);
         if ($data->status != 'aktif'){
             toastr()->warning('barang belum aktif');
             return redirect()->back();

@@ -13,13 +13,16 @@ class InfraController extends Controller
 {
     public function index()
     {
-        $infra = Infra::get();
+        if(auth()->user()->role != 'admin'){
+            $infra = Infra::where('gudang_id',auth()->user()->gudang_id)->get();
+        }else{
+            $infra = Infra::get();
+        }
         return view('infra.infra',compact('infra'));
     }
     public function create()
     {
-        $gudang = Gudang::get();
-        return view('infra.create',compact('gudang'));
+        return view('infra.create');
     }
     public function store(StoreRequest $request)
     {
@@ -35,9 +38,7 @@ class InfraController extends Controller
     }
     public function edit(Infra $id)
     {
-        $gudang = Gudang::get();
-
-        return view('infra.edit',compact(['id','gudang']));
+        return view('infra.edit',compact('id'));
     }
     public function update(StoreRequest $request,Infra $id)
     {

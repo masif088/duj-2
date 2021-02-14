@@ -92,7 +92,7 @@ class UserSeeder extends Seeder
             ]);
             $ss = Masuk::create([
                 'suplier_id' => $s->id,
-                'gudang_id' => $g->id,
+                'gudang_id' => $i == 1 ? 1 :$g->id,
                 'user_id' => $h->id,
                 'barang_id' => $b->id,
                 'kuantiti' => 5,

@@ -15,7 +15,11 @@ class MasukService
 {
     static public function index()
     {
-        $masuk = Masuk::get();
+        if(auth()->user()->role != 'admin'){
+            $masuk = Masuk::where('gudang_id',auth()->user()->gudang_id)->get();
+        }else{
+            $masuk = Masuk::get();
+        }
         return compact('masuk');
     }
     static public function create()
