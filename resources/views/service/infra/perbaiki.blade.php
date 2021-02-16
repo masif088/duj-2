@@ -18,9 +18,6 @@
                 <div class="form-group mb-3">
                   <label class="col-form-label">Nama Barang</label>
                   <input class="form-control" type="text" placeholder="ABC" name="name" value="{{$id->infra->name}}" disabled>
-                  {{-- <input  id="barang" type="text"
-                                class="form-control @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="barang"
-                                value="{{ old('barang') }}" required autocomplete="barang"  autofocus> --}}
                   @error('barang')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -31,9 +28,6 @@
                 <div class="form-group mb-3">
                   <label class="col-form-label">Lama Pengerjaan (Hari)</label>
                   <input class="form-control" type="number" placeholder="Lama Pengerjaan" name="lama" value="{{$id->lama}}">
-                  {{-- <input  id="barang" type="text"
-                                class="form-control @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="barang"
-                                value="{{ old('barang') }}" required autocomplete="barang"  autofocus> --}}
                   @error('barang')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -59,14 +53,6 @@
                     <option value="tidak">Belum</option>
                   </select>
                 </div>
-                  {{-- <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">File</label>
-                      <div class="col-sm-9">
-                        <input class="form-control" type="file" id="thumbnail" name="image">
-                      </div>
-                  </div> --}}
-
-
                   <div class="modal-footer ">
                     <button class="btn btn-primary">Simpan</button>
                     <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>

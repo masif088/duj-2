@@ -15,4 +15,12 @@ class InfraController extends Controller
             'data' => Infra::where('gudang_id',auth('sanctum')->user()->gudang_id)->with('serviceInfra')->get()
         ],200);
     }
+    public function scan(Request $request)
+    {
+        $i = Infra::where('kode',$request->kode)->with('serviceInfra')->first();
+        return response()->json([
+            'status' => 'ok',
+            'data' => $i
+        ],200);
+    }
 }

@@ -49,6 +49,7 @@ class AfterController extends Controller
         ]);
         ServiceAfter::create([
             'after_id' => $after->id,
+            'deskripsi' => $request->deskripsi,
             'file' => $fileName
         ]);
         return redirect()->back();

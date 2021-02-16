@@ -44,4 +44,14 @@ class MutasiController extends Controller
             'status' => 'ok',
         ],201);
     }
+    public function batal(Mutasi $id)
+    {
+        DB::transaction(function() use($id){
+            MutasiService::batal($id);
+            BarcodeService::update($id->barcode(), 'aktif');
+        });
+        return response()->json([
+            'status' => 'ok'
+        ],200);
+    }
 }
