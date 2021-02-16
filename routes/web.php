@@ -211,3 +211,6 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard_admin', function () {
     return view('frontend.dashboard.Admin');
 });
+Route::get('/dashboard_teknisi', function () {
+    return view('frontend.dashboard.Teknisi');
+});

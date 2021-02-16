@@ -58,37 +58,37 @@
                 </div>
                 {{-- service barang --}}
                 <div class="col-sm-12 col-xl-12 col-lg-6 notification">
-                    <div class="card">
-                        <div class="card-header card-no-border">
-                          <div class="header-top">
-                            <h5 class="m-0">Service barang</h5>
+                        <div class="card">
+                            <div class="card-header card-no-border">
+                            <div class="header-top">
+                                <h5 class="m-0">Service barang</h5>
 
-                          </div>
+                            </div>
+                            </div>
+                            <div class="card-body pt-0">
+                            <div class="media">
+                                <div class="media-body">
+                                <p>20-04-2020 <span>10:10</span></p>
+                                <h6>nama barang<span class="dot-notification"></span></h6>
+                                <span>barang saya rusak karena jatuh...</span>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-body">
+                                <p>20-04-2020<span class="pl-1">Today</span><span class="badge badge-secondary">New</span></p>
+                                <h6>Tello just like your product<span class="dot-notification"></span></h6><span>Quisque a consequat ante sit amet magna... </span>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-body">
+                                <div class="d-flex mb-3">
+                                    <div class="inner-img"><img class="img-fluid" src="../assets/images/notification/1.jpg" alt="Product-1" data-original-title="" title=""></div>
+                                    <div class="inner-img"><img class="img-fluid" src="../assets/images/notification/2.jpg" alt="Product-2" data-original-title="" title=""></div>
+                                </div><span class="mt-3">Quisque a consequat ante sit amet magna...</span>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        <div class="card-body pt-0">
-                          <div class="media">
-                            <div class="media-body">
-                              <p>20-04-2020 <span>10:10</span></p>
-                              <h6>nama barang<span class="dot-notification"></span></h6>
-                              <span>barang saya rusak karena jatuh...</span>
-                            </div>
-                          </div>
-                          <div class="media">
-                            <div class="media-body">
-                              <p>20-04-2020<span class="pl-1">Today</span><span class="badge badge-secondary">New</span></p>
-                              <h6>Tello just like your product<span class="dot-notification"></span></h6><span>Quisque a consequat ante sit amet magna... </span>
-                            </div>
-                          </div>
-                          <div class="media">
-                            <div class="media-body">
-                              <div class="d-flex mb-3">
-                                <div class="inner-img"><img class="img-fluid" src="../assets/images/notification/1.jpg" alt="Product-1" data-original-title="" title=""></div>
-                                <div class="inner-img"><img class="img-fluid" src="../assets/images/notification/2.jpg" alt="Product-2" data-original-title="" title=""></div>
-                              </div><span class="mt-3">Quisque a consequat ante sit amet magna...</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                 </div>
 
             </div>
