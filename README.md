@@ -1,4 +1,4 @@
 ## todo list
 
--   [ ] dashboard admin
--   [ ] dashboard teknisi
+-   [x] dashboard admin
+-   [x] dashboard teknisi
