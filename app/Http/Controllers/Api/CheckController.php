@@ -14,40 +14,43 @@ class CheckController extends Controller
     public function riwayat()
     {
 
-        $b = Barcode::where('status','aktif')->whereHas('masuk',function($z){
-            return $z->where('gudang_id',auth('sanctum')->user()->gudang_id);
-        })->get();
-        $c = Check::whereIn('barcode_id',$b->pluck('id'))->get();
+        $data = Check::whereDate('created_at',Carbon::now())->where('gudang_id', auth('sanctum')->user()->gudang_id)->get();
         return response()->json([
             'status' => 'ok',
-            'data' => [
-                'barcode' => $b,
-                'check' =>$c
-                ]
-        ]);
-    }
-    public function store(Request $request)
-    {
-        $b = Barcode::where('kode',$request->kode)->where('status','aktif')->whereHas('masuk',function($z){
-            return $z->where('gudang_id',auth('sanctum')->user()->gudang_id);
-        })->first();
-        
-        if($b == null ){
-            return response()->json([
-                'status' => 'error',
-                'msg' => 'kode tidak ditemukan/barang telah dicheck'
-            ],400);
-        }
-        if(Carbon::parse($b->check->created_at)->format('Y-m-d') < Carbon::now()->format('Y-m-d')){
-            Check::create([
-                'user_id' => auth('sanctum')->user()->id,
-                'barcode_id' => $b->id
+            'data' => $data,
             ]);
-
+    }
+    public function start()
+    {
+        $b = Check::latest()->first();
+        if($b == null || Carbon::parse($b->created_at)->format('Y-m-d') < Carbon::now()->format('Y-m-d')){
+            $bar = Barcode::where('status','aktif')->whereHas('masuk',function($z){
+                return $z->where('gudang_id',auth('sanctum')->user()->gudang_id);
+            })->get();
+            foreach ($bar as $bb) {
+                $bb->check()->create([
+                        'user_id' => auth('sanctum')->user()->id,
+                        'status' => 't',
+                        'gudang_id' => auth('sanctum')->user()->gudang_id,
+                    ]);
+            }
         }
+            $data = Check::whereDate('created_at',Carbon::now())->where('gudang_id', auth('sanctum')->user()->gudang_id)->get();
+        
         return response()->json([
             'status' => 'ok',
-            'data' => $b
+            'data' =>$data
+        ],200);
+    }
+    public function store(Check $check)
+    {
+        $check->update([
+            'status' => 'c'
+        ]);
+
+        
+        return response()->json([
+            'status' => 'ok',
         ],201);
     }
 }

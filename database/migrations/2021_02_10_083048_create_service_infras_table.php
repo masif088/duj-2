@@ -18,6 +18,7 @@ class CreateServiceInfrasTable extends Migration
             $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->foreignId('infra_id')->references('id')->on('infras');
             $table->text('sparepart')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->integer('lama')->nullable();
             $table->string('file')->nullable();
             $table->enum('status',['batal','pengajuan','selesai','tidak'])->default('pengajuan');

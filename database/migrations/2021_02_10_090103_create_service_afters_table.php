@@ -18,6 +18,7 @@ class CreateServiceAftersTable extends Migration
             $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->foreignId('after_id')->references('id')->on('afters');
             $table->text('sparepart')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->integer('lama')->nullable();
             $table->string('file')->nullable();
             $table->enum('status',['pengajuan','selesai','tidak'])->default('pengajuan');

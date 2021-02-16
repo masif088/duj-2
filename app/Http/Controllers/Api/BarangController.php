@@ -12,9 +12,17 @@ class BarangController extends Controller
     {
         return response()->json([
             'status' => 'ok',
-            'data' => Barang::has('masuk')->with(['masuk' => function($x){
-                $x->where('gudang_id',auth('sanctum')->user()->gudang_id);
-            }])->get()
+            'data' => Barang::whereHas('masuk',function($zz){
+                return $zz->where('gudang_id',auth('sanctum')->user()->gudang_id)->whereHas('barcode',function($xx){
+                    return $xx->where('status','aktif');
+                });
+            })->with(['masuk' => function($x){
+                $x->where('gudang_id',auth('sanctum')->user()->gudang_id)->whereHas('barcode',function($xx){
+                    return $xx->where('status','aktif');
+                })->with(['barcode' => function($cc){
+                    $cc->where('status','aktif');
+                }]);
+            }])->has('masuk')->get()
         ],200);
     }
 }

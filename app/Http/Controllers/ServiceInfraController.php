@@ -41,6 +41,7 @@ class ServiceInfraController extends Controller
             ]);
         ServiceInfra::create([
             'file' => $fileName,
+            'deskripsi' => $request->deskripsi,
             'infra_id' => $id->id
         ]);
         return redirect()->back();
