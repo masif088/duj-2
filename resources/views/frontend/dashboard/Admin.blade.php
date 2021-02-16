@@ -19,10 +19,10 @@
     {{-- widget --}}
 
     <div class="row">
-
+        {{-- barang masuk, keluar ,service barang --}}
         <div class="col-sm-6 col-xl-6 col-lg-6">
             <div class="row">
-
+                {{-- barang masuk --}}
                 <div class="col-sm-12 col-xl-6 col-lg-6">
                     <div class="card o-hidden">
                       <div class="bg-success b-r-4 card-body">
@@ -39,7 +39,7 @@
                       </div>
                     </div>
                 </div>
-
+                {{-- barang keluar --}}
                 <div class="col-sm-12 col-xl-6 col-lg-6">
                     <div class="card o-hidden">
                       <div class="bg-danger b-r-4 card-body">
@@ -90,19 +90,18 @@
                             </div>
                         </div>
                 </div>
-
             </div>
         </div>
-
+        {{-- total stock barang dan quality check --}}
         <div class="col-sm-6 col-xl-6 col-lg-6 news">
             <div class="row">
-
+                {{-- total stock barang --}}
                 <div class="col-sm-12 col-xl-12">
                     <div class="card o-hidden">
                         <div class="bg-primary b-r-4 card-body">
                           <div class="media static-top-widget">
                             <div class="align-self-center text-center">
-                              <i class="fa fa-long-arrow-up fa-2x"></i>
+                              <i class="fa fa-suitcase fa-2x"></i>
                             </div>
                             <div class="media-body">
                               <span class="m-0">stock</span>
@@ -111,12 +110,12 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
-
+                {{-- quality check --}}
                 <div class="col-sm-12 col-xl-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header border-0">
                         <div class="header-top">
                             <h5 class="m-0">Quality &amp; check</h5>
                             <div class="card-header-right-icon">
