@@ -10,6 +10,14 @@ use Services\Barcode\BarcodeService;
 
 class AfterController extends Controller
 {
+    public function index()
+    {
+        return response()->json([
+            'status' => 'ok',
+            'data' => After::where('gudang_id',auth('sanctum')->user()->gudang_id)->with(['serviceAfter','barcode'])->get(),
+             
+        ],200);
+    }
     public function store(Request $request)
     {
         $data = BarcodeService::find($request->kode,'terjual');
