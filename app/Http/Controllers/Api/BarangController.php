@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
+use App\Models\Barcode;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -23,6 +24,16 @@ class BarangController extends Controller
                     $cc->where('status','aktif');
                 }]);
             }])->has('masuk')->get()
+        ],200);
+    }
+    public function detail(Request $request)
+    {
+        $b = Barcode::where('kode',$request->kode)->with(['masuk' => function($xx){
+            $xx->with(['barang','gudang']);
+        },'mutasi'])->latest()->first();
+        return response()->json([
+            'status' => 'ok',
+            'data' => $b
         ],200);
     }
 }

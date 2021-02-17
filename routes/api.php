@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
     Route::prefix('barang')->group(function () {
         Route::get('/',[BarangController::class,'index']);
+        Route::post('/detail',[BarangController::class,'detail']);
+
     });
     Route::prefix('mutasi')->group(function () {
         Route::get('/riwayat',[MutasiController::class,'riwayat']);
