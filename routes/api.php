@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/riwayat',[MutasiController::class,'riwayat']);
         Route::post('/create',[MutasiController::class,'store']);
         Route::post('/batal/{id}',[MutasiController::class,'batal']);
+        Route::post('/detail',[MutasiController::class,'detail']);
     });
     Route::prefix('gudang')->group(function () {
         Route::get('/',[MutasiController::class,'gudang']);

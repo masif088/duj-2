@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mutasi\StoreRequest;
+use App\Models\Barcode;
 use App\Models\Gudang;
 use App\Models\Mutasi;
 use Illuminate\Http\Request;
@@ -60,6 +61,22 @@ class MutasiController extends Controller
         });
         return response()->json([
             'status' => 'ok'
+        ],200);
+    }
+    public function detail(Request $request)
+    {
+        $b = Barcode::where('kode',$request->kode)->where('status','aktif')->with(['masuk' => function($xx){
+            $xx->with(['barang','gudang','suplier']);
+        },'mutasi'])->latest()->first();
+        if($b == null || $b->masuk->gudang_id != auth('sanctum')->user()->gudang_id){
+        return response()->json([
+            'status' => 'error',
+            'msg' => 'barcode tidak ditemukan'
+        ],400);
+        }
+        return response()->json([
+            'status' => 'ok',
+            'data' => $b
         ],200);
     }
 }
