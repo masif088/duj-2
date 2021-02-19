@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\AfterController;
 use App\Http\Controllers\Api\MasukController;
 use App\Http\Controllers\Api\UserController as ApiUserController;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\CheckController;
+use App\Http\Controllers\Api\InfraController;
 use App\Http\Controllers\Api\MutasiController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,15 +35,34 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('masuk')->group(function () {
         Route::get('/riwayat',[MasukController::class,'riwayat']);
         Route::post('/create',[MasukController::class,'store']);
+        Route::post('/detail',[MasukController::class,'detail']);
     });
     Route::prefix('barang')->group(function () {
         Route::get('/',[BarangController::class,'index']);
+        
     });
     Route::prefix('mutasi')->group(function () {
+        Route::get('/riwayat',[MutasiController::class,'riwayat']);
         Route::post('/create',[MutasiController::class,'store']);
+        Route::post('/batal/{id}',[MutasiController::class,'batal']);
+    });
+    Route::prefix('gudang')->group(function () {
+        Route::get('/',[MutasiController::class,'gudang']);
     });
     Route::prefix('check')->group(function () {
-        Route::post('/create',[CheckController::class,'store']);
+        Route::get('/riwayat',[CheckController::class,'riwayat']);
+        Route::get('/start',[CheckController::class,'start']);
+        Route::post('/create/{check}',[CheckController::class,'store']);
+    });
+    Route::prefix('infra')->group(function () {
+        Route::get('/',[InfraController::class,'index']);
+        Route::post('/scan',[InfraController::class,'scan']);
+        Route::post('/service',[InfraController::class,'service']);
+    });
+    Route::prefix('after')->group(function () {
+        Route::get('/',[AfterController::class,'index']);
+        Route::post('/create',[AfterController::class,'store']);
+        Route::post('/service',[AfterController::class,'service']);
     });
 });
 Route::get('/isAuth', [ApiUserController::class, 'isAuth']);

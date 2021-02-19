@@ -17,6 +17,8 @@ class CreateChecksTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->foreignId('barcode_id')->nullable()->references('id')->on('barcodes');
+            $table->foreignId('gudang_id')->nullable()->references('id')->on('gudangs');
+            $table->enum('status',['c','t']);
             $table->timestamps();
         });
     }

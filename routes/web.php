@@ -38,11 +38,14 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-        Route::put('/edit/{id}', [UserController::class, 'update']);
         Route::group(['middleware' => ['CheckRole:admin,head,ketua']], function () {
             Route::get('/create', [UserController::class, 'create'])->name('create');
             Route::post('/create', [UserController::class, 'store']);
             Route::delete('/delete', [UserController::class, 'delete']);
+        });
+        Route::group(['middleware' => ['CheckRole:admin']], function () {
+            Route::get('/all', [UserController::class, 'all'])->name('all');
+            Route::put('/edit/{id}', [UserController::class, 'update']);
         });
     });
     Route::group(['middleware' => ['CheckRole:head,admin,teknisi']], function () {
@@ -78,6 +81,8 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::post('/create', [BarcodeController::class, 'store']);
             Route::get('/aktifasi', [BarcodeController::class, 'edit'])->name('edit');
             Route::put('/aktifasi', [BarcodeController::class, 'update']);
+            Route::get('/terjual', [BarcodeController::class, 'jual'])->name('terjual');
+            Route::put('/terjual', [BarcodeController::class, 'terjual']);
             Route::delete('/delete', [BarcodeController::class, 'delete']);
         });
         Route::prefix('mutasi')->name('mutasi.')->group(function () {
@@ -130,6 +135,9 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
     });
     Route::group(['middleware' => ['CheckRole:admin,head']], function () {
         Route::prefix('barang')->name('barang.')->group(function () {
+            Route::get('/', [BarangController::class, 'index'])->name('index');
+            Route::get('/detail/{id}', [BarangController::class, 'detail'])->name('detail');
+            
             Route::get('/create', [BarangController::class, 'create'])->name('create');
         });
         Route::prefix('gudang')->name('gudang.')->group(function () {
@@ -151,7 +159,7 @@ Route::get('/profil', function () {
     return view('frontend.profil.profil');
 });
 
-Route::get('/barang', function () {
+Route::get('/barang/barang', function () {
     return view('frontend.barang.barang');
 });
 Route::get('/barang_masuk', function () {
@@ -204,6 +212,19 @@ Route::get('/service-perbaiki', function () {
 // Route::get('/after', function () {
 //     return view('frontend.after.index');
 // });
+
+ //list user
+ Route::get('/list', function () {
+     return view('frontend.list-user.list');
+ });
+ //semua barang
+ Route::get('/semua', function () {
+     return view('frontend.barang.semua-barang');
+ });
+//aktif barcode
+Route::get('/aktif-bar', function () {
+    return view('frontend.aktif.barcode');
+});
 //dashboard
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.HO');

@@ -10,7 +10,13 @@ class ServiceInfraController extends Controller
 {
     public function index()
     {
-        $service  = ServiceInfra::get();
+        if(auth()->user()->role != 'admin'){
+            $service  = ServiceInfra::whereHas('infra',function($x){
+                return $x->where('gudang_id',auth()->user()->gudang_id);
+            })->get();
+        }else{
+            $service = ServiceInfra::get();
+        }
         return view('service.infra.index',compact('service'));
     }
     public function store(Request $request)
@@ -35,13 +41,14 @@ class ServiceInfraController extends Controller
             ]);
         ServiceInfra::create([
             'file' => $fileName,
+            'deskripsi' => $request->deskripsi,
             'infra_id' => $id->id
         ]);
         return redirect()->back();
     }
     function edit(ServiceInfra $id)
     {
-        return view('backend.serviceInfraEdit',compact('id'));
+        return view('service.infra.perbaiki',compact('id'));
     }
     public function update(Request $request,ServiceInfra $id)
     {

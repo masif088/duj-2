@@ -1,4 +1,4 @@
-@extends('frontend.layout-frontend.master')
+@extends('frontend.layouts.master')
 @section('head')
 <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/select2.css')}}">
 @endsection
@@ -28,7 +28,7 @@
                   </span>
                 @enderror
               </div>
-
+             
               <div class="form-footer">
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">

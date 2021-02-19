@@ -43,6 +43,13 @@
                                           </span>
                                         @enderror
                                       </div>
+                                    </div>
+                                    <div class="form-group row">
+                                      <label class="col-sm-3 col-form-label">Deskripsi Kerusakan</label>
+                                      <div class="col-sm-9">
+                                        <textarea class="form-control" type="text" id="thumbnail" name="deskripsi"></textarea>
+                                      </div>
+                                  </div>
                                       <div class="form-group row">
                                           <label class="col-sm-3 col-form-label">File</label>
                                           <div class="col-sm-9">
@@ -78,6 +85,7 @@
                           <th>Tanggal Pengajuan</th>
                           <th>Tanggal Selesai</th>
                           <th>Sparepart</th>
+                          <th>Deskripsi Kerusakan</th>
                           <th>Waktu Pengerjaan</th>
                           <th>File Pengajuan</th>
                           <th>Status</th>
@@ -94,12 +102,13 @@
                         <td>{{$s->created_at->format('d-M-Y')}}</td>
                         <td>{{$s->status == 'selesai' ? $s->updated_at->format('d-M-Y') : 'belum'}}</td>
                         <td>{{$s->sparepart}}</td>
+                        <td>{{$s->deskripsi}}</td>
                         <td>{{$s->lama ?? 0}} Hari</td>
                         <td><a target="__blank" href="{{asset(Storage::url('infra/'.$s->file))}}">file</a></td>
                         <td>{{$s->status}}</td>
                         <td>
                             {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#DetailModal">Detail</button> --}}
-                            @if (auth()->user()->role == 'teknisi' && ($s->user_id == null || $s->user_id == auth()->user()->id))
+                            @if (auth()->user()->role == 'teknisi' && ($s->user_id == null || $s->user_id == auth()->user()->id) && $s->status == 'tidak')
                             <a href="{{route('serviceInfra.edit',$s->id)}}">
                               <button type="button" class="btn btn-info btn-sm" >Ambil</button>
                             </a>
@@ -111,7 +120,7 @@
                             </a>
                                 
                             @endif
-                            @if (auth()->user()->role == 'admin')
+                            @if (auth()->user()->role == 'admin' && $s->status == 'pengajuan')
                                 <a href="{{route('serviceInfra.setuju',$s->id)}}">
                                   <button type="button" class="btn btn-danger btn-sm" >setuju</button>
                                 </a>

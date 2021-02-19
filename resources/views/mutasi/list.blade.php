@@ -16,10 +16,7 @@
               <div class="dropdown-basic">
                 <div class="row justify-content-end">
                   <div style="padding-right: 10px;">
-                    <a href="{{route('mutasi.create')}}">
-                      <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#addReward">Tambah</button>
-
-                    </a>
+            
 
                     {{-- <div class="dropdown">
                       <div class="btn-group mb-0">

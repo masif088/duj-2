@@ -13,4 +13,8 @@ class Infra extends Model
     {
         return $this->hasMany(ServiceInfra::class);
     }
+    public function gudang()
+    {
+        return $this->belongsTo(Gudang::class);
+    }
 }

@@ -80,12 +80,19 @@
                   @enderror
                 </div>
                 <input type="text" name="role" value="{{$user->role}}" hidden>
-                @if(auth()->user()->role == 'admin')
                 <div class="form-group">
                   <label class="col-sm-3 col-form-label">Foto</label>
                   <input class="form-control" type="file" name="img">
                 </div>
-                @endif
+                <div class="form-group">
+                  <label for="exampleFormControlSelect9">Penempatan gudang</label>
+                  <select name="gudang" class="form-control digits" id="exampleFormControlSelect9">
+                    @foreach ($gudang as $g)
+                    <option value="{{$g->id}}">{{$g->name}}</option>
+                        
+                    @endforeach
+                  </select>
+                </div>
                 <div class="form-footer">
                   <div class="form-group">
                       <div class="col-md-6 col-md-offset-4">

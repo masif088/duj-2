@@ -48,6 +48,8 @@ class UserService
                 'no_hp' => $request->no_hp,
                 'role' => $request->role,
                 'sidik' => $request->sidik,
+            'gudang_id' => $request->gudang,
+
             ]);
             return true;
     }

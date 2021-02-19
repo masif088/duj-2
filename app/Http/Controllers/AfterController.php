@@ -11,7 +11,11 @@ class AfterController extends Controller
 {
     public function index()
     {
-        $after = After::get();
+        if(auth()->user()->role != 'admin'){
+            $after = After::where('gudang_id',auth()->user()->gudang_id)->get();
+        }else{
+            $after = After::get();
+        }
         return view('service.after.index',compact('after'));
     }
     public function create()
@@ -38,12 +42,14 @@ class AfterController extends Controller
         $after = After::create([
             'user_id' => auth()->user()->id,
             'barcode_id' => $data->id,
+            'gudang_id' => auth()->user()->gudang_id,
             'nama_pembeli' => $request->nama_pembeli,
             'alamat' => $request->alamat,
             'no_hp' => $request->no_hp
         ]);
         ServiceAfter::create([
             'after_id' => $after->id,
+            'deskripsi' => $request->deskripsi,
             'file' => $fileName
         ]);
         return redirect()->back();
@@ -59,6 +65,7 @@ class AfterController extends Controller
         if ($data->status == 'nonaktif') return 'barang masih nonaktif';
         $id->update([
             'user_id' => auth()->user()->id,
+            'gudang_id' => auth()->user()->gudang_id,
             'barcode_id' => $data->id,
             'nama_pembeli' => $request->nama_pembeli
         ]);

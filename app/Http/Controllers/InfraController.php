@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Infra\StoreRequest;
 use App\Http\Requests\InfraRequest;
+use App\Models\Gudang;
 use App\Models\Infra;
 use Illuminate\Http\Request;
 use Services\Infra\InfraService;
@@ -12,7 +13,11 @@ class InfraController extends Controller
 {
     public function index()
     {
-        $infra = Infra::get();
+        if(auth()->user()->role != 'admin'){
+            $infra = Infra::where('gudang_id',auth()->user()->gudang_id)->get();
+        }else{
+            $infra = Infra::get();
+        }
         return view('infra.infra',compact('infra'));
     }
     public function create()

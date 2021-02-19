@@ -14,12 +14,46 @@
           </li>
 
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('user.index')}}"><i data-feather="users"> </i><span>Profile</span></a></li>
-        <li class="dropdown"><a class="nav-link menu-title link-nav" href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
+          @if (auth()->user()->role == 'admin')
+          <li class="dropdown"><a class="nav-link menu-title" href="{{route('barang.index')}}"><i data-feather="file-text"></i><span>Semua Barang</span></a></li>
+          <li class="dropdown"><a class="nav-link menu-title" href="{{route('user.all')}}"><i data-feather="users"></i><span>User</span></a></li>
+          @endif
+          <li class="dropdown"><a class="nav-link menu-title" href="{{route('barcode.edit')}}"><i data-feather="box"> </i><span>Aktifasi Barcode</span></a></li>
+          <li class="dropdown"><a class="nav-link menu-title" href="{{route('barcode.terjual')}}"><i data-feather="box"> </i><span>barang terjual</span></a></li>
+          <li class="dropdown"><a class="nav-link menu-title link-nav" href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
             <ul class="nav-submenu menu-content">
               <li><a href="{{route('barang.create')}}">Nama Barang</a></li>
               @if (auth()->user()->role != 'teknisi')
               <li><a href="{{route('masuk.index')}}">List Barang Masuk</a></li>
               @endif
+              @if (auth()->user()->role == 'head')
+              <li><a href="{{route('barang.index')}}">semua barang</a></li>
+                  
+              @endif
+            </ul>
+          </li>
+          <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Kelola Mutasi</span></a>
+            <ul class="nav-submenu menu-content">
+              @if (auth()->user()->role == 'head')
+              <li><a href="{{route('mutasi.create')}}">Mutasi</a></li>
+                  
+              @endif
+              {{-- @if (auth()->user()->role != 'teknisi') --}}
+              <li><a href="{{route('mutasi.index')}}">Riwayat Mutasi</a></li>
+              {{-- @endif --}}
+            </ul>
+          </li>
+          <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Kelola Infrastruktur</span></a>
+            <ul class="nav-submenu menu-content">
+              <li><a href="{{route('infra.index')}}">Infrastruktur</a></li>
+              {{-- @if (auth()->user()->role != 'teknisi') --}}
+              <li><a href="{{route('serviceInfra.index')}}">Service Infrastruktur</a></li>
+              {{-- @endif --}}
+            </ul>
+          </li>
+          <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Kelola Aftersale</span></a>
+            <ul class="nav-submenu menu-content">
+              <li><a href="{{route('after.index')}}">Aftersale</a></li>
             </ul>
           </li>
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('gudang.index')}}"><i data-feather="monitor"> </i><span>Kelola Gudang</span></a></li>
