@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mutasi\StoreRequest;
+use App\Models\Gudang;
 use App\Models\Mutasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,13 @@ use Services\Mutasi\MutasiService;
 
 class MutasiController extends Controller
 {
+    public function gudang()
+    {
+        return response()->json([
+            'status' => 'ok',
+            'data' => Gudang::get()
+        ],200);
+    }
     public function riwayat()
     {
         $mutasi = Mutasi::whereHas('barcode', function ($m) {
