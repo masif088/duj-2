@@ -92,10 +92,10 @@ class UserSeeder extends Seeder
             ]);
             $ss = Masuk::create([
                 'suplier_id' => $s->id,
-                'gudang_id' => $i == 1 ? 1 :$g->id,
+                'gudang_id' => $i == 1 ? 2 :($i ==2 ? 1 : $g->id),
                 'user_id' => $h->id,
                 'barang_id' => $b->id,
-                'kuantiti' => 5,
+                'kuantiti' => 50,
                 'harga_satuan' => 12000+($i*100),
                 'kode_akuntan' => 'kukuk'.$i,
             ]);
@@ -106,10 +106,10 @@ class UserSeeder extends Seeder
                 ]);
             }
         }
-       Barcode::take(10)->update([
+       Barcode::take(20)->update([
            'status' => 'aktif'
        ]);
-        $cc = Barcode::where('status','aktif')->take(5)->get();
+        $cc = Barcode::where('status','aktif')->take(10)->get();
         foreach ($cc as $value) {
             $value->update([
                 'status' => 'mutasi'
@@ -124,7 +124,7 @@ class UserSeeder extends Seeder
         for ($i=0; $i < 10; $i++) { 
                 Infra::create([
                 'user_id' => $k->id,
-                'gudang_id' => $k->id,
+                'gudang_id' => 2,
                 'name' => 'papan tulis '.$i,
                 'kode' => Str::random(6),
             ]);
