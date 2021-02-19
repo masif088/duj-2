@@ -229,3 +229,9 @@ Route::get('/aktif-bar', function () {
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.HO');
 });
+Route::get('/dashboard_admin', function () {
+    return view('frontend.dashboard.Admin');
+});
+Route::get('/dashboard_teknisi', function () {
+    return view('frontend.dashboard.Teknisi');
+});
