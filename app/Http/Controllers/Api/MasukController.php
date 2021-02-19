@@ -33,7 +33,7 @@ class MasukController extends Controller
             'status' => 'ok'
         ],201);
     }
-    public function detail(Request $request,$status)
+    public function detail(Request $request)
     {
         $b = Barcode::where('kode',$request->kode)->with(['masuk' => function($xx){
             $xx->with(['barang','gudang','suplier']);
