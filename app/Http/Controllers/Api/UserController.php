@@ -38,9 +38,11 @@ class UserController extends Controller
     public function isAuth()
     {
         $status = null;
+        $data=null;
         $statuscode = null;
         if (auth('sanctum')->check()) {
             $status = 'ok';
+            $data = auth('sanctum')->user()->first();
             $statuscode = 200;
         } else {
             $status = 'unauth';
@@ -48,6 +50,7 @@ class UserController extends Controller
         }
         return response()->json([
             'status' => $status,
+            'data' => $data,
             'msg' => $statuscode == 200 ? 'ok' : 'error',
         ], $statuscode);
     }

@@ -16,7 +16,7 @@ class BarangController extends Controller
                return $m->where('gudang_id',auth()->user()->gudang_id); 
             })->get();
         }else{
-            $barcode = $id->barcodes()->get();
+            $barcode = $id->barcodes()->with('masuk')->get();
         }
         return view('backend.barcode',compact('barcode'));
     }

@@ -13,6 +13,7 @@
         <p>Nama: {{$b->masuk->barang->name}}</p>
         <p>kode: {{$b->kode}}</p>
         <p>status: {{$b->status}}</p>
+        <p>gudang:{{$b->masuk->gudang_id}}</p>
         <p>harga: {{$b->masuk->harga_satuan}}</p>
     </div>
     @endforeach
