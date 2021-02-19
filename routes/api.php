@@ -35,11 +35,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('masuk')->group(function () {
         Route::get('/riwayat',[MasukController::class,'riwayat']);
         Route::post('/create',[MasukController::class,'store']);
+        Route::post('/detail/{status}',[MasukController::class,'detail']);
     });
     Route::prefix('barang')->group(function () {
         Route::get('/',[BarangController::class,'index']);
-        Route::post('/detail/{status}',[BarangController::class,'detail']);
-
+        
     });
     Route::prefix('mutasi')->group(function () {
         Route::get('/riwayat',[MutasiController::class,'riwayat']);

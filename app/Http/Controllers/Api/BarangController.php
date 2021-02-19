@@ -26,21 +26,5 @@ class BarangController extends Controller
             }])->has('masuk')->get()
         ],200);
     }
-    public function detail(Request $request,$status)
-    {
-        $b = Barcode::where('kode',$request->kode)->where('status',$status)->with(['masuk' => function($xx){
-            $xx->with(['barang','gudang','suplier']);
-        },'mutasi'])->latest()->first();
-        if($b == null){
-
-        return response()->json([
-            'status' => 'error',
-            'msg' => 'barcode tidak ditemukan'
-        ],400);
-        }
-        return response()->json([
-            'status' => 'ok',
-            'data' => $b
-        ],200);
-    }
+   
 }
