@@ -42,7 +42,7 @@ class UserController extends Controller
         $statuscode = null;
         if (auth('sanctum')->check()) {
             $status = 'ok';
-            $data = auth('sanctum')->user()->first();
+            $data = auth('sanctum')->user();
             $statuscode = 200;
         } else {
             $status = 'unauth';
