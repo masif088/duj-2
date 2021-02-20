@@ -31,7 +31,7 @@ class BarcodeService
                 return $x->where('gudang_id',$gudang);
             });
         }
-        $data = $data->where('kode',$d)->first();
+        $data = $data->where('kode',$d)->latest()->first();
         
         return $data;
     }
