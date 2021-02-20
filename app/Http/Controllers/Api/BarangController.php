@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Barcode;
 use Illuminate\Http\Request;
+use Services\Barcode\BarcodeService;
 
 class BarangController extends Controller
 {
@@ -25,6 +26,16 @@ class BarangController extends Controller
                 }]);
             }])->has('masuk')->get()
         ],200);
+    }
+    public function terjual(Request $request)
+    {
+        $data = BarcodeService::find($request->kode,'aktif',auth('sanctum')->user()->gudang_id);
+        if ($data->status != 'aktif'){
+            toastr()->warning('barang belum aktif');
+            return redirect()->back();
+        } 
+        BarcodeService::update($data,'terjual');
+        return redirect()->back();
     }
    
 }
