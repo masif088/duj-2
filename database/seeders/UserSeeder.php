@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\After;
 use App\Models\Barang;
 use App\Models\Barcode;
 use App\Models\Gudang;
 use App\Models\Infra;
 use App\Models\Masuk;
 use App\Models\Mutasi;
+use App\Models\ServiceAfter;
 use App\Models\ServiceInfra;
 use App\Models\Suplier;
 use App\Models\User;
@@ -119,6 +121,24 @@ class UserSeeder extends Seeder
     })->take(5)->update([
         'status' => 'aktif'
     ]);
+    $bv = Barcode::whereHas('masuk',function($x){
+        return $x->where('gudang_id',2);
+    })->where('status','terjual')->get();
+    foreach ($bv as $value) {
+        $after = After::create([
+            'user_id' => auth('sanctum')->user()->id,
+            'barcode_id' => $value->id,
+            'gudang_id' => auth('sanctum')->user()->gudang_id,
+            'nama_pembeli' => Str::random(4),
+            'alamat' => 'jember',
+            'no_hp' => '083758378'
+        ]);
+        ServiceAfter::create([
+            'after_id' => $after->id,
+            'deskripsi' => 'tidqak bisa dimakan',
+            'file' => 'google.com'
+        ]);
+    }
         $cc = Barcode::where('status','aktif')->take(10)->get();
         foreach ($cc as $value) {
             $value->update([
