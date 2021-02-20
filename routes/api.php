@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
     Route::prefix('barang')->group(function () {
         Route::get('/',[BarangController::class,'index']);
+        Route::post('/terjual',[BarangController::class,'terjual']);
+
         
     });
     Route::prefix('mutasi')->group(function () {
