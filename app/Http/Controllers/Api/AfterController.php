@@ -14,7 +14,7 @@ class AfterController extends Controller
     {
         return response()->json([
             'status' => 'ok',
-            'data' => After::where('gudang_id',auth('sanctum')->user()->gudang_id)->with(['serviceAfter','barcode'])->get(),
+            'data' => After::where('gudang_id',auth('sanctum')->user()->gudang_id)->with(['serviceAfter','barcode.masuk.barang'])->get(),
              
         ],200);
     }
