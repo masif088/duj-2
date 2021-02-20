@@ -37,5 +37,13 @@ class BarangController extends Controller
         BarcodeService::update($data,'terjual');
         return redirect()->back();
     }
-   
+    public function status()
+    {
+        return response()->json([
+            'status' => 'ok',
+            'data' => Barcode::whereHas('masuk',function($x){
+                return $x->where('gudang_id',auth('sanctum')->user()->gudang_id);
+            })->where('status','terjual')->get(),
+        ]);
+    }
 }
