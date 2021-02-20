@@ -13,6 +13,10 @@ class After extends Model
     {
         return $this->hasOne(ServiceAfter::class);
     }
+    public function serviceAfters()
+    {
+        return $this->hasMany(ServiceAfter::class);
+    }
     public function barcode()
     {
         return $this->belongsTo(Barcode::class);
