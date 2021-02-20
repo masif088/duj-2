@@ -43,20 +43,31 @@ class AfterController extends Controller
             $file = $request->file('file');
             $fileName = substr(md5(microtime()), 0, 100).'.'.$file->getClientOriginalExtension();
             $request->file('file')->storeAs('public/after/',$fileName);
-        
-        $after = After::create([
-            'user_id' => auth('sanctum')->user()->id,
-            'barcode_id' => $data->id,
-            'gudang_id' => auth('sanctum')->user()->gudang_id,
-            'nama_pembeli' => $request->nama_pembeli,
-            'alamat' => $request->alamat,
-            'no_hp' => $request->no_hp
-        ]);
-        ServiceAfter::create([
-            'after_id' => $after->id,
-            'deskripsi' => $request->deskripsi,
-            'file' => $fileName
-        ]);
+        if(After::where('barcode_id',$data->id)->exists()){
+            $after = After::where('barcode_id',$data->id)->first();
+            ServiceAfter::create([
+                'after_id' => $after->id,
+                'deskripsi' => $request->deskripsi,
+                'file' => $fileName
+            ]);
+                $after->update([
+                'user_id' => auth('sanctum')->user()->id,
+                ]);
+        }else{
+            $after = After::create([
+                'user_id' => auth('sanctum')->user()->id,
+                'barcode_id' => $data->id,
+                'gudang_id' => auth('sanctum')->user()->gudang_id,
+                'nama_pembeli' => $request->nama_pembeli,
+                'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp
+                ]);
+                ServiceAfter::create([
+                    'after_id' => $after->id,
+                    'deskripsi' => $request->deskripsi,
+                    'file' => $fileName
+                    ]);
+                }
         return response()->json([
             'status' => 'sukses',
             'msg' => 'sukses membuat pengajuan'
