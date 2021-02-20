@@ -126,9 +126,9 @@ class UserSeeder extends Seeder
     })->where('status','terjual')->get();
     foreach ($bv as $value) {
         $after = After::create([
-            'user_id' => auth('sanctum')->user()->id,
+            'user_id' => 1,
             'barcode_id' => $value->id,
-            'gudang_id' => auth('sanctum')->user()->gudang_id,
+            'gudang_id' => 2,
             'nama_pembeli' => Str::random(4),
             'alamat' => 'jember',
             'no_hp' => '083758378'
