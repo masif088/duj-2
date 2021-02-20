@@ -11,7 +11,7 @@ class After extends Model
     protected $guarded = [];
     public function serviceAfter()
     {
-        return $this->hasOne(ServiceAfter::class);
+        return $this->hasOne(ServiceAfter::class)->latest();
     }
     public function serviceAfters()
     {
