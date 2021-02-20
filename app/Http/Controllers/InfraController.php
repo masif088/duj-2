@@ -13,11 +13,7 @@ class InfraController extends Controller
 {
     public function index()
     {
-        if(auth()->user()->role != 'admin'){
-            $infra = Infra::where('gudang_id',auth()->user()->gudang_id)->get();
-        }else{
-            $infra = Infra::get();
-        }
+          $infra = Infra::get();
         return view('infra.infra',compact('infra'));
     }
     public function create()
