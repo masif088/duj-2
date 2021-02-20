@@ -11,6 +11,7 @@
         {!! QrCode::size(100)->generate($b->kode); !!}
         <p>Nama: {{$b->name}}</p>
         <p>kode: {{$b->kode}}</p>
+        <p>gudang: {{$b->gudang_id}}</p>
 
     </div>
 </body>
