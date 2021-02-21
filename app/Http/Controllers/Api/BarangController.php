@@ -29,13 +29,17 @@ class BarangController extends Controller
     }
     public function terjual(Request $request)
     {
-        $data = BarcodeService::find($request->kode,'aktif',auth('sanctum')->user()->gudang_id);
-        if ($data->status != 'aktif'){
-            toastr()->warning('barang belum aktif');
-            return redirect()->back();
+        $data = BarcodeService::find($request->kode,null,auth('sanctum')->user()->gudang_id);
+        if ($data == null){
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'kode tidak ditemukan'
+            ],400);
         } 
         BarcodeService::update($data,'terjual');
-        return redirect()->back();
+        return response()->json([
+            'status' => 'ok',
+        ],200);
     }
     public function status()
     {
