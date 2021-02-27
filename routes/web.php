@@ -205,8 +205,8 @@ Route::get('/service', function () {
 Route::get('/service-teknisi', function () {
     return view('frontend.service.service-r-teknisi');
 });
-Route::get('/service-perbaiki', function () {
-    return view('frontend.service.perbaiki');
+Route::get('/service-a-teknisi', function () {
+    return view('frontend.after.index-teknisi');
 });
 //after
 // Route::get('/after', function () {
