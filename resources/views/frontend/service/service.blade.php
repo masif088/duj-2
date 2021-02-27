@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-header">
             <!-- <div class="pull-right mr-4"><a href="#">Edit Profile Playlist</a></div> -->
-            <h5>Barang</h5>
+            <h5>Service</h5>
           </div>
           <div class="card-body">
 
@@ -105,7 +105,8 @@
                         <td>Rusak</td>
                         <td>
                             {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#DetailModal">Detail</button> --}}
-                            <button type="button" class="btn btn-info btn-sm" >Edit</button>
+
+                            <button type="button" class="btn btn-success btn-sm" >Setuju</button>
                             <button type="button" class="btn btn-danger btn-sm" >Batal</button>
                         </td>
                       </tr>

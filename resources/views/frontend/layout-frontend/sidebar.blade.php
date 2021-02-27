@@ -1,5 +1,5 @@
 <header class="main-nav">
-  <div class="logo-wrapper">PT Wira Utama Jaya
+  <div class="logo-wrapper">PT Dira Utama Jaya
     <div class="back-btn"><i class="fa fa-angle-left"></i></div>
     <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i></div>
   </div>
@@ -12,7 +12,32 @@
           <li class="back-btn"><a href="index.html"><img class="img-fluid" src="../assets/images/logo/logo-icon.png" alt=""></a>
             <div class="mobile-back text-right"><span>Back</span><i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
           </li>
+          {{-- update sidebar --}}
+          {{-- @if (auth()->user()->role == 'admin')
+            <li class="dropdown"><a class="nav-link menu-title " href="#"><i data-feather="box"> </i><span>Barang</span></a>
+              <ul class="nav-submenu menu-content">
+                <li><a href="{{route('barang.create')}}">Nama Barang</a></li>
+                <li><a href="{{route('masuk.index')}}">List Barang Masuk</a></li>
+                <li><a href="{{route('barang.index')}}">semua barang</a></li>
+              </ul>
+            </li>
 
+          @endif
+          @if (auth()->user()->role != 'admin')
+          <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
+            <ul class="nav-submenu menu-content">
+              <li><a href="{{route('barang.create')}}">Nama Barang</a></li>
+              @if (auth()->user()->role != 'teknisi')
+              <li><a href="{{route('masuk.index')}}">List Barang Masuk</a></li>
+              @endif
+              @if (auth()->user()->role == 'head')
+              <li><a href="{{route('barang.index')}}">semua barang</a></li>
+
+              @endif
+            </ul>
+          </li>
+          @endif --}}
+          {{-- end update sidebar --}}
           <li class="dropdown"><a class="nav-link menu-title" href="dashboard"><i data-feather="home"></i><span>Dashboard</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title" href="list"><i data-feather="users"></i><span>User</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title" href="semua"><i data-feather="file-text"></i><span>Semua Barang</span></a></li>
@@ -46,6 +71,14 @@
               <li><a href="{{route('barang.create')}}">Aftersale</a></li>
             </ul>
           </li>
+
+          {{-- teknisi --}}
+          @if (auth()->user()->role == 'teknisi')
+            <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('user.index')}}"><i data-feather="users"> </i><span>Profile</span></a></li>
+            <li class="dropdown"><a class="nav-link menu-title" href=""><i data-feather="file-text"></i><span>Infrastruktur</span></a></li>
+            <li class="dropdown"><a class="nav-link menu-title" href=""><i data-feather="box"></i><span>Aftersale</span></a></li>
+          @endif
+          {{-- end teknisi --}}
           <li class="dropdown"><a class="nav-link menu-title " href="{{route('gudang.index')}}"><i data-feather="monitor"> </i><span>Kelola Gudang</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title " href="{{route('suplier.index')}}"><i data-feather="monitor"> </i><span>Kelola Suplier</span></a></li>
 

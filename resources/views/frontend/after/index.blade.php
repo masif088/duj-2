@@ -112,11 +112,55 @@
                         <td>8 Hari</td>
                         <td>Rusak</td>
                         <td>
-                            <button type="button" class="btn btn-info btn-sm" >Edit</button>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#EditModal">Edit</button>
                             <button type="button" class="btn btn-danger btn-sm" >Batal</button>
                         </td>
                       </tr>
+                      {{-- Modal edit --}}
+                      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Edit</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="theme-form" action="" method="POST" enctype="multipart/form-data">
+                                      @csrf
+                                      <input type="text" name="nama_pembeli" value="{{$id->nama_pembeli}}" placeholder="nama pembeli">
+                                      <div class="form-group mb-3">
+                                        <label class="col-form-label">Kode Barcode</label>
+                                        <input  id="Barcode" type="text"
+                                                      class="form-control @error('barcode') is-invalid @enderror" placeholder="Kode Barcode" name="barcode"
+                                                      value="{{ old('barcode') }}" required autocomplete="barcode"  autofocus>
+                                        @error('barcode')
+                                          <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                          </span>
+                                        @enderror
+                                      </div>
+                                      <div class="form-group mb-3">
+                                        <label class="col-form-label">Nama Pembeli</label>
+                                        <input  id="Pembeli" type="text"
+                                                      class="form-control @error('pembeli') is-invalid @enderror" placeholder="Nama Pembeli" name="pembeli"
+                                                      value="{{ old('pembeli') }}" required autocomplete="pembeli"  autofocus>
+                                        @error('barcode')
+                                          <span pembeli="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                          </span>
+                                        @enderror
+                                      </div>
 
+                                        <div class="modal-footer ">
+                                          <button class="btn btn-primary">Add</button>
+                                          <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- end modal edit --}}
                   </tbody>
               </table>
             </div>

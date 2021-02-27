@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-header">
             <!-- <div class="pull-right mr-4"><a href="#">Edit Profile Playlist</a></div> -->
-            <h5>Barang</h5>
+            <h5>Service</h5>
           </div>
           <div class="card-body">
 
@@ -20,24 +20,27 @@
               <table class="table table-bordered table-striped">
                   <thead class="active">
                       <tr>
-                          <th>No</th>
-                          <th>Nama barang</th>
-                          <th>Nama Teknisi</th>
-                          <th>Kode</th>
-                          <th>Tanggal Pengajuan</th>
-                          <th>Tanggal Selesai</th>
-                          <th>Sparepart</th>
-                          <th>Waktu Pengerjaan</th>
-                          <th>Status</th>
-                          <th>action</th>
+                        <th>No</th>
+                        <th>Nama Pembeli</th>
+                        <th>Nama produk</th>
+                        <th>Nama Teknisi</th>
+                        <th>Alamat</th>
+                        <th>No Hp</th>
+                        <th>Tanggal Pengajuan</th>
+                        <th>Tanggal Selesai</th>
+                        <th>Sparepart</th>
+                        <th>Waktu Pengerjaan</th>
+                        <th>Status</th>
+                        <th>action</th>
                       </tr>
                       </thead>
                   <tbody>
                       <tr>
                         <td>1</td>
+                        <td>user</td>
                         <td>Abc</td>
                         <td>k</td>
-                        <td>1222</td>
+                        <td>jember</td>
                         <td>2/2/2021</td>
                         <td>10/2/2021</td>
                         <td>Tes</td>
@@ -50,6 +53,7 @@
                       </tr>
                       <tr>
                         <td>2</td>
+                        <td>user1</td>
                         <td>Abc</td>
                         <td>-</td>
                         <td>1222</td>
