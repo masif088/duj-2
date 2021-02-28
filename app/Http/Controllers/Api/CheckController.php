@@ -42,13 +42,34 @@ class CheckController extends Controller
             'data' =>$data
         ],200);
     }
-    public function store(Check $check)
+    public function detail(Request $request)
     {
-        $check->update([
-            'status' => 'c'
-        ]);
-
-        
+        $b = Barcode::where('kode',$request->kode)->where('status','aktif')->with(['masuk' => function($xx){
+            $xx->with(['barang','gudang','suplier']);
+        }])->latest()->first();
+        if($b == null || $b->masuk->gudang_id != auth('sanctum')->user()->gudang_id){
+        return response()->json([
+            'status' => 'error',
+            'msg' => 'barcode tidak ditemukan'
+        ],400);
+        }
+        return response()->json([
+            'status' => 'ok',
+            'data' => $b
+        ],200);
+    }
+    public function store($id)
+    {
+        $c = Check::where([['gudang_id',auth('sanctum')->user()->gudang_id],['barcode_id',$id]])->first();
+        if($c == null){
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'barcode tidak ditemukan'
+            ],400);
+            }       
+            $c->update([
+                'status' => 'c'
+            ]);
         return response()->json([
             'status' => 'ok',
         ],201);
