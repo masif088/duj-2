@@ -56,7 +56,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('check')->group(function () {
         Route::get('/riwayat',[CheckController::class,'riwayat']);
         Route::get('/start',[CheckController::class,'start']);
-        Route::post('/create/{check}',[CheckController::class,'store']);
+        Route::post('/detail',[CheckController::class,'detail']);
+        Route::post('/create/{id}',[CheckController::class,'store']);
     });
     Route::prefix('infra')->group(function () {
         Route::get('/',[InfraController::class,'index']);
