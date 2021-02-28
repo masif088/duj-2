@@ -47,7 +47,7 @@
           <div class="sub-cont">
             <div class="img">
               <div class="img__text m--up">
-                <h2>PT Wira Utama Jaya</h2>
+                <h2>PT Dira Utama Jaya</h2>
 
               </div>
             </div>

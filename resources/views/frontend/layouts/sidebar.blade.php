@@ -1,5 +1,5 @@
 <header class="main-nav">
-  <div class="logo-wrapper">PT Wira Utama Jaya
+  <div class="logo-wrapper">PT Dira Utama Jaya
     <div class="back-btn"><i class="fa fa-angle-left"></i></div>
     <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i></div>
   </div>
@@ -28,7 +28,7 @@
               @endif
               @if (auth()->user()->role == 'head')
               <li><a href="{{route('barang.index')}}">semua barang</a></li>
-                  
+
               @endif
             </ul>
           </li>
@@ -36,13 +36,20 @@
             <ul class="nav-submenu menu-content">
               @if (auth()->user()->role == 'head')
               <li><a href="{{route('mutasi.create')}}">Mutasi</a></li>
-                  
+
               @endif
               {{-- @if (auth()->user()->role != 'teknisi') --}}
               <li><a href="{{route('mutasi.index')}}">Riwayat Mutasi</a></li>
               {{-- @endif --}}
             </ul>
           </li>
+          {{-- teknisi --}}
+          @if (auth()->user()->role == 'teknisi')
+            <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('user.index')}}"><i data-feather="users"> </i><span>Profile</span></a></li>
+            <li class="dropdown"><a class="nav-link menu-title" href=""><i data-feather="file-text"></i><span>Infrastruktur</span></a></li>
+            <li class="dropdown"><a class="nav-link menu-title" href=""><i data-feather="box"></i><span>Aftersale</span></a></li>
+          @endif
+          {{-- end teknisi --}}
           <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"> </i><span>Kelola Infrastruktur</span></a>
             <ul class="nav-submenu menu-content">
               <li><a href="{{route('infra.index')}}">Infrastruktur</a></li>
@@ -58,7 +65,7 @@
           </li>
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('gudang.index')}}"><i data-feather="monitor"> </i><span>Kelola Gudang</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('suplier.index')}}"><i data-feather="monitor"> </i><span>Kelola Suplier</span></a></li>
-              
+
         </div>
       <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
     </div>

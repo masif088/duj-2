@@ -10,7 +10,7 @@
     <form action="{{route('after.edit',$id->id)}}" method="post">
     @csrf
     @method('put')
-    <input type="text" name="kode" placeholder="barcode" value="{{$id->barcode->kode}}"">
+    <input type="text" name="kode" placeholder="barcode" value="{{$id->barcode->kode}}">
     <input type="text" name="nama_pembeli" value="{{$id->nama_pembeli}}" placeholder="nama pembeli">
     <button type="submit">submit</button>
     </form>

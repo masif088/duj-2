@@ -137,7 +137,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
         Route::prefix('barang')->name('barang.')->group(function () {
             Route::get('/', [BarangController::class, 'index'])->name('index');
             Route::get('/detail/{id}', [BarangController::class, 'detail'])->name('detail');
-            
+
             Route::get('/create', [BarangController::class, 'create'])->name('create');
         });
         Route::prefix('gudang')->name('gudang.')->group(function () {
@@ -205,8 +205,8 @@ Route::get('/service', function () {
 Route::get('/service-teknisi', function () {
     return view('frontend.service.service-r-teknisi');
 });
-Route::get('/service-perbaiki', function () {
-    return view('frontend.service.perbaiki');
+Route::get('/service-a-teknisi', function () {
+    return view('frontend.after.index-teknisi');
 });
 //after
 // Route::get('/after', function () {
@@ -234,4 +234,9 @@ Route::get('/dashboard_admin', function () {
 });
 Route::get('/dashboard_teknisi', function () {
     return view('frontend.dashboard.Teknisi');
+});
+
+//invoice
+Route::get('/invoice', function () {
+    return view('frontend.invoice.invoice');
 });
