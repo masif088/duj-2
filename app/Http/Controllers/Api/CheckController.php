@@ -53,6 +53,12 @@ class CheckController extends Controller
             'msg' => 'barcode tidak ditemukan'
         ],400);
         }
+        if($b->check()->whereDate('created_at',Carbon::now())->where('status','c')->exists()){
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'barcode telah di scan'
+            ],400);
+        }
         return response()->json([
             'status' => 'ok',
             'data' => $b
@@ -60,7 +66,7 @@ class CheckController extends Controller
     }
     public function store($id)
     {
-        $c = Check::where([['gudang_id',auth('sanctum')->user()->gudang_id],['barcode_id',$id]])->first();
+        $c = Check::whereDate('created_at',Carbon::now())->where([['gudang_id',auth('sanctum')->user()->gudang_id],['barcode_id',$id]])->first();
         if($c == null){
             return response()->json([
                 'status' => 'error',

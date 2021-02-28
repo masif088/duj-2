@@ -19,7 +19,7 @@ class Barcode extends Model
     }
     public function check()
     {
-        return $this->hasOne(Check::class)->latest();      
+        return $this->hasMany(Check::class)->latest();      
     }
     public function checks()
     {
