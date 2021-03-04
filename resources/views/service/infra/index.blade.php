@@ -105,7 +105,7 @@
                         <td>{{$s->deskripsi}}</td>
                         <td>{{$s->lama ?? 0}} Hari</td>
                         <td><a target="__blank" href="{{asset(Storage::url('infra/'.$s->file))}}">file</a></td>
-                        <td>{{$s->status}}</td>
+                        <td>{{$s->status == 'tidak' ? 'Disetujui' : $s->status}}</td>
                         <td>
                             {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#DetailModal">Detail</button> --}}
                             @if (auth()->user()->role == 'teknisi' && ($s->user_id == null || $s->user_id == auth()->user()->id) && $s->status == 'tidak')

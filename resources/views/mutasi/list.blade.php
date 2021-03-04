@@ -16,15 +16,6 @@
               <div class="dropdown-basic">
                 <div class="row justify-content-end">
                   <div style="padding-right: 10px;">
-            
-
-                    {{-- <div class="dropdown">
-                      <div class="btn-group mb-0">
-                        <button class="dropbtn btn-info btn-round" type="button">Filter <span><i class="icofont icofont-arrow-down"></i></span></button>
-                        <div class="dropdown-content"><a href="#">Selesai</a><a href="#">Belum selesai</a><a href="#">Pending</a>
-                        </div>
-                      </div>
-                    </div> --}}
                 </div>
               </div>
 
@@ -36,9 +27,9 @@
                   <thead class="active">
                       <tr>
                           <th>No</th>
-                          <th>Nama barang</th>
+                          {{-- <th>Nama barang</th> --}}
                           <th>Tanggal Mutasi</th>
-                          <th>Kode Barcode</th>
+                          {{-- <th>Kode Barcode</th> --}}
                           <th>Kode Mutasi</th>
                           <th>Gudang Tujuan</th>
                           <th>Status</th>
@@ -50,9 +41,9 @@
                         
                     <tr>
                       <td>{{$i+1}}</td>
-                      <td>{{$m->barcode->masuk->barang->name}}</td>
+                      {{-- <td>{{$m->barcode->masuk->barang->name}}</td> --}}
                       <td>{{$m->created_at->format('d-M-Y')}}</td>
-                        <td>{{$m->barcode->kode}}</td>
+                        {{-- <td>{{$m->barcode->kode}}</td> --}}
                         <td>{{$m->kode_mutasi}}</td>
                         <td>{{$m->barcode->masuk->gudang->name}} -> {{$m->gudang->name}}</td>
                         <td>{{$m->status}}</td>
@@ -66,6 +57,9 @@
 
                               </a>
                           @endif
+                          <a href="{{route('mutasi.invoice',$m->kode_mutasi)}}">
+                            <button type="button" class="btn btn-success btn-sm" >Invoice</button>
+                          </a>
                           </td>
                         </tr>
                         @endforeach

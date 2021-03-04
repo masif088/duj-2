@@ -153,7 +153,7 @@
                         <td>{{$s->serviceAfter->status == 'tidak' ? 'disetujui' : $s->serviceAfter->status}}</td>
                         <td>
                             {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#DetailModal">Detail</button> --}}
-                            @if (auth()->user()->role == 'teknisi' && ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'selesai') && ($s->user_id == null || $s->user_id == auth()->user()->id))
+                            @if (auth()->user()->role == 'teknisi' && ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'selesai') && ($s->serviceAfter->user_id == null || $s->serviceAfter->user_id == auth()->user()->id) && $s->serviceAfter->status != 'pengajuan')
                             <a href="{{route('serviceAfter.edit',$s->id)}}">
                               <button type="button" class="btn btn-info btn-sm" >Ambil</button>
                             </a>

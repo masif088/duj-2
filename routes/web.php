@@ -92,6 +92,9 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/edit/{id}', [MutasiController::class, 'edit'])->name('edit');
             Route::put('/edit/{id}', [MutasiController::class, 'update']);
             Route::get('/batal/{id}', [MutasiController::class, 'batal'])->name('batal');
+            Route::get('/reset', [MutasiController::class, 'reset'])->name('reset');
+            Route::get('/invoice/{id}', [MutasiController::class, 'invoice'])->name('invoice');
+        
         });
         Route::prefix('infra')->name('infra.')->group(function () {
             Route::get('/', [InfraController::class, 'index'])->name('index');

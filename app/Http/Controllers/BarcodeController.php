@@ -19,7 +19,7 @@ class BarcodeController extends Controller
     }
     public function update(Request $request)
     {
-        $data = BarcodeService::find($request->kode,'aktif',auth()->user()->gudang_id);
+        $data = BarcodeService::find($request->kode,'nonaktif',auth()->user()->gudang_id);
         if ($data == null) {
             toastr()->warning('barang telah aktif/termutasi');
             return redirect()->back();

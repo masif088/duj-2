@@ -24,6 +24,9 @@ class UserController extends Controller
                 'status' => 'error',
             ], 401);
         }
+        $user->update([
+            'token' => $request->token
+        ]);
 
         $token = $user->createToken('token-' . $user->name)->plainTextToken;
 

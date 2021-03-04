@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'gudang' => 'required',
-            'kode' => 'required',
+            'kode' => 'string|required',
         ];
     }
     public $validator = null;

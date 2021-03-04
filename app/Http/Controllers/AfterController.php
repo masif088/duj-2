@@ -9,6 +9,11 @@ use Services\Barcode\BarcodeService;
 
 class AfterController extends Controller
 {
+    public function __construct()
+    {
+        $this->fcm = new FcmController;
+    
+    }
     public function index()
     {
         if(auth()->user()->role != 'admin'){
@@ -85,10 +90,10 @@ class AfterController extends Controller
     }
     public function setuju(After $id)
     {
-
         $id->serviceAfter()->update([
             'status' => 'tidak',
         ]);
+        $this->fcm->send('Persetujuan AfterSale','Selamat persetujuan telah diterima',null,null,null,$id->gudang_id);
         return redirect()->back();
     }
 }

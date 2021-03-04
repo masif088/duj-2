@@ -7,6 +7,7 @@ use App\Models\Barcode;
 use App\Models\Gudang;
 use App\Models\Mutasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Services\Barcode\BarcodeService;
 use Services\Mutasi\MutasiService;
@@ -15,26 +16,31 @@ class MutasiController extends Controller
 {
     public function index()
     {
-        // Barcode::where('status', 'mutasi')->whereHas('masuk', function ($s) {
-        //     return $s->where('gudang_id', auth()->user()->gudang_id);
-        // })->whereHas('mutasi', function ($m) {
-        //     return $m->where('status', '!=', 'batal');
-        // })->with(['mutasi', 'masuk'])
         if(auth()->user()->role != 'admin'){
             $mutasis = Mutasi::whereHas('barcode', function ($m) {
                 return $m->whereHas('masuk', function($z){
                     return $z->where('gudang_id',auth()->user()->gudang_id);
                 });
-            })->get();
+            })->groupby('kode_mutasi')->get();
         }else{
-            $mutasis = Mutasi::get();
+            $mutasis = Mutasi::groupby('kode_mutasi')->get();
         }
         return view('mutasi.list', compact('mutasis'));
+    }
+    public function invoice($id)
+    {
+        $mutasi = Mutasi::where('kode_mutasi',$id)->get();
+        return view('mutasi.invoice',compact('mutasi'));
     }
     public function create()
     {
         $gudang = Gudang::get();
         return view('mutasi.create', compact('gudang'));
+    }
+    public function reset()
+    {
+       $c = Cookie::forget('kodeMts');
+       return redirect()->back()->withCookie($c);
     }
     public function store(StoreRequest $request)
     {
@@ -50,12 +56,13 @@ class MutasiController extends Controller
             toastr()->warning('barang masih nonaktif/telahh termutasi'); 
             return redirect()->back();
         }
-        DB::transaction(function() use($data,$request){
+        $c = DB::transaction(function() use($data,$request){
             BarcodeService::update($data, 'mutasi');
-            MutasiService::store($request, $data->id);
-            
+            $c = MutasiService::store($request, $data->id);
+            return $c;
         });
-        return redirect()->back();
+        $request->flash();
+        return redirect()->back()->cookie($c);
     }
     public function edit(Mutasi $id)
     {
