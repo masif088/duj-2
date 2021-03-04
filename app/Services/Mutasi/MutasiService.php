@@ -3,20 +3,32 @@
 namespace Services\Mutasi;
 
 use App\Models\Mutasi;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 
 class MutasiService
 {
     
     static public function store($data,$b)
-    {   
-        $data = Mutasi::create([
+    {  
+        if(is_null(Cookie::get('kodeMts'))){
+            $coki = 0;
+            do {
+                $rk = Str::random(5+$coki);
+                $c = cookie("kodeMts", $rk, 60000);
+                $coki+=1;
+            }while (Mutasi::where('kode_mutasi',$rk)->exists());
+        }else{
+            $rk = Cookie::get('kodeMts');
+            $c = cookie("kodeMts", $rk, 60000);
+        }
+        Mutasi::create([
             'user_id' => auth()->user()->id,
             'gudang_id' => $data->gudang,
             'barcode_id' => $b,
-            'kode_mutasi' => Str::random(6),
+            'kode_mutasi' => $rk,
         ]);
-        return $data;
+        return $c;
     }
     static public function update($data,$b,$gudang)
     {   

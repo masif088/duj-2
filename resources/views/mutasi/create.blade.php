@@ -12,6 +12,7 @@
           <div class="card-header">
             <!-- <div class="pull-right mr-4"><a href="#">Edit Profile Playlist</a></div> -->
             <h5>Barang Keluar</h5>
+            <p>Kode Mutasi:{{Cookie::get('kodeMts') ?? 'null'}} <a href="{{route('mutasi.reset')}}"><span style="cursor:pointer" class="badge badge-primary">Reset</span></a></p>
           </div>
           <div class="card-body">
             <form action="{{route('mutasi.create')}}" method="POST" class="form theme-form">
@@ -22,7 +23,7 @@
                 value="{{ old('gudang') }}" required autocomplete="gudang"  autofocus>
                 @foreach ($gudang as $g)
                 @if ($g->id != auth()->user()->gudang_id)
-                <option value="{{$g->id}}">{{$g->name}}</option>
+                <option value="{{$g->id}}" {{ old('gudang') == $g->id ? 'selected' : null }}>{{$g->name}}</option>
                     
                 @endif
                 @endforeach  

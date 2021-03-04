@@ -31,7 +31,7 @@ class StoreUserRequest extends FormRequest
             'password' => 'required|string|min:1',
             'img' => 'nullable|image|max:2042',
             'alamat' => 'nullable|string|min:5',
-            'no_hp' => 'nullable|string|min:11',
+            'no_hp' => 'nullable|string|max:13',
             'role' => 'nullable|string',
             'sidik' => 'nullable|string',
         ];

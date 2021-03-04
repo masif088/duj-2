@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ServiceInfraController extends Controller
 {
+    public function __construct()
+    {
+        $this->fcm = new FcmController;
+    
+    }
     public function index()
     {
         if(auth()->user()->role != 'admin'){
@@ -71,6 +76,7 @@ class ServiceInfraController extends Controller
         $id->update([
             'status' => 'tidak',
         ]);
+        $this->fcm->send('Persetujuan Infratruktur','Selamat persetujuan telah diterima',null,null,null,$id->infra->gudang_id);
         return redirect()->back();
     }
     public function batal(ServiceInfra $id)

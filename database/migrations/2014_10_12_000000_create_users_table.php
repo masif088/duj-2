@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('no_hp')->nullable();
             $table->string('alamat')->nullable();
             $table->string('sidik')->nullable();
+            $table->string('token')->nullable();
             $table->enum('role',['admin','head','ketua','checker','teknisi']);
             $table->rememberToken();
             $table->timestamps();
