@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Services\Barcode\BarcodeService;
 use Services\Mutasi\MutasiService;
+use Illuminate\Support\Str;
+
 
 class MutasiController extends Controller
 {
@@ -22,23 +24,22 @@ class MutasiController extends Controller
             'data' => Gudang::get()
         ],200);
     }
-    public function reset()
-    {
-       $c = Cookie::forget('kodeMts');
-       return response()->json([
-        'status' => 'ok'
-    ],200)->withCookie($c);
-    }
+
     public function riwayat()
     {
         $mutasi = Mutasi::whereHas('barcode', function ($m) {
             return $m->whereHas('masuk', function($z){
                 return $z->where('gudang_id',auth('sanctum')->user()->gudang_id);
             });
-        })->get();
+        });
+        $m = (clone $mutasi)->select('created_at', DB::raw('count(*) as total'))
+        ->groupBy('created_at')
+        ->get();;
+        $mutasi = (clone $mutasi)->get();
         return response()->json([
             'status' => 'ok',
-            'data' => $mutasi
+            'data' => $mutasi,
+            'count' => $m
         ],201);
     }
     public function store(StoreRequest $request)
@@ -52,13 +53,42 @@ class MutasiController extends Controller
         $data = BarcodeService::find($request->kode,'aktif');
         if ($data == null) return 'tidak ditemukan';
         if ($data->status == 'nonaktif' || $data->status == 'mutasi') return 'barang masih nonaktif/telahh termutasi';
-        DB::transaction(function() use($data,$request){
+        $c = DB::transaction(function() use($data,$request){
             BarcodeService::update($data, 'mutasi');
-            MutasiService::store($request, $data->id);
-            
+            if(is_null($request->kodeMts)){
+                $coki = 0;
+                do {
+                    $rk = Str::random(5+$coki);
+                    $c = $rk;
+                    $coki+=1;
+                }while (Mutasi::where('kode_mutasi',$rk)->exists());
+            }else{
+                $rk = $request->kodeMts;
+                $c = $rk;
+                $dd = Mutasi::where('kode_mutasi',$rk)->first();
+                $request['gudang'] = $dd->gudang_id ?? $request->gudang;
+            }
+            Mutasi::create([
+                'user_id' => auth('sanctum')->user()->id,
+                'gudang_id' => $request->gudang,
+                'barcode_id' => $request->id,
+                'kode_mutasi' => $rk,
+            ]);
+            return $c;
         });
+        $zz = Mutasi::where('kode_mutasi',$request->kodeMts);
+        if($zz->exists()){
+            $b = (clone $zz)->count();
+            $g = (clone $zz)->first()->gudang->name;
+        }else{
+            $b = null;
+            $g = null;
+        }
         return response()->json([
             'status' => 'ok',
+            'kodeMts' => $c,
+            'scaned' => $b,
+            'gudang' => $g,
         ],201);
     }
     public function batal(Mutasi $id)

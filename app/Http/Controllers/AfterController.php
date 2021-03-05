@@ -17,11 +17,7 @@ class AfterController extends Controller
     }
     public function index()
     {
-        if(auth()->user()->role != 'admin'){
-            $after = After::where('gudang_id',auth()->user()->gudang_id)->get();
-        }else{
-            $after = After::get();
-        }
+            $after = After::orderBy('created_at','DESC')->get();
         return view('service.after.index',compact('after'));
     }
     public function create()
