@@ -94,10 +94,25 @@ class UserSeeder extends Seeder
             ]);
             $ss = Masuk::create([
                 'suplier_id' => $s->id,
-                'gudang_id' => $i == 1 ? 2 :($i ==2 ? 1 : $g->id),
+                'gudang_id' => 1,
                 'user_id' => $h->id,
                 'barang_id' => $b->id,
                 'kuantiti' => 50,
+                'harga_satuan' => 12000+($i*100),
+                'kode_akuntan' => 'kukuk'.$i,
+            ]);
+            for ($z = 0; $z < $ss->kuantiti; $z++) {
+                $ss->barcode()->create([
+                    'user_id' => $h->id,
+                    'kode' => mt_rand(10000000, 99999999),
+                ]);
+            }
+            $ss = Masuk::create([
+                'suplier_id' => $s->id,
+                'gudang_id' => 2,
+                'user_id' => $h->id,
+                'barang_id' => $b->id,
+                'kuantiti' => 1,
                 'harga_satuan' => 12000+($i*100),
                 'kode_akuntan' => 'kukuk'.$i,
             ]);

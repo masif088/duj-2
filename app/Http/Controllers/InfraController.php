@@ -13,7 +13,7 @@ class InfraController extends Controller
 {
     public function index()
     {
-          $infra = Infra::get();
+          $infra = Infra::orderBy('created_at','DESC')->get();
         return view('infra.infra',compact('infra'));
     }
     public function create()
