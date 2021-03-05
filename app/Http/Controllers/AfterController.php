@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\After\StoreRequest;
 use App\Models\After;
 use App\Models\ServiceAfter;
 use Illuminate\Http\Request;
@@ -27,8 +28,11 @@ class AfterController extends Controller
     {
         return view('backend.after.create');
     }
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
+        if(isset($request->validator) && $request->validator->fails()){
+            return redirect()->back()->withErrors($request->validator->messages());
+        }
         $data = BarcodeService::find($request->kode,'terjual');
         if($data == null){
             toastr()->warning('maaf kode yang anda masukan salah');

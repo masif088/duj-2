@@ -38,7 +38,7 @@ class BarcodeController extends Controller
     public function terjual(Request $request)
     {
         $data = BarcodeService::find($request->kode,'aktif',auth()->user()->gudang_id);
-        if ($data->status != 'aktif'){
+        if ($data == null || $data->status != 'aktif'){
             toastr()->warning('barang belum aktif');
             return redirect()->back();
         } 

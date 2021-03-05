@@ -31,7 +31,7 @@ class UpdateRequest extends FormRequest
             'password' => 'nullable|string|min:1',
             'img' => 'nullable|image|max:2042',
             'alamat' => 'nullable|string|min:5',
-            'no_hp' => 'nullable|string|min:11',
+            'no_hp' => 'nullable|string|min:11|max:13',
             'role' => 'nullable|string',
             'sidik' => 'nullable|string',
         ];

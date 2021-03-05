@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
-
-use Illuminate\Foundation\Http\FormRequest;
+namespace App\Http\Requests\After;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 
-
-class StoreUserRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,14 +24,7 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required| string|max:50',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:1',
-            'img' => 'nullable|image|max:2042',
-            'alamat' => 'nullable|string|min:5',
-            'no_hp' => 'nullable|string|max:13|min:11',
-            'role' => 'nullable|string',
-            'sidik' => 'nullable|string',
+            'no_hp' => 'required|max:13|min:11'
         ];
     }
     public $validator = null;
