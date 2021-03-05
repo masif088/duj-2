@@ -26,7 +26,8 @@ class User extends Authenticatable
         'no_hp',
         'role',
         'sidik',
-        'gudang_id'
+        'gudang_id',
+        'token'
     ];
 
     /**

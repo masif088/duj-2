@@ -21,6 +21,9 @@ class MutasiService
         }else{
             $rk = Cookie::get('kodeMts');
             $c = cookie("kodeMts", $rk, 60000);
+            $dd = Mutasi::where('kode_mutasi',$rk)->first();
+            $data['gudang'] = $dd->gudang_id ?? $data->gudang;
+
         }
         Mutasi::create([
             'user_id' => auth()->user()->id,
