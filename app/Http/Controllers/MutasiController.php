@@ -35,7 +35,14 @@ class MutasiController extends Controller
     public function create()
     {
         $gudang = Gudang::get();
-        return view('mutasi.create', compact('gudang'));
+        $zz = Mutasi::where('kode_mutasi',Cookie::get('kodeMts'));
+        $b = (clone $zz)->count();
+        if($zz->exists()){
+            $g = (clone $zz)->first()->gudang->name;
+        }else{
+            $g = 'null';
+        }
+        return view('mutasi.create', compact(['g','b','gudang']));
     }
     public function reset()
     {

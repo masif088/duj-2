@@ -12,11 +12,17 @@
           <div class="card-header">
             <!-- <div class="pull-right mr-4"><a href="#">Edit Profile Playlist</a></div> -->
             <h5>Barang Keluar</h5>
-            <p>Kode Mutasi:{{Cookie::get('kodeMts') ?? 'null'}} <a href="{{route('mutasi.reset')}}"><span style="cursor:pointer" class="badge badge-primary">Reset</span></a></p>
+            <p>Kode Mutasi:{{Cookie::get('kodeMts') ?? 'null'}} <a href="{{route('mutasi.reset')}}"><span style="cursor:pointer" class="badge badge-primary">Reset</span></a>
+            <br>
+            Yang telah discan: {{$b}}
+            <br>
+            Gudang tujuan: {{$g}}
+            </p>
           </div>
           <div class="card-body">
             <form action="{{route('mutasi.create')}}" method="POST" class="form theme-form">
-              @csrf  
+              @csrf 
+              @if($g == 'null') 
               <div class="form-group mb-3">
               <div class="col-form-label">Gudang Tujuan</div>
                 <select name="gudang" class="js-example-basic-single col-sm-12 @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="gudang"
@@ -34,6 +40,7 @@
                   </span>
                 @enderror
               </div>
+              @endif
                 <div class="form-group mb-3">
                   <label class="col-form-label">kode</label>
                   <input  id="kode" type="text"
@@ -48,12 +55,22 @@
 
               <div class="form-footer">
                 <div class="form-group">
-                    <div class="col-md-6 col-md-offset-4">
+                  <div class="row">
 
+                    <div class="col-md-2">
+                      
                       <button type="submit" class="btn btn-primary" >
-                          Tambah
+                        Tambah
                       </button>
                     </div>
+                    <div class="col-md-2">
+                      
+                      <a href="{{route('mutasi.reset')}}" class="btn btn-success" >
+                        Selesai
+                      </a>
+                    </div>
+                  </div>
+                 
                 </div>
               </div>
 
