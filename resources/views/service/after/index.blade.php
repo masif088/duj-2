@@ -73,7 +73,7 @@
                                     <div class="form-gorup mb-3">
                                       <div class="form-group mb-3">
                                         <label class="col-form-label">no hp</label>
-                                        <input  id="no_hp" type="text"
+                                        <input  id="no_hp" type="number"
                                                       class="form-control @error('no_hp') is-invalid @enderror" placeholder="No Hp" name="no_hp"
                                                       value="{{ old('no_hp') }}" required autocomplete="no_hp"  autofocus>
                                         @error('no_hp')
