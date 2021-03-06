@@ -47,7 +47,7 @@
                     <h5>50</h5>
                     <p class="font-roboto">Total Barang</p>
                   </div>
-                  {{-- <div class="col-xl-12 p-0 left-btn"><a class="btn btn-gradient">Summary</a></div> --}}
+                  <div class="col-xl-12 p-0 left-btn"></div>
                 </div>
               </div>
               <div class="col-xl-9 p-0">
