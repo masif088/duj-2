@@ -71,7 +71,7 @@ class MutasiController extends Controller
             Mutasi::create([
                 'user_id' => auth('sanctum')->user()->id,
                 'gudang_id' => $request->gudang,
-                'barcode_id' => $request->id,
+                'barcode_id' => $data->id,
                 'kode_mutasi' => $rk,
             ]);
             return $c;
