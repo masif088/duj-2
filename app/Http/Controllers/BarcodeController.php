@@ -15,6 +15,7 @@ class BarcodeController extends Controller
     }
     public function edit()
     {
+        
         return view('barcode.barcode');
     }
     public function update(Request $request)
@@ -33,6 +34,10 @@ class BarcodeController extends Controller
     }
     public function jual()
     {
+        if(auth()->user()->role == 'admin'){
+            $barang = Barcode::where('status','terjual')->get();
+            return view('barang.terjual',compact('barang'));
+        }
         return view('barcode.terjual');
     }
     public function terjual(Request $request)

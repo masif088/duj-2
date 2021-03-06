@@ -20,8 +20,9 @@ class CreateServiceInfrasTable extends Migration
             $table->text('sparepart')->nullable();
             $table->text('deskripsi')->nullable();
             $table->integer('lama')->nullable();
+            $table->text('alasan')->nullable();
             $table->string('file')->nullable();
-            $table->enum('status',['batal','pengajuan','selesai','tidak'])->default('pengajuan');
+            $table->enum('status',['tolak','batal','pengajuan','selesai','tidak'])->default('pengajuan');
             $table->timestamps();
         });
     }

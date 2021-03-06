@@ -49,8 +49,8 @@
                   <label class="form-label">Status Pengerjaan</label>
                   <select  class="js-example-basic-single form-control @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="status"
                   value="{{ old('barang') }}" required autocomplete="barang"  autofocus>
+                  <option value="tidak">Belum</option>
                     <option value="selesai">Selesai</option>
-                    <option value="tidak">Belum</option>
                   </select>
                 </div>
                   <div class="modal-footer ">

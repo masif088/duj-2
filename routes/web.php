@@ -24,17 +24,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::view('/loginn', 'frontend.auth.login');
 Route::view('/registerr', 'frontend.auth.register');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // backend
 Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,teknisi']], function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
@@ -104,6 +100,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::put('/edit/{id}', [InfraController::class, 'update']);
             Route::delete('/delete/{id}',[InfraController::class, 'delete'])->name('delete');
             Route::get('/barcode/{b}', [InfraController::class, 'barcode'])->name('barcode');
+            
         });
         Route::prefix('service-infra')->name('serviceInfra.')->group(function () {
             Route::get('/', [ServiceInfraController::class, 'index'])->name('index');
@@ -115,6 +112,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/barcode/{b}', [ServiceInfraController::class, 'barcode'])->name('barcode');
             Route::get('/batal/{id}', [ServiceInfraController::class, 'batal'])->name('batal');
             Route::get('/setuju/{id}', [ServiceInfraController::class, 'setuju'])->name('setuju');
+            Route::post('/tolak/{id}', [ServiceInfraController::class, 'tolak'])->name('tolak');
 
         });
         Route::prefix('after')->name('after.')->group(function () {
@@ -126,6 +124,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::delete('/delete/{id}',[AfterController::class, 'delete'])->name('delete');
             Route::get('/barcode/{b}', [AfterController::class, 'barcode'])->name('barcode');
             Route::get('/setuju/{id}', [AfterController::class, 'setuju'])->name('setuju');
+            Route::post('/tolak/{id}', [AfterController::class, 'tolak'])->name('tolak');
 
         });
         Route::prefix('service-after')->name('serviceAfter.')->group(function () {

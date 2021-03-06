@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\After;
 use App\Models\Barcode;
+use App\Models\Infra;
 use App\Models\Masuk;
+use App\Models\ServiceAfter;
 use App\Models\ServiceInfra;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -42,6 +44,12 @@ class HomeController extends Controller
             $masuk =Masuk::whereDate('created_at',date('Y-m-d'))->get();
             $admin = User::where('role','admin')->count();
             return view('dashboard.HO',compact(['masuk','admin']));
+        }
+        if(auth()->user()->role == 'teknisi'){
+            $infra = Infra::where('status','rusak')->count();
+            $after = ServiceAfter::take(10)->latest()->get();
+            $infraP = ServiceInfra::take(10)->latest()->get();
+            return view('dashboard.Teknisi',compact(['after','infra','infraP']));
         }
     }
 }

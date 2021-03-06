@@ -76,7 +76,7 @@ class MutasiController extends Controller
             ]);
             return $c;
         });
-        $zz = Mutasi::where('kode_mutasi',$request->kodeMts);
+        $zz = Mutasi::where('kode_mutasi',$c);
         if($zz->exists()){
             $b = (clone $zz)->count();
             $g = (clone $zz)->first()->gudang->name;

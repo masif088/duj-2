@@ -24,60 +24,8 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-8 xl-100 dashboard-sec box-col-12">
-        <div class="card earning-card">
-          <div class="card-body p-0">
-            <div class="row m-0">
-              <div class="col-xl-3 earning-content p-0">
-                <div class="row m-0 chart-left">
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>Dashboard</h5>
-                    {{-- <p class="font-roboto">Overview of last month</p> --}}
-                  </div>
-
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>5 </h5>
-                    <p class="font-roboto">Total Cabang</p>
-                  </div>
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>20</h5>
-                    <p class="font-roboto">Total User</p>
-                  </div>
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>50</h5>
-                    <p class="font-roboto">Total Barang</p>
-                  </div>
-                  {{-- <div class="col-xl-12 p-0 left-btn"><a class="btn btn-gradient">Summary</a></div> --}}
-                </div>
-              </div>
-              <div class="col-xl-9 p-0">
-                <div class="chart-right">
-                  <div class="row m-0 p-tb">
-                    <div class="col-xl-8 col-md-8 col-sm-8 col-12 p-0">
-                      <div class="inner-top-left">
-                        <ul class="d-flex list-unstyled">
-                          {{-- <li>User</li> --}}
-                        </ul>
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="row">
-                    <div class="col-xl-12">
-                      <div class="card-body p-0">
-                        <div class="card-body chart-block">
-                          <div class="chart-overflow" id="column-chart1"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
+      
       <div class="col-xl-12 col-lg-12 xl-50 calendar-sec box-col-6">
         <div class="card gradient-primary o-hidden">
           <div class="card-body">
@@ -107,7 +55,7 @@
     </div>
   </div>
 @endsection
-@section('script')
+{{-- @section('script')
   <script src="{{asset('assets/js/chart/google/google-chart-loader.js')}}"></script>
   <script src="{{asset('assets/js/chart/google/google-chart.js')}}"></script>
-@endsection
+@endsection --}}
