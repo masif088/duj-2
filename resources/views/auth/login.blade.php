@@ -8,7 +8,7 @@
             <form class="theme-form" action="{{route('login')}}" method="POST">
                 @csrf
               <h4>LOGIN</h4>
-              <h6>Enter your Email and Password</h6>
+              <h6>Masukkan Email dan Password anda</h6>
               <div class="form-group">
                 <label class="col-form-label pt-0">Email</label>
                 <input  id="email" type="email"
@@ -36,7 +36,7 @@
                                 {{ old('remember') ? 'checked' : '' }}>
 
                         <label class="form-check-label" for="checkbox1">
-                            {{ __('Remember Me') }}
+                            {{ __('Ingat Akun Saya') }}
                         </label>
               </div>
               <div class="form-group row mt-3 mb-0">
@@ -55,7 +55,7 @@
               <form class="theme-form" action="{{route('login')}}" method="POST">
                 @csrf
                 <h4>LOGIN</h4>
-                <h6>Enter your Email and Password</h6>
+                <h6>Masukkan Email dan Password anda</h6>
                 <div class="form-group">
                   <label class="col-form-label pt-0">Email</label>
                   <input  id="email" type="email"
@@ -83,7 +83,7 @@
                                   {{ old('remember') ? 'checked' : '' }}>
 
                           <label class="form-check-label" for="checkbox1">
-                              {{ __('Remember Me') }}
+                              {{ __('Ingat Akun Saya') }}
                           </label>
                 </div>
                 <div class="form-group row mt-3 mb-0">
