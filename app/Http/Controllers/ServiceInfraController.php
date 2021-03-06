@@ -73,6 +73,16 @@ class ServiceInfraController extends Controller
         $this->fcm->send('Persetujuan Infratruktur','Selamat persetujuan telah diterima',null,null,null,$id->infra->gudang_id);
         return redirect()->back();
     }
+    public function tolak(Request $request,ServiceInfra $id)
+    {
+
+        $id->update([
+            'status' => 'tolak',
+            'alasan' => $request->alasan
+        ]);
+        $this->fcm->send('Persetujuan Infratruktur','Selamat persetujuan telah diterima',null,null,null,$id->infra->gudang_id);
+        return redirect()->back();
+    }
     public function batal(ServiceInfra $id)
     {
         $id->infra()->update([

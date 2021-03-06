@@ -182,7 +182,8 @@ class UserSeeder extends Seeder
                 ]);
             ServiceInfra::create([
                 'file' => 'https://drive.google.com/file/d/1DL7hrsmdHe4cDydVYhBU72lCFpRL_lFJ/view?usp=sharing',
-                'infra_id' => $value->id
+                'infra_id' => $value->id,
+                'deskripsi' => 'barang saya hancur..'
             ]);
         }
     }

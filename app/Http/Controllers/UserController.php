@@ -19,7 +19,7 @@ class UserController extends Controller
     }
     public function all()
     {
-        $user = User::where('role' ,'!=','admin')->get();
+        $user = User::where('id' ,'!=',auth()->user()->id)->get();
         return view('user.list',compact('user'));
     }
     public function create()
@@ -40,6 +40,7 @@ class UserController extends Controller
     {
         if(isset($request->validator) && $request->validator->fails()){
             $request->flash();
+            toastr()->warning('silahkan cek kembali');
             return redirect()->back()->withErrors($request->validator->messages());
         }
         if(auth()->user()->role == 'admin'){
@@ -59,6 +60,7 @@ class UserController extends Controller
             return redirect()->back();
         }
         UserService::store($request);
+        toastr()->success('berhasil membuat');
         return redirect()->back();
     }
     public function update(UpdateRequest $request,User $id)

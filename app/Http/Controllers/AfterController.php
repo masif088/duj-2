@@ -96,4 +96,13 @@ class AfterController extends Controller
         $this->fcm->send('Persetujuan AfterSale','Selamat persetujuan telah diterima',null,null,null,$id->gudang_id);
         return redirect()->back();
     }
+    public function tolak(Request $request,After $id)
+    {
+        $id->serviceAfter()->update([
+            'status' => 'tolak',
+            'alasan' => $request->alasan
+        ]);
+        $this->fcm->send('Persetujuan AfterSale','Persetujuan anda ditolak',null,null,null,$id->gudang_id);
+        return redirect()->back();
+    }
 }

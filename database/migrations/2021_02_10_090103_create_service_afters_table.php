@@ -20,8 +20,9 @@ class CreateServiceAftersTable extends Migration
             $table->text('sparepart')->nullable();
             $table->text('deskripsi')->nullable();
             $table->integer('lama')->nullable();
+            $table->text('alasan')->nullable();
             $table->string('file')->nullable();
-            $table->enum('status',['pengajuan','selesai','tidak'])->default('pengajuan');
+            $table->enum('status',['tolak','pengajuan','selesai','tidak','batal'])->default('pengajuan');
             $table->timestamps();
         });
     }

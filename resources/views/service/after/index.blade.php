@@ -86,13 +86,13 @@
                                     <div class="form-group row">
                                       <label class="col-sm-3 col-form-label">Deskripsi Kerusakan</label>
                                       <div class="col-sm-9">
-                                        <textarea class="form-control" type="text" id="thumbnail" name="deskripsi"></textarea>
+                                        <textarea class="form-control" required type="text" id="thumbnail" name="deskripsi"></textarea>
                                       </div>
                                   </div>
                                       <div class="form-group row">
                                           <label class="col-sm-3 col-form-label">File</label>
                                           <div class="col-sm-9">
-                                            <input class="form-control" type="file" id="thumbnail" name="file">
+                                            <input class="form-control" required type="file" id="thumbnail" name="file">
                                           </div>
                                       </div>
 
@@ -153,25 +153,77 @@
                         <td>{{$s->serviceAfter->status == 'tidak' ? 'disetujui' : $s->serviceAfter->status}}</td>
                         <td>
                             {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#DetailModal">Detail</button> --}}
-                            @if (auth()->user()->role == 'teknisi' && ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'selesai') && ($s->serviceAfter->user_id == null || $s->serviceAfter->user_id == auth()->user()->id) && $s->serviceAfter->status != 'pengajuan')
+                            @if (auth()->user()->role == 'teknisi' && $s->serviceAfter->status != 'tolak'&& ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'selesai') && ($s->serviceAfter->user_id == null || $s->serviceAfter->user_id == auth()->user()->id) && $s->serviceAfter->status != 'pengajuan')
                             <a href="{{route('serviceAfter.edit',$s->id)}}">
-                              <button type="button" class="btn btn-info btn-sm" >Ambil</button>
+                              <button type="button" class="btn btn-info btn-sm" >{!! $s->serviceAfter->user_id == null ? 'Ambil' :'Edit'!!}</button>
                             </a>
                                 
                             @endif
-                            @if ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'tidak' && auth()->user()->role == 'head' || auth()->user()->role == 'ketua')
+                            @if ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'tolak'&& $s->serviceAfter->status != 'tidak' && auth()->user()->role == 'head' || auth()->user()->role == 'ketua')
                             <a href="{{route('serviceAfter.batal',$s->id)}}">
                               <button type="button" class="btn btn-info btn-sm" >Batal</button>
                             </a>
                                 
                             @endif
-                            @if (auth()->user()->role == 'admin' && $s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'tidak')
-                                <a href="{{route('after.setuju',$s->id)}}">
-                                  <button type="button" class="btn btn-danger btn-sm" >setuju</button>
+                            @if (auth()->user()->role == 'admin' && $s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'tolak' && $s->serviceAfter->status != 'tidak')
+                                <a onclick="return confirm('apakah anda yakin?')" href="{{route('after.setuju',$s->id)}}">
+                                  <button type="button" class="btn btn-success btn-sm" >setuju</button>
                                 </a>
+                                 <button type="button" data-toggle="modal" data-target="#alasan{{$s->id}}" class="btn btn-danger btn-sm" >Tolak</button> 
+                            @endif
+                            @if ($s->serviceAfter->status == 'tolak')
+                            <button type="button" data-toggle="modal" data-target="#alasann{{$s->id}}" class="btn btn-danger btn-sm" >Alasan</button>     
                             @endif
                         </td>
                       </tr>
+                      <div class="modal fade" id="alasan{{$s->id}}" tabindex="-1" role="dialog" aria-labelledby="addReward" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tolak Service</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="theme-form" action="{{route('after.tolak',$s->id)}}" method="POST" enctype="multipart/form-data">
+                                      @csrf
+                                      <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Alasan</label>
+                                        <div class="col-sm-9">
+                                          <textarea class="form-control" type="text" id="thumbnail" name="alasan" required></textarea>
+                                        </div>
+                                    </div>
+                                        <div class="modal-footer ">
+                                          <button class="btn btn-primary">Add</button>
+                                          <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if ($s->serviceAfter->status == 'tolak')
+                    <div class="modal fade" id="alasann{{$s->id}}" tabindex="-1" role="dialog" aria-labelledby="addReward" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title">Tolak Service</h5>
+                                  <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                              </div>
+                              <div class="modal-body">
+                                    <div class="form-group row">
+                                      <label class="col-sm-3 col-form-label">Alasan</label>
+                                      <div class="col-sm-9">
+                                        <textarea class="form-control" type="text" id="thumbnail" readonly name="alasan" required>{{$s->serviceAfter->alasan}}</textarea>
+                                      </div>
+                                  </div>
+                                      <div class="modal-footer ">
+                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                      </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                    @endif
                       @endforeach
                       
                     </tbody>
