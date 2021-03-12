@@ -9,4 +9,8 @@ class Gudang extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function masuks()
+    {
+        return $this->hasMany(Masuk::class);
+    }
 }
