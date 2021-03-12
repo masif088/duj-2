@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barcode;
+use App\Models\Gudang;
 use App\Models\Masuk;
+use App\Models\Mutasi;
 use Illuminate\Http\Request;
 use Services\Barcode\BarcodeService;
 use Services\Masuk\MasukService;
@@ -13,10 +15,10 @@ class MasukController extends Controller
 {
     public function riwayat()
     {
-        $masuk = Masuk::where('gudang_id',auth('sanctum')->user()->gudang_id)->with('barcode')->get();
+       $mutasi = Mutasi::where('gudang_id',auth('sanctum')->user()->gudang_id)->with('barcode.masuk.gudang')->get();
         return response()->json([
             'status' => 'ok',
-            'data' => $masuk,
+            'data' => $mutasi,
         ],200); 
     }
     public function store(Request $request)
