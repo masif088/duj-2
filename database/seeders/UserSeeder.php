@@ -120,6 +120,7 @@ class UserSeeder extends Seeder
                 $sss->barcode()->create([
                     'user_id' => $h->id,
                     'kode' => mt_rand(10000000, 99999999),
+                    'status' => 'aktif'
                 ]);
             }
         }
