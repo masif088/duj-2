@@ -80,7 +80,7 @@ class UserSeeder extends Seeder
             'gudang_id' =>2,
 
         ]);
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 10; $i++) { 
             $g = Gudang::create([
                 'name' => 'gudang B'.$i
             ]);
@@ -107,7 +107,7 @@ class UserSeeder extends Seeder
                     'kode' => mt_rand(10000000, 99999999),
                 ]);
             }
-            $ss = Masuk::create([
+            $sss = Masuk::create([
                 'suplier_id' => $s->id,
                 'gudang_id' => 2,
                 'user_id' => $h->id,
@@ -116,8 +116,8 @@ class UserSeeder extends Seeder
                 'harga_satuan' => 12000+($i*100),
                 'kode_akuntan' => 'kukuk'.$i,
             ]);
-            for ($z = 0; $z < $ss->kuantiti; $z++) {
-                $ss->barcode()->create([
+            for ($z = 0; $z < $sss->kuantiti; $z++) {
+                $sss->barcode()->create([
                     'user_id' => $h->id,
                     'kode' => mt_rand(10000000, 99999999),
                 ]);
