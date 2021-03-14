@@ -134,7 +134,7 @@ class UserSeeder extends Seeder
        ]);
        Barcode::whereHas('masuk',function($x){
         return $x->where('gudang_id',2);
-    })->take(5)->update([
+    })->take(2)->update([
         'status' => 'terjual'
     ]);
     $bv = Barcode::whereHas('masuk',function($x){
