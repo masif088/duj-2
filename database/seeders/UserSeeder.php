@@ -160,7 +160,7 @@ class UserSeeder extends Seeder
     }
         $cc = Barcode::where('status','aktif')->whereHas('masuk',function($x){
             return $x->where('gudang_id','!=',1);
-        })->take(100)->get();
+        })->take(10)->get();
         foreach ($cc as $value) {
             $value->update([
                 'status' => 'mutasi'
