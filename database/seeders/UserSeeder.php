@@ -155,7 +155,9 @@ class UserSeeder extends Seeder
             'file' => 'google.com'
         ]);
     }
-        $cc = Barcode::where('status','aktif')->take(10)->get();
+        $cc = Barcode::where('status','aktif')->whereHas('masuk',function($x){
+            return $x->where('gudang_id','!=',1);
+        })->take(100)->get();
         foreach ($cc as $value) {
             $value->update([
                 'status' => 'mutasi'
