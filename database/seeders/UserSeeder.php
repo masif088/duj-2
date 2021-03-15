@@ -107,6 +107,9 @@ class UserSeeder extends Seeder
                     'kode' => mt_rand(10000000, 99999999),
                 ]);
             }
+           
+        }
+        for ($i=0; $i < 50; $i++) { 
             $sss = Masuk::create([
                 'suplier_id' => $s->id,
                 'gudang_id' => 2,
