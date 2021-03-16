@@ -16,9 +16,9 @@ class MasukService
     static public function index()
     {
         if(auth()->user()->role != 'admin'){
-            $masuk = Masuk::where('gudang_id',auth()->user()->gudang_id)->get();
+            $masuk = Masuk::where('gudang_id',auth()->user()->gudang_id)->orderByDesc('created_at')->paginate(30);
         }else{
-            $masuk = Masuk::get();
+            $masuk = Masuk::orderByDesc('created_at')->paginate(30);
         }
         return compact('masuk');
     }

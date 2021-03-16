@@ -12,7 +12,7 @@ class GudangController extends Controller
 {
     public function index()
     {
-        $gudang = Gudang::get();
+        $gudang = Gudang::orderByDesc('created_at')->paginate(30);
         return view('gudang.index',compact('gudang'));
     }
     public function store(StoreRequest $request)

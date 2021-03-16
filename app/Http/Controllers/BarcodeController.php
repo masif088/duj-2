@@ -35,7 +35,7 @@ class BarcodeController extends Controller
     public function jual()
     {
         if(auth()->user()->role == 'admin'){
-            $barang = Barcode::where('status','terjual')->get();
+            $barang = Barcode::where('status','terjual')->orderByDesc('created_at')->paginate(30);
             return view('barang.terjual',compact('barang'));
         }
         return view('barcode.terjual');

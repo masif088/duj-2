@@ -21,9 +21,9 @@ class MutasiController extends Controller
                 return $m->whereHas('masuk', function($z){
                     return $z->where('gudang_id',auth()->user()->gudang_id);
                 });
-            })->groupby('kode_mutasi')->get();
+            })->groupby('kode_mutasi')->orderByDesc('created_at')->paginate(30);
         }else{
-            $mutasis = Mutasi::groupby('kode_mutasi')->get();
+            $mutasis = Mutasi::groupby('kode_mutasi')->orderByDesc('created_at')->paginate(30);
         }
         return view('mutasi.list', compact('mutasis'));
     }
