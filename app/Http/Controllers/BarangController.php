@@ -23,17 +23,17 @@ class BarangController extends Controller
     public function index()
     {
         if(auth()->user()->role == 'admin'){
-            $barang = Barang::get();
+            $barang = Barang::orderByDesc('created_at')->paginate(30);
         }else{
             $barang = Barang::whereHas('masuk',function($z){
                 return $z->where('gudang_id',auth()->user()->gudang_id);
-            })->get();
+            })->orderByDesc('created_at')->paginate(30);
         }
         return view('barang.semuabarang',compact('barang'));
     }
     public function create()
     {
-        $barang = Barang::get();
+        $barang = Barang::orderByDesc('created_at')->paginate(30);
         return view('barang.index',compact('barang'));
     }
     public function store(StoreRequest $request)

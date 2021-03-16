@@ -55,7 +55,7 @@
                                         <a href="{{route('infra.edit',$in->id)}}">
                                             <button type="button" class="btn btn-info btn-sm">Edit</button>
                                         </a>
-                                            
+
                                         @endif
                                         <a href="{{route('infra.barcode',$in->id)}}">
                                             <button type="button" class="btn btn-danger btn-sm">Barcode</button>
@@ -67,7 +67,11 @@
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{$infra->links()}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Infra\StoreRequest;
-use App\Http\Requests\InfraRequest;
-use App\Models\Gudang;
 use App\Models\Infra;
-use Illuminate\Http\Request;
 use Services\Infra\InfraService;
 
 class InfraController extends Controller
 {
     public function index()
     {
-          $infra = Infra::orderBy('created_at','DESC')->get();
+          $infra = Infra::orderByDesc('created_at')->paginate(30);
         return view('infra.infra',compact('infra'));
     }
     public function create()
