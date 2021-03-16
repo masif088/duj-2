@@ -13,7 +13,7 @@ class AfterController extends Controller
     public function __construct()
     {
         $this->fcm = new FcmController;
-    
+        $this->log = new LogController;
     }
     public function index()
     {
@@ -69,6 +69,7 @@ class AfterController extends Controller
                         'file' => $fileName
                         ]);
                     }
+                    $this->log->create('After Sale','c');
         return redirect()->back();
     }
     public function edit(After $id)
@@ -86,6 +87,7 @@ class AfterController extends Controller
             'barcode_id' => $data->id,
             'nama_pembeli' => $request->nama_pembeli
         ]);
+        $this->log->create('After Sale','u');
         return redirect()->back();
     }
     public function setuju(After $id)
@@ -94,6 +96,7 @@ class AfterController extends Controller
             'status' => 'tidak',
         ]);
         $this->fcm->send('Persetujuan AfterSale','Selamat persetujuan telah diterima',null,null,null,$id->gudang_id);
+        $this->log->create('After Sale','s');
         return redirect()->back();
     }
     public function tolak(Request $request,After $id)
@@ -103,6 +106,7 @@ class AfterController extends Controller
             'alasan' => $request->alasan
         ]);
         $this->fcm->send('Persetujuan AfterSale','Persetujuan anda ditolak',null,null,null,$id->gudang_id);
+        $this->log->create('After Sale','t');
         return redirect()->back();
     }
 }
