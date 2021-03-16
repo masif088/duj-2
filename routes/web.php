@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::post('/create', [BarangController::class, 'store']);
             Route::get('/edit/{id}', [BarangController::class, 'edit'])->name('edit');
             Route::put('/edit/{id}', [BarangController::class, 'update']);
-            Route::delete('/delete', [BarangController::class, 'delete']);
+            Route::delete('/delete/{id}', [BarangController::class, 'delete'])->name('delete');
         });
         Route::prefix('gudang')->name('gudang.')->group(function () {
             Route::get('/create', [GudangController::class, 'create'])->name('create');

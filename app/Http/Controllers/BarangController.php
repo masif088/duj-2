@@ -9,6 +9,10 @@ use Services\Barang\BarangService;
 
 class BarangController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function detail(Barang $id)
     {
         if(auth()->user()->role != 'admin'){
@@ -42,11 +46,29 @@ class BarangController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         BarangService::store($request);
+        $this->log->create('Nama Barang','c');
+        toastr()->success('Berhasil');
+
         return redirect()->back();
     }
     public function update(StoreRequest $request,Barang $id)
     {
         BarangService::update($request,$id);
+        $this->log->create('Nama Barang','u');
+        toastr()->success('Berhasil');
+
+        return redirect()->back();
+    }
+    public function delete(Barang $id)
+    {
+        try {
+            $id->delete();
+        $this->log->create('Nama Barang','d');
+        toastr()->success('Berhasil');
+
+        } catch (\Throwable $th) {
+            toastr()->warning('Nama Barang telah digunakan');
+        }
         return redirect()->back();
     }
 }
