@@ -8,6 +8,10 @@ use Services\Infra\InfraService;
 
 class InfraController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function index()
     {
           $infra = Infra::orderByDesc('created_at')->paginate(30);
@@ -22,7 +26,10 @@ class InfraController extends Controller
         if (isset($request->validator) && $request->validator->fails()) {
             return redirect()->back()->withErrors($request->validator->messages());
         }
-        InfraService::store($request);
+        $data=InfraService::store($request);
+        $this->log->create('menambah infrastruktur #'.$data->name,'infra',$data->id);
+        toastr()->success('Berhasil');
+
         return redirect()->route('infra.index');
     }
     public function barcode(Infra $b)
@@ -39,6 +46,9 @@ class InfraController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         InfraService::update($request,$id);
-        return redirect()->back();
+        $this->log->create('mengubah infrastruktur #'.$id->name,'infra',$id->id);
+        toastr()->success('Berhasil');
+
+        return redirect()->route('infra.index');
     }
 }

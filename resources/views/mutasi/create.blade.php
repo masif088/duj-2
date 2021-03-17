@@ -16,7 +16,7 @@
             <br>
             Yang telah discan: {{$b}}
             <br>
-            Gudang tujuan: {{$g}}
+            Gudang tujuan: {{$g->name ?? null}}
             </p>
           </div>
           <div class="card-body">
@@ -25,11 +25,11 @@
               @if($g == 'null') 
               <div class="form-group mb-3">
               <div class="col-form-label">Gudang Tujuan</div>
-                <select name="gudang" class="js-example-basic-single col-sm-12 @error('barang') is-invalid @enderror" placeholder="Nama Barang" name="gudang"
+                <select name="gudang" class="js-example-basic-single col-sm-12 @error('barang') is-invalid @enderror" name="gudang"
                 value="{{ old('gudang') }}" required autocomplete="gudang"  autofocus>
-                @foreach ($gudang as $g)
-                @if ($g->id != auth()->user()->gudang_id)
-                <option value="{{$g->id}}" {{ old('gudang') == $g->id ? 'selected' : null }}>{{$g->name}}</option>
+                @foreach ($gudang as $gu)
+                @if ($gu->id != auth()->user()->gudang_id)
+                <option value="{{$gu->id}}" {{ old('gudang') == $gu->id ? 'selected' : null }}>{{$gu->name}}</option>
                     
                 @endif
                 @endforeach  
@@ -40,6 +40,8 @@
                   </span>
                 @enderror
               </div>
+              @else
+              <input type="text" hidden name="gudang" value="{{$g->id}}">
               @endif
                 <div class="form-group mb-3">
                   <label class="col-form-label">kode</label>
