@@ -14,6 +14,10 @@ use Services\Mutasi\MutasiService;
 
 class MutasiController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function index()
     {
         if(auth()->user()->role != 'admin'){
