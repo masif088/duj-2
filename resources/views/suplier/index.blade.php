@@ -37,11 +37,11 @@
                                     </div>
                                     <div class="form-group">
                                       <textarea class="form-control" placeholder="alamat" name="alamat" cols="30" rows="10"></textarea>
-                                      
+
                                   </div>
                                       <div class="modal-footer ">
-                                        <button class="btn btn-primary">Add</button>
-                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="btn btn-primary">Tambah</button>
+                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                                       </div>
                                   </form>
                               </div>
@@ -78,7 +78,7 @@
                       </thead>
                   <tbody>
                     @foreach ($suplier as $i => $b)
-                        
+
                     <tr>
                       <td>{{$i+1}}</td>
                       <td>{{$b->name}}</td>
@@ -86,17 +86,17 @@
                       <td>{{$b->alamat}}</td>
                       @if(auth()->user()->role == 'head')
                       <td>
-                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal{{$b->id}}">Edit</button>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{$b->id}}">Delete</button>
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal{{$b->id}}">Ubah</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{$b->id}}">Hapus</button>
                       </td>
                     </tr>
-                    
+
                     {{-- Modal edit --}}
                     <div class="modal fade" id="editModal{{$b->id}}" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Edit Barang</h5>
+                                    <h5 class="modal-title">Ubah Barang</h5>
                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             </div>
                             <div class="modal-body">
@@ -113,8 +113,8 @@
                                       <input class="form-control" type="text" placeholder="alamat" name="alamat" value="{{$b->alamat}}">
                                     </div>
                                     <div class="modal-footer ">
-                                      <button class="btn btn-primary">Add</button>
-                                      <button class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                      <button class="btn btn-primary">Simpan</button>
+                                      <button class="btn btn-warning" data-dismiss="modal" aria-label="Close">Batal</button>
                                     </div>
                                 </form>
                             </div>
@@ -128,7 +128,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h5 class="modal-title">Delete</h5>
+                              <h5 class="modal-title">Hapus</h5>
                               <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                           </div>
                           <div class="modal-body">
@@ -137,8 +137,8 @@
                                 @method('delete')
                                 <p>Apakah anda yakin akan menghapus?</p>
                                 <div class="modal-footer ">
-                                    <button type="submit" class="btn btn-primary">Delete</button>
-                                    <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Hapus</button>
+                                    <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Hapus</button>
                                 </div>
                             </form>
                         </div>

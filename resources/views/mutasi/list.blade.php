@@ -38,7 +38,7 @@
                       </thead>
                   <tbody>
                     @foreach ($mutasis as $i => $m)
-                        
+
                     <tr>
                       <td>{{$i+1}}</td>
                       {{-- <td>{{$m->barcode->masuk->barang->name}}</td> --}}
@@ -50,7 +50,7 @@
                         <td>
                           @if ($m->status != 'diterima' && $m->status != 'batal')
                           <a href="{{route('mutasi.edit',$m->id)}}">
-                            <button type="button" class="btn btn-info btn-sm" >Edit</button>
+                            <button type="button" class="btn btn-info btn-sm" >Ubah</button>
                           </a>
                               <a href="{{route('mutasi.batal',$m->id)}}">
                                 <button type="button" class="btn btn-danger btn-sm" >Batal</button>
@@ -63,7 +63,7 @@
                           </td>
                         </tr>
                         @endforeach
-                        
+
                   </tbody>
               </table>
             </div>
