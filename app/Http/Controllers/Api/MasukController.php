@@ -37,10 +37,12 @@ class MasukController extends Controller
     }
     public function detail(Request $request)
     {
-        $b = Barcode::where('kode',$request->kode)->with(['masuk' => function($xx){
+        $b = Barcode::where('kode',$request->kode)->where('status','mutasi')->whereHas('masuk',function($zz){
+            return $zz->where('gudang_id',auth('sanctum')->user()->gudang_id);
+        })->with(['masuk' => function($xx){
             $xx->with(['barang','gudang','suplier']);
         },'mutasi'])->latest()->first();
-        if($b == null || $b->masuk->gudang_id == auth('sanctum')->user()->gudang_id){
+        if(is_null($b)){
         return response()->json([
             'status' => 'error',
             'msg' => 'barcode tidak ditemukan'
