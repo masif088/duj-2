@@ -30,7 +30,7 @@
                               <div class="modal-body">
                                   <form class="theme-form" action="{{route('serviceInfra.create')}}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    
+
                                     <div class="form-gorup mb-3">
                                       <div class="form-group mb-3">
                                         <label class="col-form-label">kode</label>
@@ -59,8 +59,8 @@
 
 
                                       <div class="modal-footer ">
-                                        <button class="btn btn-primary">Add</button>
-                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="btn btn-primary">Tambah</button>
+                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                                       </div>
                                   </form>
                               </div>
@@ -109,24 +109,24 @@
                         <td>
                             @if (auth()->user()->role == 'teknisi' && $s->status != 'tolak' && ($s->user_id == null || $s->user_id == auth()->user()->id) && $s->status == 'tidak')
                             <a href="{{route('serviceInfra.edit',$s->id)}}">
-                              <button type="button" class="btn btn-info btn-sm" >{!! $s->user_id == null ? 'Ambil' :'Edit'!!}</button>
+                              <button type="button" class="btn btn-info btn-sm" >{!! $s->user_id == null ? 'Ambil' :'Ubah'!!}</button>
                             </a>
-                                
+
                             @endif
                             @if ($s->status != 'tolak' && auth()->user()->role == 'head' || auth()->user()->role == 'ketua')
                             <a href="{{route('serviceInfra.batal',$s->id)}}">
                               <button type="button" class="btn btn-info btn-sm" >Batal</button>
                             </a>
-                                
+
                             @endif
                             @if (auth()->user()->role == 'admin' && $s->status != 'tolak' && $s->status == 'pengajuan')
                                 <a onclick="return confirm('apakah anda yakin?')" href="{{route('serviceInfra.setuju',$s->id)}}">
                                   <button type="button" class="btn btn-success btn-sm" >setuju</button>
                                 </a>
-                                <button type="button" data-toggle="modal" data-target="#alasan{{$s->id}}" class="btn btn-danger btn-sm" >Tolak</button> 
+                                <button type="button" data-toggle="modal" data-target="#alasan{{$s->id}}" class="btn btn-danger btn-sm" >Tolak</button>
                             @endif
                             @if ($s->status == 'tolak')
-                            <button type="button" data-toggle="modal" data-target="#alasann{{$s->id}}" class="btn btn-danger btn-sm" >Alasan</button>     
+                            <button type="button" data-toggle="modal" data-target="#alasann{{$s->id}}" class="btn btn-danger btn-sm" >Alasan</button>
                             @endif
                         </td>
                       </tr>
@@ -147,8 +147,8 @@
                                         </div>
                                     </div>
                                         <div class="modal-footer ">
-                                          <button class="btn btn-primary">Add</button>
-                                          <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                          <button class="btn btn-primary">Tambah</button>
+                                          <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                                         </div>
                                     </form>
                                 </div>
@@ -171,7 +171,7 @@
                                       </div>
                                   </div>
                                       <div class="modal-footer ">
-                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                                       </div>
                               </div>
                           </div>
@@ -179,7 +179,7 @@
                   </div>
                     @endif
                       @endforeach
-                      
+
                     </tbody>
               </table>
             </div>

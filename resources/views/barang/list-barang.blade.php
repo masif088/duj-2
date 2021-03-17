@@ -17,7 +17,7 @@
                 <div class="row justify-content-end">
                   @if(auth()->user()->role == 'head')
                   <div style="padding-right: 10px;">
-                    <a href="{{route('masuk.create')}}" ><button class="btn btn-success btn-lg" type="button">Add</button></a>
+                    <a href="{{route('masuk.create')}}" ><button class="btn btn-success btn-lg" type="button">Tambah</button></a>
                   </div>
                   @endif
               </div>
@@ -60,9 +60,9 @@
                         <td>{{$m->barcode()->where('status','mutasi')->count()}}</td>
                         <td>
                           <a class="btn btn-success" href="{{route('barcode.index',$m->id)}}">Barcode</a>
-                    
+
                           @if(auth()->user()->role == 'head')
-                          <a class="btn btn-warning" href="{{route('masuk.edit',$m->id)}}">Edit</a></td>
+                          <a class="btn btn-warning" href="{{route('masuk.edit',$m->id)}}">Ubah</a></td>
                           @endif
                         </tr>
                     @endforeach

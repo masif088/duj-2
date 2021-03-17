@@ -18,7 +18,7 @@
                             <div style="padding-right: 10px;">
                               @if(auth()->user()->role == 'head')
                                 <button class="btn btn-success btn-lg" type="button" data-toggle="modal"
-                                    data-target="#addReward">Add</button>
+                                    data-target="#addReward">Tambah</button>
                                 {{-- Modal add --}}
                                 <div class="modal fade" id="addReward" tabindex="-1" role="dialog"
                                     aria-labelledby="addReward" aria-hidden="true">
@@ -38,9 +38,9 @@
                                                             placeholder="Nama" name="name">
                                                     </div>
                                                     <div class="modal-footer ">
-                                                        <button class="btn btn-primary">Add</button>
+                                                        <button class="btn btn-primary">Tambah</button>
                                                         <button class="btn btn-secondary" data-dismiss="modal"
-                                                            aria-label="Close">Cancel</button>
+                                                            aria-label="Close">Batal</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -82,9 +82,9 @@
                                     @if(auth()->user()->role == 'head')
                                     <td>
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                            data-target="#editModal{{$b->id}}">Edit</button>
+                                            data-target="#editModal{{$b->id}}">Ubah</button>
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#deleteModal{{$b->id}}">Delete</button>
+                                            data-target="#deleteModal{{$b->id}}">Hapus</button>
                                     </td>
                                 </tr>
 
@@ -94,7 +94,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Edit</h5>
+                                                <h5 class="modal-title">Ubah</h5>
                                                 <button class="close" type="button" data-dismiss="modal"
                                                     aria-label="Close"><span aria-hidden="true">×</span></button>
                                             </div>
@@ -108,9 +108,9 @@
                                                             placeholder="Nama" name="name" value="{{$b->name}}">
                                                     </div>
                                                     <div class="modal-footer ">
-                                                        <button class="btn btn-primary">Add</button>
+                                                        <button class="btn btn-primary">Simpan</button>
                                                         <button class="btn btn-warning" data-dismiss="modal"
-                                                            aria-label="Close">Cancel</button>
+                                                            aria-label="Close">Batal</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -125,7 +125,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Delete Reward</h5>
+                                                <h5 class="modal-title">Hapus</h5>
                                                 <button class="close" type="button" data-dismiss="modal"
                                                     aria-label="Close"><span aria-hidden="true">×</span></button>
                                             </div>
@@ -136,9 +136,9 @@
                                                     @method('delete')
                                                     <p>Apakah anda yakin akan menghapus?</p>
                                                     <div class="modal-footer ">
-                                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                                        <button type="submit" class="btn btn-primary">Hapus</button>
                                                         <button class="btn btn-secondary" data-dismiss="modal"
-                                                            aria-label="Close">Cancel</button>
+                                                            aria-label="Close">Batal</button>
                                                     </div>
                                                 </form>
                                             </div>
