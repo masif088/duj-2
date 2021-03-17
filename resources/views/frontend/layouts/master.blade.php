@@ -70,7 +70,7 @@
           <div class="nav-right col-8 pull-right right-menu">
             <ul class="nav-menus">
               <li class="profile-nav onhover-dropdown p-0">
-                <div class="media profile-media"><img style="width: 3em;height:2.7em;border-radius:50%;" src="{{asset(auth()->user()->img ? Storage::url('/user/'.auth()->user()->img) : '/assets/images/user/7.jpg')}}" alt="">
+                <div class="media profile-media"><img style="width: 3em;height:2.7em;border-radius:50%;" src="{{asset(auth()->user()->img ? Storage::url('/user/'.auth()->user()->img) : '/assets/images/user/user.png')}}" alt="">
                   <div class="media-body"><span>{{auth()->user()->name}}</span>
                     <p class="mb-0 font-roboto">{{auth()->user()->role}}<i class="middle fa fa-angle-down"></i></p>
                   </div>

@@ -15,7 +15,7 @@
             </div>
             <div class="greeting-user text-center">
               <div class="profile-vector"><img class="img-fluid" src="../assets/images/dashboard/welcome.png" alt=""></div>
-              <h4 class="f-w-600"><span id="greeting">Good Morning</span> <span class="right-circle"><i class="fa fa-check-circle f-14 middle"></i></span></h4>
+              <h4 class="f-w-600"><span>Selamat Datang</span> <span class="right-circle"><i class="fa fa-check-circle f-14 middle"></i></span></h4>
               <h4>{{auth()->user()->name}}</h4>
               <h5 style="color:white">Role : Head Office</h5>
               {{-- <div class="whatsnew-btn"><a class="btn btn-primary">Whats New !</a></div> --}}

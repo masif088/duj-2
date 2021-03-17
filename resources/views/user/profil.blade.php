@@ -18,7 +18,7 @@
             <div class="card-body">
               <form class="form theme-form">
                 <div class="row mb-2">
-                  <div class="col-auto"><img class="img-70 rounded-circle" alt="" src="{{asset($user->img ? Storage::url('/user/'.$user->img) : '/assets/images/user/7.jpg')}}"></div>
+                  <div class="col-auto"><img class="img-70 rounded-circle" alt="" src="{{asset($user->img ? Storage::url('/user/'.$user->img) : '/assets/images/user/user.png')}}"></div>
                   <div class="col">
                     <h3 class="mb-1">{{$user->name}}</h3>
                       <p class="mb-4">{{$user->role}}</p>
