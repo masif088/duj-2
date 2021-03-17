@@ -6,6 +6,7 @@ use App\Models\After;
 use App\Models\Barcode;
 use App\Models\Infra;
 use App\Models\Masuk;
+use App\Models\Mutasi;
 use App\Models\ServiceAfter;
 use App\Models\ServiceInfra;
 use App\Models\User;
@@ -41,7 +42,7 @@ class HomeController extends Controller
             return view('dashboard.Admin',compact(['infra','service','stok','barangMasuk','barangKeluar']));
         }
         if(auth()->user()->role == 'head'){
-            $masuk =Masuk::whereDate('created_at',date('Y-m-d'))->get();
+            $masuk =Masuk::whereDate('created_at',date('Y-m-d'))->orderByDesc('created_at')->get();
             $admin = User::where('role','admin')->count();
             return view('dashboard.HO',compact(['masuk','admin']));
         }

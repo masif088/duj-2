@@ -45,8 +45,8 @@ class BarangController extends Controller
         if(isset($request->validator) && $request->validator->fails()){
             return redirect()->back()->withErrors($request->validator->messages());
         }
-        BarangService::store($request);
-        $this->log->create('Nama Barang','c');
+        $id = BarangService::store($request);
+        $this->log->create('menambah nama barang','barang',$id->id);
         toastr()->success('Berhasil');
 
         return redirect()->back();
@@ -54,16 +54,18 @@ class BarangController extends Controller
     public function update(StoreRequest $request,Barang $id)
     {
         BarangService::update($request,$id);
-        $this->log->create('Nama Barang','u');
         toastr()->success('Berhasil');
+        $this->log->create('mengubah nama barang','barang',$id->id);
 
         return redirect()->back();
     }
     public function delete(Barang $id)
     {
         try {
+            $name = $id->name;
+            $id= $id->id;
             $id->delete();
-        $this->log->create('Nama Barang','d');
+        $this->log->create('menghapus nama barang #'.$name,'barang',$id);
         toastr()->success('Berhasil');
 
         } catch (\Throwable $th) {

@@ -15,9 +15,10 @@ class CreateLogsTable extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->references('id')->on('users');
-            $table->string('aktivitas');
-            $table->enum('action',['c','u','d','s','t']);
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('message');
+            $table->bigInteger('type_id');
+            $table->enum('type',['mutasi','after','service_after','masuk','infra','service_infra','barang','barcode','Check','gudang','suplier','user']);
             $table->timestamps();
         });
     }

@@ -69,7 +69,9 @@ class AfterController extends Controller
                         'file' => $fileName
                         ]);
                     }
-                    $this->log->create('After Sale','c');
+                    $this->log->create('menambah after sale','after',$after->id);
+        toastr()->success('Berhasil');
+
         return redirect()->back();
     }
     public function edit(After $id)
@@ -87,7 +89,10 @@ class AfterController extends Controller
             'barcode_id' => $data->id,
             'nama_pembeli' => $request->nama_pembeli
         ]);
-        $this->log->create('After Sale','u');
+        toastr()->success('Berhasil');
+
+        $this->log->create('mengubah after sale','after',$id->id);
+
         return redirect()->back();
     }
     public function setuju(After $id)
@@ -95,8 +100,10 @@ class AfterController extends Controller
         $id->serviceAfter()->update([
             'status' => 'tidak',
         ]);
-        $this->fcm->send('Persetujuan AfterSale','Selamat persetujuan telah diterima',null,null,null,$id->gudang_id);
-        $this->log->create('After Sale','s');
+        toastr()->success('Berhasil');
+
+        $this->log->create('Persetujuan after sale','after',$id->id);
+        $this->fcm->send(' AfterSale','Selamat persetujuan telah diterima',null,null,null,$id->gudang_id);
         return redirect()->back();
     }
     public function tolak(Request $request,After $id)
@@ -105,8 +112,10 @@ class AfterController extends Controller
             'status' => 'tolak',
             'alasan' => $request->alasan
         ]);
+        toastr()->success('Berhasil');
+
         $this->fcm->send('Persetujuan AfterSale','Persetujuan anda ditolak',null,null,null,$id->gudang_id);
-        $this->log->create('After Sale','t');
+        $this->log->create('Persetujuan after sale ditolak','after',$id->id);
         return redirect()->back();
     }
 }

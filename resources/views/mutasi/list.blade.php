@@ -49,9 +49,10 @@
                         <td>{{$m->status}}</td>
                         <td>
                           @if ($m->status != 'diterima' && $m->status != 'batal')
-                          <a href="{{route('mutasi.edit',$m->id)}}">
+
+                          {{-- <a href="{{route('mutasi.edit',$m->id)}}">
                             <button type="button" class="btn btn-info btn-sm" >Edit</button>
-                          </a>
+                          </a> --}}
                               <a href="{{route('mutasi.batal',$m->id)}}">
                                 <button type="button" class="btn btn-danger btn-sm" >Batal</button>
 

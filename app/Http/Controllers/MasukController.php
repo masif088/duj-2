@@ -13,6 +13,7 @@ use Services\Masuk\MasukService;
 
 class MasukController extends Controller
 {
+    
     public function create()
     {
         return view('barang.create',MasukService::create());
@@ -26,7 +27,9 @@ class MasukController extends Controller
         if(isset($request->validator) && $request->validator->fails()){
             return redirect()->back()->withErrors($request->validator->messages());
         }
-        MasukService::store($request);
+         MasukService::store($request);
+         toastr()->success('Berhasil');
+
         return redirect()->route('masuk.index');
     }
     public function edit(Masuk $id)
@@ -40,6 +43,8 @@ class MasukController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         MasukService::update($request,$id);
+        toastr()->success('Berhasil');
+
         return redirect()->route('masuk.index');
     }
 }
