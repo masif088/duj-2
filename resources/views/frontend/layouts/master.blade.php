@@ -35,6 +35,7 @@
     <link id="color" rel="stylesheet" href="{{asset('/assets/css/color-1.css')}}" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/responsive.css')}}">
+    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
     @yield('head')
     @toastr_css
   </head>
@@ -151,7 +152,7 @@
     <script src="{{asset('/assets/js/chart/apex-chart/apex-chart.js')}}"></script>
     <script src="{{asset('/assets/js/chart/apex-chart/stock-prices.js')}}"></script>
     <script src="{{asset('/assets/js/notify/bootstrap-notify.min.js')}}"></script>
-    <script src="{{asset('/assets/js/dashboard/default.js')}}"></script>
+    {{-- <script src="{{asset('/assets/js/dashboard/default.js')}}"></script> --}}
     <script src="{{asset('/assets/js/notify/index.js')}}"></script>
     <script src="{{asset('/assets/js/datepicker/date-picker/datepicker.js')}}"></script>
     <script src="{{asset('/assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
@@ -162,6 +163,7 @@
     <script src="{{asset('/assets/js/typeahead-search/handlebars.js')}}"></script>
     <script src="{{asset('/assets/js/typeahead-search/typeahead-custom.j')}}s"></script>
     <script src="{{asset('/assets/js/tooltip-init.js')}}"></script>
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
     @yield('script')
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
