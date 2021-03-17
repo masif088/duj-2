@@ -106,6 +106,7 @@ class MutasiController extends Controller
         $b = Barcode::where('kode',$request->kode)->where('status','aktif')->with(['masuk' => function($xx){
             $xx->with(['barang','gudang','suplier']);
         },'mutasi'])->latest()->first();
+        return $b;
         if($b == null || ($b->masuk->gudang_id != auth('sanctum')->user()->gudang_id)){
         return response()->json([
             'status' => 'error',
