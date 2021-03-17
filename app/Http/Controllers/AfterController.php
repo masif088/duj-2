@@ -17,7 +17,7 @@ class AfterController extends Controller
     }
     public function index()
     {
-            $after = After::orderByDesc('created_at')->paginate(30);
+            $after = After::orderByDesc('created_at')->paginate(10);
         return view('service.after.index',compact('after'));
     }
     public function create()
