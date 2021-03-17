@@ -14,7 +14,7 @@
             <div class="card-body">
               <form class="form theme-form">
                 <div class="row mb-2">
-                  <div class="col-auto"><img class="img-70 rounded-circle" alt="" src="{{asset('/assets/images/user/7.jpg')}}"></div>
+                  <div class="col-auto"><img class="img-70 rounded-circle" alt="" src="{{asset('/assets/images/user/user.png')}}"></div>
                   <div class="col">
                     <h3 class="mb-1">MARK JECNO</h3>
                       <p class="mb-4">ADMIN</p>

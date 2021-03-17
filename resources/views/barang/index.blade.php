@@ -138,7 +138,7 @@
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     @method('delete')
-                                                    <h1>Apakah anda yakin akan menghapus "Tittle"?</h1>
+                                                    <p>Apakah anda yakin akan menghapus {{$b->name}}?</p>
                                                     <div class="modal-footer ">
                                                         <button class="btn btn-primary">Delete</button>
                                                         <button class="btn btn-secondary" data-dismiss="modal"
