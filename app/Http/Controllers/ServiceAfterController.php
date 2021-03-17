@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ServiceAfterController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function edit(ServiceAfter $id)
     {
         return view('service.after.perbaiki',compact('id'));
@@ -26,6 +30,7 @@ class ServiceAfterController extends Controller
         $id->update([
             'status' => 'batal'
         ]);
+        $this->log->create('membatalkan after sale','service_after',$id->id);
         return redirect()->back();
     }
 }

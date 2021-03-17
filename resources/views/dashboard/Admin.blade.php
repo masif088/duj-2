@@ -72,7 +72,7 @@
                             <div class="media-body">
                               <p>{{$s->serviceAfter->created_at->format('d-M-Y')}} <span>{{$s->serviceAfter->created_at->format('H:s')}}</span></p>
                               <h6>{{$s->barcode->masuk->barang->name}}<span class="dot-notification"></span></h6>
-                              <span>{{$s->serviceAfter->deskripsi}}</span>
+                              <span>{{Str::limit($s->serviceAfter->deskripsi,20)}}</span>
                             </div>
                           </div>
                           @endforeach
@@ -118,7 +118,7 @@
                       <div class="media-body">
                         <p>{{$i->created_at->format('d-M-Y')}} <span>{{$i->created_at->format('H:s')}}</span></p>
                         <h6>{{$i->infra->name}}<span class="dot-notification"></span></h6>
-                        <span>{{$i->deskripsi}}</span>
+                        <span>{{Str::limit($i->deskripsi,20)}}</span>
                       </div>
                     </div>
                     @endforeach

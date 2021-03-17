@@ -15,7 +15,7 @@ class ServiceInfraController extends Controller
     }
     public function index()
     {
-            $service = ServiceInfra::orderBy('created_at','DESC')->get();
+            $service = ServiceInfra::orderByDesc('created_at')->paginate(10);
         return view('service.infra.index',compact('service'));
     }
     public function store(Request $request)

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Log;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,6 +28,13 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Event::listen(\Illuminate\Auth\Events\Login::class, function ($event) {
+           Log::create([
+            'user_id' => $event->user->id,
+            'message' => 'melakukan login',
+            'type' => 'user',
+            'type_id' => $event->user->id
+           ]);
+        });
     }
 }

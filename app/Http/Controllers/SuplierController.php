@@ -11,7 +11,7 @@ class SuplierController extends Controller
 {
     public function index()
     {
-        $suplier = Suplier::get();
+        $suplier = Suplier::orderByDesc('created_at')->paginate(30);
         return view('suplier.index',compact('suplier'));
     }
     public function store(StoreRequest $request)

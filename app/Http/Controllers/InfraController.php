@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Infra\StoreRequest;
-use App\Http\Requests\InfraRequest;
-use App\Models\Gudang;
 use App\Models\Infra;
-use Illuminate\Http\Request;
 use Services\Infra\InfraService;
 
 class InfraController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function index()
     {
-          $infra = Infra::orderBy('created_at','DESC')->get();
+          $infra = Infra::orderByDesc('created_at')->paginate(30);
         return view('infra.infra',compact('infra'));
     }
     public function create()
@@ -25,7 +26,10 @@ class InfraController extends Controller
         if (isset($request->validator) && $request->validator->fails()) {
             return redirect()->back()->withErrors($request->validator->messages());
         }
-        InfraService::store($request);
+        $data=InfraService::store($request);
+        $this->log->create('menambah infrastruktur #'.$data->name,'infra',$data->id);
+        toastr()->success('Berhasil');
+
         return redirect()->route('infra.index');
     }
     public function barcode(Infra $b)
@@ -42,6 +46,9 @@ class InfraController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         InfraService::update($request,$id);
-        return redirect()->back();
+        $this->log->create('mengubah infrastruktur #'.$id->name,'infra',$id->id);
+        toastr()->success('Berhasil');
+
+        return redirect()->route('infra.index');
     }
 }

@@ -14,6 +14,10 @@ use Services\Mutasi\MutasiService;
 
 class MutasiController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function index()
     {
         if(auth()->user()->role != 'admin'){
@@ -21,9 +25,9 @@ class MutasiController extends Controller
                 return $m->whereHas('masuk', function($z){
                     return $z->where('gudang_id',auth()->user()->gudang_id);
                 });
-            })->groupby('kode_mutasi')->get();
+            })->groupby('kode_mutasi')->orderByDesc('created_at')->paginate(30);
         }else{
-            $mutasis = Mutasi::groupby('kode_mutasi')->get();
+            $mutasis = Mutasi::groupby('kode_mutasi')->orderByDesc('created_at')->paginate(30);
         }
         return view('mutasi.list', compact('mutasis'));
     }
@@ -38,7 +42,7 @@ class MutasiController extends Controller
         $zz = Mutasi::where('kode_mutasi',Cookie::get('kodeMts'));
         $b = (clone $zz)->count();
         if($zz->exists()){
-            $g = (clone $zz)->first()->gudang->name;
+            $g = (clone $zz)->first()->gudang;
         }else{
             $g = 'null';
         }
@@ -52,6 +56,7 @@ class MutasiController extends Controller
     public function store(StoreRequest $request)
     {
         if (isset($request->validator) && $request->validator->fails()) {
+            dd($request->validator->messages());
             return redirect()->back()->withErrors($request->validator->messages());
         }
         $data = BarcodeService::find($request->kode,null,auth()->user()->gudang_id);
@@ -68,7 +73,7 @@ class MutasiController extends Controller
             $c = MutasiService::store($request, $data->id);
             return $c;
         });
-        $request->flash();
+        toastr()->success('Berhasil');
         return redirect()->back()->cookie($c);
     }
     public function edit(Mutasi $id)
@@ -97,8 +102,13 @@ class MutasiController extends Controller
     public function batal(Mutasi $id)
     {
         DB::transaction(function() use($id){
-            MutasiService::batal($id);
-            BarcodeService::update($id->barcode(), 'aktif');
+            $m = Mutasi::where('kode_mutasi',$id->kode_mutasi)->get();
+            foreach ($m as $idd) {
+                MutasiService::batal($idd);
+                BarcodeService::update($idd->barcode(), 'aktif');
+            }
+            $this->log->create('membatalkan mutasi #'.$idd->kode,'mutasi',$idd->id);
+
         });
         return redirect()->back();
     }

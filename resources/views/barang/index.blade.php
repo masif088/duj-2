@@ -134,9 +134,10 @@
                                                     aria-label="Close"><span aria-hidden="true">×</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="theme-form" action="" method="POST"
+                                                <form class="theme-form" action="{{route('barang.delete',$b->id)}}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
+                                                    @method('delete')
                                                     <h1>Apakah anda yakin akan menghapus "Tittle"?</h1>
                                                     <div class="modal-footer ">
                                                         <button class="btn btn-primary">Hapus</button>
@@ -154,7 +155,11 @@
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{$barang->links()}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

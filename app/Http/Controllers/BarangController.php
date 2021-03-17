@@ -9,6 +9,10 @@ use Services\Barang\BarangService;
 
 class BarangController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function detail(Barang $id)
     {
         if(auth()->user()->role != 'admin'){
@@ -23,17 +27,17 @@ class BarangController extends Controller
     public function index()
     {
         if(auth()->user()->role == 'admin'){
-            $barang = Barang::get();
+            $barang = Barang::orderByDesc('created_at')->paginate(30);
         }else{
             $barang = Barang::whereHas('masuk',function($z){
                 return $z->where('gudang_id',auth()->user()->gudang_id);
-            })->get();
+            })->orderByDesc('created_at')->paginate(30);
         }
         return view('barang.semuabarang',compact('barang'));
     }
     public function create()
     {
-        $barang = Barang::get();
+        $barang = Barang::orderByDesc('created_at')->paginate(30);
         return view('barang.index',compact('barang'));
     }
     public function store(StoreRequest $request)
@@ -41,12 +45,32 @@ class BarangController extends Controller
         if(isset($request->validator) && $request->validator->fails()){
             return redirect()->back()->withErrors($request->validator->messages());
         }
-        BarangService::store($request);
+        $id = BarangService::store($request);
+        $this->log->create('menambah nama barang','barang',$id->id);
+        toastr()->success('Berhasil');
+
         return redirect()->back();
     }
     public function update(StoreRequest $request,Barang $id)
     {
         BarangService::update($request,$id);
+        toastr()->success('Berhasil');
+        $this->log->create('mengubah nama barang','barang',$id->id);
+
+        return redirect()->back();
+    }
+    public function delete(Barang $id)
+    {
+        try {
+            $name = $id->name;
+            $id= $id->id;
+            $id->delete();
+        $this->log->create('menghapus nama barang #'.$name,'barang',$id);
+        toastr()->success('Berhasil');
+
+        } catch (\Throwable $th) {
+            toastr()->warning('Nama Barang telah digunakan');
+        }
         return redirect()->back();
     }
 }

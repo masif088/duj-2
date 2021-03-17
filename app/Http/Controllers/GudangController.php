@@ -7,12 +7,15 @@ use App\Models\Gudang;
 use Illuminate\Http\Request;
 use Services\Gudang\GudangService;
 
-
 class GudangController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function index()
     {
-        $gudang = Gudang::get();
+        $gudang = Gudang::orderByDesc('created_at')->paginate(30);
         return view('gudang.index',compact('gudang'));
     }
     public function store(StoreRequest $request)
@@ -20,7 +23,10 @@ class GudangController extends Controller
         if(isset($request->validator) && $request->validator->fails()){
             return redirect()->back()->withErrors($request->validator->messages());
         }
-        GudangService::store($request);
+        $data = GudangService::store($request);
+        $this->log->create('menambah gudang #'.$data->name,'gudang',$data->id);
+        toastr()->success('Berhasil');
+
         return redirect()->back();
     }
     public function update(StoreRequest $request,Gudang $id)
@@ -29,11 +35,22 @@ class GudangController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         GudangService::update($request,$id);
+        $this->log->create('mengubah nama gudang #'.$id->name,'gudang',$id->id);
+        toastr()->success('Berhasil');
+
         return redirect()->back();
     }
     public function delete(Gudang $id)
     {
-        $id->delete();
+        try {
+            $name = $id->name;
+            $id= $id->id;
+            $id->delete();
+        $this->log->create('menghapus gudang #'.$name,'barang',$id);
+        toastr()->success('Berhasil');
+        } catch (\Throwable $th) {
+            toastr()->warning('Gudang telah digunakan');
+        }
         return redirect()->back();
     }
 }
