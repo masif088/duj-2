@@ -83,8 +83,6 @@
                                     <td>
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                             data-target="#editModal{{$b->id}}">Edit</button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#deleteModal{{$b->id}}">Delete</button>
                                     </td>
                                 </tr>
 
@@ -120,31 +118,7 @@
                                 {{-- end modal edit --}}
 
                                 {{-- Modal Delete --}}
-                                <div class="modal fade" id="deleteModal{{$b->id}}" tabindex="-1" role="dialog"
-                                    aria-labelledby="deleteModal" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Delete Reward</h5>
-                                                <button class="close" type="button" data-dismiss="modal"
-                                                    aria-label="Close"><span aria-hidden="true">×</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="theme-form" action="{{route('gudang.delete',$b->id)}}"
-                                                    method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <p>Apakah anda yakin akan menghapus?</p>
-                                                    <div class="modal-footer ">
-                                                        <button type="submit" class="btn btn-primary">Delete</button>
-                                                        <button class="btn btn-secondary" data-dismiss="modal"
-                                                            aria-label="Close">Cancel</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            
                                 @endif
                                 {{-- end modal Delete --}}
                                 @endforeach

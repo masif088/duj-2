@@ -53,10 +53,13 @@
                           {{-- <a href="{{route('mutasi.edit',$m->id)}}">
                             <button type="button" class="btn btn-info btn-sm" >Edit</button>
                           </a> --}}
-                              <a href="{{route('mutasi.batal',$m->id)}}">
-                                <button type="button" class="btn btn-danger btn-sm" >Batal</button>
+                          @if (auth()->user()->role == 'head')
+                          <a href="{{route('mutasi.batal',$m->id)}}">
+                            <button type="button" class="btn btn-danger btn-sm" >Batal</button>
 
-                              </a>
+                          </a>
+                              
+                          @endif
                           @endif
                           <a href="{{route('mutasi.invoice',$m->kode_mutasi)}}">
                             <button type="button" class="btn btn-success btn-sm" >Invoice</button>

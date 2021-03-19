@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="text-md-right" id="project">
-                                        <h6>Barang Masuk</h6>
+                                        
 
                                     </div>
                                 </div>
