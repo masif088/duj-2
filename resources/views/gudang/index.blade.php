@@ -82,9 +82,9 @@
                                     @if(auth()->user()->role == 'head')
                                     <td>
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                            data-target="#editModal{{$b->id}}">Ubah</button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#deleteModal{{$b->id}}">Hapus</button>
+
+                                            data-target="#editModal{{$b->id}}">Edit</button>
+
                                     </td>
                                 </tr>
 
@@ -120,31 +120,7 @@
                                 {{-- end modal edit --}}
 
                                 {{-- Modal Delete --}}
-                                <div class="modal fade" id="deleteModal{{$b->id}}" tabindex="-1" role="dialog"
-                                    aria-labelledby="deleteModal" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Hapus</h5>
-                                                <button class="close" type="button" data-dismiss="modal"
-                                                    aria-label="Close"><span aria-hidden="true">×</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="theme-form" action="{{route('gudang.delete',$b->id)}}"
-                                                    method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <p>Apakah anda yakin akan menghapus?</p>
-                                                    <div class="modal-footer ">
-                                                        <button type="submit" class="btn btn-primary">Hapus</button>
-                                                        <button class="btn btn-secondary" data-dismiss="modal"
-                                                            aria-label="Close">Batal</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 @endif
                                 {{-- end modal Delete --}}
                                 @endforeach
