@@ -30,7 +30,7 @@
                               <div class="modal-body">
                                   <form class="theme-form" action="{{route('after.create')}}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    
+
                                     <div class="form-gorup mb-3">
                                       <div class="form-group mb-3">
                                         <label class="col-form-label">kode</label>
@@ -98,8 +98,8 @@
 
 
                                       <div class="modal-footer ">
-                                        <button class="btn btn-primary">Add</button>
-                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="btn btn-primary">Tambah</button>
+                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                                       </div>
                                   </form>
                               </div>
@@ -141,8 +141,8 @@
                       <td>{{$s->barcode->masuk->barang->name}}</td>
                       <td>{{$s->serviceAfter->user->name ?? 'null'}}</td>
                       <td>{{$s->nama_pembeli}}</td>
-                      <td>{{$s->no_hp}}</td>  
-                      <td>{{$s->alamat}}</td>  
+                      <td>{{$s->no_hp}}</td>
+                      <td>{{$s->alamat}}</td>
                       <td>{{$s->barcode->kode}}</td>
                         <td>{{$s->created_at->format('d-M-Y')}}</td>
                         <td>{{$s->serviceAfter->status == 'selesai' ? $s->serviceAfter->updated_at->format('d-M-Y') : 'belum'}}</td>
@@ -155,24 +155,24 @@
                             {{-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#DetailModal">Detail</button> --}}
                             @if (auth()->user()->role == 'teknisi' && $s->serviceAfter->status != 'tolak'&& ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'selesai') && ($s->serviceAfter->user_id == null || $s->serviceAfter->user_id == auth()->user()->id) && $s->serviceAfter->status != 'pengajuan')
                             <a href="{{route('serviceAfter.edit',$s->id)}}">
-                              <button type="button" class="btn btn-info btn-sm" >{!! $s->serviceAfter->user_id == null ? 'Ambil' :'Edit'!!}</button>
+                              <button type="button" class="btn btn-info btn-sm" >{!! $s->serviceAfter->user_id == null ? 'Ambil' :'Ubah'!!}</button>
                             </a>
-                                
+
                             @endif
                             @if ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'tolak'&& $s->serviceAfter->status != 'tidak' && auth()->user()->role == 'head' || auth()->user()->role == 'ketua')
                             <a href="{{route('serviceAfter.batal',$s->id)}}">
                               <button type="button" class="btn btn-info btn-sm" >Batal</button>
                             </a>
-                                
+
                             @endif
                             @if (auth()->user()->role == 'admin' && $s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'tolak' && $s->serviceAfter->status != 'tidak')
                                 <a onclick="return confirm('apakah anda yakin?')" href="{{route('after.setuju',$s->id)}}">
                                   <button type="button" class="btn btn-success btn-sm" >setuju</button>
                                 </a>
-                                 <button type="button" data-toggle="modal" data-target="#alasan{{$s->id}}" class="btn btn-danger btn-sm" >Tolak</button> 
+                                 <button type="button" data-toggle="modal" data-target="#alasan{{$s->id}}" class="btn btn-danger btn-sm" >Tolak</button>
                             @endif
                             @if ($s->serviceAfter->status == 'tolak')
-                            <button type="button" data-toggle="modal" data-target="#alasann{{$s->id}}" class="btn btn-danger btn-sm" >Alasan</button>     
+                            <button type="button" data-toggle="modal" data-target="#alasann{{$s->id}}" class="btn btn-danger btn-sm" >Alasan</button>
                             @endif
                         </td>
                       </tr>
@@ -193,8 +193,8 @@
                                         </div>
                                     </div>
                                         <div class="modal-footer ">
-                                          <button class="btn btn-primary">Add</button>
-                                          <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                          <button class="btn btn-primary">Tambah</button>
+                                          <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                                         </div>
                                     </form>
                                 </div>
@@ -217,7 +217,7 @@
                                       </div>
                                   </div>
                                       <div class="modal-footer ">
-                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                                       </div>
                               </div>
                           </div>
@@ -225,7 +225,7 @@
                   </div>
                     @endif
                       @endforeach
-                      
+
                     </tbody>
               </table>
             </div>
