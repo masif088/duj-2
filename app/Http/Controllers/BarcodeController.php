@@ -39,13 +39,12 @@ class BarcodeController extends Controller
         $this->log->create('aktifasi barcode #'.$data->kode,'barcode',$data->id);
         return redirect()->back();
     }
-    public function jual()
+    public function jual($list = null)
     {
-        if(auth()->user()->role == 'admin'){
+        if(auth()->user()->role == 'admin' || ($list == 'all')){
             $barang = Barcode::where('status','terjual')->orderByDesc('created_at')->paginate(30);
             return view('barang.terjual',compact('barang'));
         }
-        
         return view('barcode.terjual');
     }
     public function terjual(Request $request)
@@ -57,7 +56,6 @@ class BarcodeController extends Controller
         } 
         BarcodeService::update($data,'terjual');
         toastr()->success('Berhasil');
-
         $this->log->create('status barcode terjual #'.$data->kode,'barcode',$data->id);
         return redirect()->back();
     }

@@ -48,10 +48,12 @@ class MutasiController extends Controller
         $b = (clone $zz)->count();
         if($zz->exists()){
             $g = (clone $zz)->first()->gudang;
+            $gud = (clone $zz)->get();
         }else{
+            $gud = [];
             $g = 'null';
         }
-        return view('mutasi.create', compact(['g','b','gudang']));
+        return view('mutasi.create', compact(['g','b','gudang','gud']));
     }
     public function reset()
     {
@@ -119,6 +121,12 @@ class MutasiController extends Controller
         });
         toastr()->success('Berhasil');
 
+        return redirect()->back();
+    }
+    public function delete(Mutasi $id)
+    {
+        $id->delete();
+        BarcodeService::update($id->barcode(), 'aktif');
         return redirect()->back();
     }
 }

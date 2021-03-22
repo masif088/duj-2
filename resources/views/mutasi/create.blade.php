@@ -11,13 +11,18 @@
         <div class="card">
           <div class="card-header">
             <!-- <div class="pull-right mr-4"><a href="#">Edit Profile Playlist</a></div> -->
+            
             <h5>Barang Keluar</h5>
             <p>Kode Mutasi:{{Cookie::get('kodeMts') ?? 'null'}} <a href="{{route('mutasi.reset')}}"><span style="cursor:pointer" class="badge badge-primary">Reset</span></a>
             <br>
             Yang telah discan: {{$b}}
+            <a href="{{route('mutasi.reset')}}" class="btn btn-success pull-right" >
+              Selesai
+            </a>
             <br>
             Gudang tujuan: {{$g->name ?? null}}
             </p>
+            
           </div>
           <div class="card-body">
             <form action="{{route('mutasi.create')}}" method="POST" class="form theme-form">
@@ -54,27 +59,67 @@
                     </span>
                   @enderror
                 </div>
-
-              <div class="form-footer">
-                <div class="form-group">
-                  <div class="row">
-
-                    <div class="col-md-2">
+                <div class="form-footer">
+                  <div class="form-group">
+                    <div class="row">
+  
+                      <div class="col-md-2">
+                        
+                        <button type="submit" class="btn btn-primary" >
+                          Tambah
+                        </button>
+                      </div>
                       
-                      <button type="submit" class="btn btn-primary" >
-                        Tambah
-                      </button>
                     </div>
-                    <div class="col-md-2">
-                      
-                      <a href="{{route('mutasi.reset')}}" class="btn btn-success" >
-                        Selesai
-                      </a>
-                    </div>
+                   
                   </div>
-                 
                 </div>
-              </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive invoice-table" id="table">
+      <table class="table table-bordered table-striped tabel-form-barang">
+          <thead class="active">
+              <tr>
+                <th>Tanggal</th>
+                <th>Nama Barang</th>
+                <th>Gudang Awal</th>
+                <th>Gudang Tujuan</th>
+                <th>Action</th>
+                {{-- <th>Total</th> --}}
+              </tr>
+              </thead>
+          <tbody>
+            @foreach ($gud as $gudd)
+           
+            <tr>
+              <td>
+                <input type="text"  name="Tanggal[]"  class="form-control" placeholder="20/3/2021" value="{{$gudd->created_at->format('d-M-Y')}}" disabled/>
+              </td>
+              <td>
+                <div class="main">
+                  <input type="text"  name="Nama_Barang[]"  class="form-control" placeholder="Nama Barang" value="{{$gudd->barcode->masuk->barang->name}}" disabled/>
+                </div>
+              </td>
+              <td>
+                <input type="text"  name="g_awal[]"  class="form-control" placeholder="Gudang Awal" value="{{$gudd->barcode->masuk->gudang->name}}" disabled/>
+              </td>
+              <td>
+                    <input type="text" name="g_tujuan[]" class="form-control" placeholder="Gudang Tujuan" value="{{$gudd->gudang->name}}" disabled/>
+                  </td>
+                  <td>
+                    <a href="{{route('mutasi.delete',$gudd->id)}}">
+                      <button type="button" class="btn btn-danger">Hapus</button>
+                    </a>
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+      </table>
+    </div>
+  
+  </div>
+</div>
+            
 
             </form>
           </div>
