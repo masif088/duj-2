@@ -13,9 +13,13 @@ class GudangController extends Controller
     {
         $this->log = new LogController;
     }
-    public function index()
+    public function index(Request $request)
     {
-        $gudang = Gudang::orderByDesc('created_at')->paginate(30);
+        if($request->gudang != null){
+            $gudang = Gudang::where('id',$request->gudang)->orderByDesc('created_at')->paginate(30);
+        }else{
+            $gudang = Gudang::orderByDesc('created_at')->paginate(30);
+        }
         return view('gudang.index',compact('gudang'));
     }
     public function store(StoreRequest $request)

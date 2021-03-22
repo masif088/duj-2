@@ -24,28 +24,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach ($log as $i=>$l)
+                                    
                                 <tr>
-                                    <td>1</td>
-                                    <td>User1</td>
-                                    <td>Tes</td>
-                                    <td>TES TES</td>
-
+                                    <td>{{$i+1}}</td>
+                                    <td>{{$l->user->name}}</td>
+                                    <td>{{$l->type}}</td>
+                                    <td>{{$l->message}}</td>
+                                    
                                     <td>
-                                        <a href="">
-                                            <button type="button" class="btn btn-info btn-sm">Ubah</button>
-                                        </a>
-                                        <a href="">
-                                            <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                        <a target="__blank" href="{{
+                                            $l->type == 'user' ? route('user.lihat',$l->type_id) :
+                                            ($l->type == 'suplier' ? route('suplier.index').'?suplier='.$l->type_id :
+                                            ($l->type == 'gudang' ? route('gudang.index').'?gudang='.$l->type_id : null
+                                            
+                                            )
+                                            )
+                                        }}">
+                                            <button type="button" class="btn btn-info btn-sm">Lihat</button>
                                         </a>
                                     </td>
                                 </tr>
-
+                                
+                                @endforeach
 
                             </tbody>
                         </table>
                     </div>
-
+<div class="row">
+    <div class="col-md-12">
+        {{$log->links()}}
+    </div>
+</div>
                 </div>
             </div>
         </div>

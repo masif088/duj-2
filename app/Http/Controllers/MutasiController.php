@@ -97,6 +97,8 @@ class MutasiController extends Controller
             MutasiService::update($id, $data->id, $request->gudang);
             BarcodeService::update($data, 'mutasi');
         });
+        toastr()->success('Berhasil');
+
         return redirect()->back();
     }
     public function batal(Mutasi $id)
@@ -110,6 +112,8 @@ class MutasiController extends Controller
             $this->log->create('membatalkan mutasi #'.$idd->kode,'mutasi',$idd->id);
 
         });
+        toastr()->success('Berhasil');
+
         return redirect()->back();
     }
 }

@@ -11,6 +11,11 @@ use Services\User\UserService;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    
+    }
     public function index()
     {
         $user = auth()->user();
@@ -59,7 +64,9 @@ class UserController extends Controller
         }else{
             return redirect()->back();
         }
-        UserService::store($request);
+        $ss = UserService::store($request);
+        $this->log->create('membuat akun'.$ss->role.' baru #'.$ss->name,'user',$ss->id);
+
         toastr()->success('berhasil membuat');
         return redirect()->back();
     }
@@ -74,6 +81,9 @@ class UserController extends Controller
           
         }
         UserService::edit($request,$id);
+        $this->log->create('update akun user #'.$id->name,'user',$id->id);
+        toastr()->success('berhasil membuat');
+
         return redirect()->back();
     }
 }
