@@ -31,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(\Illuminate\Auth\Events\Login::class, function ($event) {
            Log::create([
             'user_id' => $event->user->id,
-            'message' => 'melakukan login',
+            'message' => 'melakukan login #'.$event->user->name,
             'type' => 'user',
             'type_id' => $event->user->id
            ]);
