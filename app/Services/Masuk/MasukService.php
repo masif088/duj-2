@@ -15,12 +15,17 @@ use Services\Barcode\BarcodeService;
 class MasukService
 {
    
-    static public function index()
+    static public function index($r)
     {
         if(auth()->user()->role != 'admin'){
             $masuk = Masuk::where('gudang_id',auth()->user()->gudang_id)->orderByDesc('created_at')->paginate(30);
         }else{
-            $masuk = Masuk::orderByDesc('created_at')->paginate(30);
+            if($r->masuk != 'masuk'){
+                $masuk = Masuk::where('id',$r->masuk)->orderByDesc('created_at')->paginate(30);
+            }else{
+                $masuk = Masuk::orderByDesc('created_at')->paginate(30);
+
+            }
         }
         return compact('masuk');
     }
@@ -64,6 +69,7 @@ class MasukService
     }
     static public function storeMutasi($b)
     {
+        $log = new LogController;
         $masuk = Masuk::create([
                 'suplier_id' => $b->masuk->suplier->id,
                 'gudang_id' => auth('sanctum')->user()->gudang_id,
@@ -81,6 +87,9 @@ class MasukService
             $b->mutasi()->update([
                 'status' => 'diterima'
             ]);
+            $log->create('menambah barang masuk #'.$masuk->barang->name,'masuk',$masuk->id);
+
+            return true;
     }
     static public function update($data, $masuk)
     {

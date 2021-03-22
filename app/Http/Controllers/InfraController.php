@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Infra\StoreRequest;
 use App\Models\Infra;
+use Illuminate\Http\Request;
 use Services\Infra\InfraService;
 
 class InfraController extends Controller
@@ -12,9 +13,14 @@ class InfraController extends Controller
     {
         $this->log = new LogController;
     }
-    public function index()
+    public function index(Request $request)
     {
-          $infra = Infra::orderByDesc('created_at')->paginate(30);
+        if($request->infra != null){
+            $infra = Infra::where('id',$request->infra)->orderByDesc('created_at')->paginate(30);
+        }else{
+            $infra = Infra::orderByDesc('created_at')->paginate(30);
+
+        }
         return view('infra.infra',compact('infra'));
     }
     public function create()

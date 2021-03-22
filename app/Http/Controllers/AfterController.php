@@ -15,9 +15,16 @@ class AfterController extends Controller
         $this->fcm = new FcmController;
         $this->log = new LogController;
     }
-    public function index()
+    public function index(Request $request)
     {
+        if($request->after != null){
+            $after = After::where('id',$request->after)->orderByDesc('created_at')->paginate(10);
+        }elseif($request->safter != null){
+            $after = ServiceAfter::where('id',$request->safter)->first()->after()->paginate(10);
+        }else{
             $after = After::orderByDesc('created_at')->paginate(10);
+
+        }
         return view('service.after.index',compact('after'));
     }
     public function create()

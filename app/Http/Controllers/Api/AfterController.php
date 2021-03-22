@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogController;
 use App\Models\After;
 use App\Models\ServiceAfter;
 use Illuminate\Http\Request;
@@ -10,6 +11,10 @@ use Services\Barcode\BarcodeService;
 
 class AfterController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function index()
     {
         return response()->json([
@@ -68,6 +73,8 @@ class AfterController extends Controller
                     'file' => $fileName
                     ]);
                 }
+        $this->log->create('menambah after sale','after',$after->id);
+
         return response()->json([
             'status' => 'sukses',
             'msg' => 'sukses membuat pengajuan'

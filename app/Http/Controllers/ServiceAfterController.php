@@ -24,7 +24,7 @@ class ServiceAfterController extends Controller
             'status' => $request->status ?? 'tidak',
         ]);
         toastr()->success('Berhasil');
-
+        $this->log->create('update data after sale #'.$id->after->nama_pembeli,'service_after',$id->id);
         return redirect()->back();
     }
     public function batal(ServiceAfter $id)

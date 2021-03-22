@@ -18,7 +18,7 @@ class MutasiController extends Controller
     {
         $this->log = new LogController;
     }
-    public function index()
+    public function index(Request $request)
     {
         if(auth()->user()->role != 'admin'){
             $mutasis = Mutasi::whereHas('barcode', function ($m) {
@@ -27,7 +27,12 @@ class MutasiController extends Controller
                 });
             })->groupby('kode_mutasi')->orderByDesc('created_at')->paginate(30);
         }else{
-            $mutasis = Mutasi::groupby('kode_mutasi')->orderByDesc('created_at')->paginate(30);
+            if($request->mutasi != null){
+                $mutasis = Mutasi::where('id',$request->mutasi)->groupby('kode_mutasi')->orderByDesc('created_at')->paginate(30);
+            }else{
+                $mutasis = Mutasi::groupby('kode_mutasi')->orderByDesc('created_at')->paginate(30);
+
+            }
         }
         return view('mutasi.list', compact('mutasis'));
     }

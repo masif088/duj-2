@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogController;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
@@ -12,6 +13,10 @@ use Services\User\UserService;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     function login(Request $request)
     {
         $user = User::where(function($z){
@@ -27,8 +32,8 @@ class UserController extends Controller
         $user->update([
             'token' => $request->token
         ]);
-
         $token = $user->createToken('token-' . $user->name)->plainTextToken;
+        $this->log->create('melakukan Login #'.$user->name,'user',$user->id);
 
         $response = [
             'data' => $user,
@@ -68,6 +73,8 @@ class UserController extends Controller
         $request['role'] = 'checker';
         $request['gudang'] = auth('sanctum')->user()->gudang_id;
         $user = UserService::store($request);
+        $this->log->create('membuat user baru #'.$user->name,'user',$user->id);
+
         return response()->json([
             'status' => 'ok',
             'data' => $user,
