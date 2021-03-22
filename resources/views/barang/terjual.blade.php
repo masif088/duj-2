@@ -21,7 +21,10 @@
                           <th>Tanggal</th>
                           <th>Nama Barang</th>
                           <th>Kode</th>
+                          @if (auth()->user()->role != 'head')
                           <th>Harga</th>
+                              
+                          @endif
                       </tr>
                       </thead>
                   <tbody>
@@ -31,9 +34,12 @@
                       <td>{{$b->created_at->format('d-M-Y, H:m')}}</td>
                       <td>{{$b->masuk->barang->name}}</td>
                       <td>{{$b->kode}}</td>
-                      <td>
-                        {{$b->masuk->harga_satuan}}
-                      </td>
+                      @if (auth()->user()->role != 'head')
+                          <td>
+                            {{$b->masuk->harga_satuan}}
+                          </td>
+                              
+                          @endif
                     </tr>
                     @endforeach
                     

@@ -79,7 +79,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::post('/create', [BarcodeController::class, 'store']);
             Route::get('/aktifasi', [BarcodeController::class, 'edit'])->name('edit');
             Route::put('/aktifasi', [BarcodeController::class, 'update']);
-            Route::get('/terjual', [BarcodeController::class, 'jual'])->name('terjual');
+            Route::get('/terjual/{list?}', [BarcodeController::class, 'jual'])->name('terjual');
             Route::put('/terjual', [BarcodeController::class, 'terjual']);
             Route::delete('/delete', [BarcodeController::class, 'delete']);
         });
@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/batal/{id}', [MutasiController::class, 'batal'])->name('batal');
             Route::get('/reset', [MutasiController::class, 'reset'])->name('reset');
             Route::get('/invoice/{id}', [MutasiController::class, 'invoice'])->name('invoice');
+            Route::get('/delete/{id}', [MutasiController::class, 'delete'])->name('delete');
         
         });
         Route::prefix('infra')->name('infra.')->group(function () {
@@ -141,7 +142,6 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
         Route::prefix('barang')->name('barang.')->group(function () {
             Route::get('/', [BarangController::class, 'index'])->name('index');
             Route::get('/detail/{id?}', [BarangController::class, 'detail'])->name('detail');
-
             Route::get('/create', [BarangController::class, 'create'])->name('create');
         });
         Route::prefix('gudang')->name('gudang.')->group(function () {
@@ -165,7 +165,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
    
 });
 Route::get('/profil', function () {
-    return view('frontend.profil.profil');
+    return view('mutasi.tambah-mutasi');
 });
 
 Route::get('/barang/barang', function () {

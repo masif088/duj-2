@@ -47,6 +47,7 @@
               @endif
               @if (auth()->user()->role == 'head')
               <li><a href="{{route('barang.index')}}">semua barang</a></li>
+              <li><a href="{{route('barcode.terjual','all')}}">semua barang terjual</a></li>
 
               @endif
             </ul>
