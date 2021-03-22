@@ -53,7 +53,7 @@
                                     <td>
                                         @if (auth()->user()->role == 'head')
                                         <a href="{{route('infra.edit',$in->id)}}">
-                                            <button type="button" class="btn btn-info btn-sm">Edit</button>
+                                            <button type="button" class="btn btn-info btn-sm">Ubah</button>
                                         </a>
 
                                         @endif

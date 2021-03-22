@@ -8,7 +8,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title mb-0">Create</h4>
+              <h4 class="card-title mb-0">Tambah User</h4>
               <div class="card-options"><a class="card-options-collapse" href="#" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-toggle="card-remove"><i class="fe fe-x"></i></a></div>
             </div>
             <div class="card-body">
@@ -47,7 +47,7 @@
                   <select name="gudang" class="form-control digits" id="exampleFormControlSelect9">
                     @foreach ($gudang as $g)
                     <option value="{{$g->id}}">{{$g->name}}</option>
-                        
+
                     @endforeach
                   </select>
                 </div>
@@ -102,7 +102,7 @@
                 <div class="form-footer">
                   <div class="form-group">
                       <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" id="" class="btn btn-success">Save </button>
+                        <button type="submit" id="" class="btn btn-success">Simpan </button>
                       </div>
                   </div>
                 </div>

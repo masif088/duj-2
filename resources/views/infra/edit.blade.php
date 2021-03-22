@@ -28,13 +28,13 @@
                   </span>
                 @enderror
               </div>
-             
+
               <div class="form-footer">
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
 
                       <button type="submit" class="btn btn-primary" >
-                          Tambah
+                          Ubah
                       </button>
                         {{-- <button type="submit" class="btn btn-primary">Tambah</button> --}}
                     </div>

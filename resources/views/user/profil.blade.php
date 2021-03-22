@@ -7,7 +7,7 @@
       <form action="{{route('user.edit',$user->id)}}" method="post" enctype="multipart/form-data">
       @csrf
       @method('put')
-      
+
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
@@ -89,7 +89,7 @@
                   <select name="gudang" class="form-control digits" id="exampleFormControlSelect9">
                     @foreach ($gudang as $g)
                     <option value="{{$g->id}}">{{$g->name}}</option>
-                        
+
                     @endforeach
                   </select>
                 </div>
@@ -97,9 +97,9 @@
                   <div class="form-group">
                       <div class="col-md-6 col-md-offset-4">
                         @if(auth()->user()->role == 'admin')
-                        <input type="button" id="confirmedit" class="btn btn-danger" value="Edit"/>
+                        <input type="button" id="confirmedit" class="btn btn-danger" value="Ubah"/>
                         <button type="submit" class="btn btn-primary" id="btnupdate" data-toggle="modal" data-target="#modalEdit">
-                            Update
+                            Simpan
                         </button>
                         @endif
                       </div>
