@@ -5,6 +5,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\InfraController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\MutasiController;
 use App\Http\Controllers\ServiceAfterController;
@@ -41,7 +42,8 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
         });
         Route::group(['middleware' => ['CheckRole:admin']], function () {
             Route::get('/all', [UserController::class, 'all'])->name('all');
-            Route::put('/edit/{id}', [UserController::class, 'update']);
+            Route::put('/edit/{id}', [UserController::class, 'update'])->name('lihat');
+           
         });
     });
     Route::group(['middleware' => ['CheckRole:head,admin,teknisi']], function () {
@@ -155,7 +157,12 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/{id}', [BarcodeController::class, 'index'])->name('index');
         });
     });
-
+    Route::group(['middleware' => ['CheckRole:admin']], function () {
+        Route::prefix('log')->name('log.')->group(function () {
+            Route::get('/', [LogController::class, 'index'])->name('index');
+        });
+    });
+   
 });
 Route::get('/profil', function () {
     return view('frontend.profil.profil');

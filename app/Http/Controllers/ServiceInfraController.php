@@ -11,6 +11,7 @@ class ServiceInfraController extends Controller
     public function __construct()
     {
         $this->fcm = new FcmController;
+        $this->log = new LogController;
     
     }
     public function index()
@@ -38,11 +39,14 @@ class ServiceInfraController extends Controller
         $id->update([
             'status' => 'rusak',
             ]);
-        ServiceInfra::create([
+        $ss = ServiceInfra::create([
             'file' => $fileName,
             'deskripsi' => $request->deskripsi,
             'infra_id' => $id->id
         ]);
+        $this->log->create('membuat service infrastruktur #'.$request->kode,'service_infra',$ss->id);
+
+        toastr()->success('Berhasil');
         return redirect()->back();
     }
     function edit(ServiceInfra $id)
@@ -61,6 +65,10 @@ class ServiceInfraController extends Controller
             $id->infra->update([
                 'status' => 'ready'
             ]);
+            $this->log->create('menyelesaikan service infrastruktur #'.$id->infra->kode,'service_infra',$id->id);
+        }else{
+            $this->log->create('perubahan service infrastruktur #'.$id->infra->kode,'service_infra',$id->id);
+
         }
         return redirect()->back();
     }
@@ -71,6 +79,7 @@ class ServiceInfraController extends Controller
             'status' => 'tidak',
         ]);
         $this->fcm->send('Persetujuan Infratruktur','Selamat persetujuan telah diterima',null,null,null,$id->infra->gudang_id);
+        $this->log->create('persetujuan service infrastruktur #'.$id->infra->kode,'service_infra',$id->id);
         return redirect()->back();
     }
     public function tolak(Request $request,ServiceInfra $id)
@@ -80,6 +89,8 @@ class ServiceInfraController extends Controller
             'status' => 'tolak',
             'alasan' => $request->alasan
         ]);
+        $this->log->create('Penolakan pengajuan service infrastruktur #'.$id->infra->kode,'service_infra',$id->id);
+
         $this->fcm->send('Persetujuan Infratruktur','Selamat persetujuan telah diterima',null,null,null,$id->infra->gudang_id);
         return redirect()->back();
     }
@@ -88,6 +99,7 @@ class ServiceInfraController extends Controller
         $id->infra()->update([
             'status' => 'ready'
         ]);
+        $this->log->create('Pembatalan pengajuan service infrastruktur #'.$id->infra->kode,'infra',$id->infra->id);
         $id->delete();
         return redirect()->back();
     }

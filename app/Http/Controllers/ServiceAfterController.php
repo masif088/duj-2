@@ -23,6 +23,8 @@ class ServiceAfterController extends Controller
             'lama' => $request->lama,
             'status' => $request->status ?? 'tidak',
         ]);
+        toastr()->success('Berhasil');
+
         return redirect()->back();
     }
     public function batal(ServiceAfter $id)
@@ -31,6 +33,8 @@ class ServiceAfterController extends Controller
             'status' => 'batal'
         ]);
         $this->log->create('membatalkan after sale','service_after',$id->id);
+        toastr()->success('Berhasil');
+        
         return redirect()->back();
     }
 }
