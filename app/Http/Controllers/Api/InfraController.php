@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogController;
 use App\Models\Infra;
 use App\Models\ServiceInfra;
 use Illuminate\Http\Request;
 
 class InfraController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function index()
     {
         return response()->json([
@@ -53,11 +58,13 @@ class InfraController extends Controller
         $id->update([
             'status' => 'rusak',
             ]);
-        ServiceInfra::create([
+        $ss = ServiceInfra::create([
             'file' => $fileName,
             'deskripsi' => $request->deskripsi,
             'infra_id' => $id->id
         ]);
+        $this->log->create('membuat service infrastruktur #'.$request->kode,'service_infra',$ss->id);
+        
         return response()->json([
             'status' => 'ok',
         ],201);

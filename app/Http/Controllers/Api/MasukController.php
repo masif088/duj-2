@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogController;
 use App\Models\Barcode;
 use App\Models\Gudang;
 use App\Models\Masuk;
@@ -13,6 +14,10 @@ use Services\Masuk\MasukService;
 
 class MasukController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function riwayat()
     {
        $mutasi = Mutasi::where('gudang_id',auth('sanctum')->user()->gudang_id)->with('barcode.masuk.gudang')->get();

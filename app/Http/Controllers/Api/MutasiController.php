@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogController;
 use App\Http\Requests\Mutasi\StoreRequest;
 use App\Models\Barcode;
 use App\Models\Gudang;
@@ -17,6 +18,10 @@ use Illuminate\Support\Str;
 
 class MutasiController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function gudang()
     {
         return response()->json([
@@ -68,12 +73,14 @@ class MutasiController extends Controller
                 $dd = Mutasi::where('kode_mutasi',$rk)->first();
                 $request['gudang'] = $dd->gudang_id ?? $request->gudang;
             }
-            Mutasi::create([
+            $m = Mutasi::create([
                 'user_id' => auth('sanctum')->user()->id,
                 'gudang_id' => $request->gudang,
                 'barcode_id' => $data->id,
                 'kode_mutasi' => $rk,
             ]);
+            $this->log->create('membuat mutasi #'.$rk,'mutasi',$m->id);
+
             return $c;
         });
         $zz = Mutasi::where('kode_mutasi',$c);

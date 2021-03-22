@@ -18,9 +18,9 @@ class MasukController extends Controller
     {
         return view('barang.create',MasukService::create());
     }
-    public function index()
+    public function index(Request $request)
     {
-        return view('barang.list-barang',MasukService::index());
+        return view('barang.list-barang',MasukService::index($request));
     }
     public function store(StoreRequest $request)
     {

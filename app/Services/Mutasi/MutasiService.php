@@ -50,9 +50,13 @@ class MutasiService
     }
     static public function batal($data)
     {
+        $log = new LogController;
+
         $data->update([
             'status' => 'batal',
         ]);
+        $log->create('membatalkan mutasi #'.$data->kode_mutasi,'mutasi',$data->id);
+
         return true;
     }
 }

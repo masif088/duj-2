@@ -14,9 +14,14 @@ class ServiceInfraController extends Controller
         $this->log = new LogController;
     
     }
-    public function index()
+    public function index(Request $request)
     {
+        if($request->infra != null){
+            $service = ServiceInfra::where('id',$request->infra)->orderByDesc('created_at')->paginate(10);
+        }else{
             $service = ServiceInfra::orderByDesc('created_at')->paginate(10);
+
+        }
         return view('service.infra.index',compact('service'));
     }
     public function store(Request $request)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogController;
 use App\Models\Barang;
 use App\Models\Barcode;
 use Illuminate\Http\Request;
@@ -10,6 +11,10 @@ use Services\Barcode\BarcodeService;
 
 class BarangController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function index()
     {
         return response()->json([
@@ -37,6 +42,7 @@ class BarangController extends Controller
             ],400);
         } 
         BarcodeService::update($data,'terjual');
+        $this->log->create('status barcode terjual #'.$data->kode,'barcode',$data->id);
         return response()->json([
             'status' => 'ok',
         ],200);

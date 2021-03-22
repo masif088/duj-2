@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogController;
 use App\Models\Barang;
 use App\Models\Barcode;
 use App\Models\Check;
@@ -11,6 +12,10 @@ use Illuminate\Http\Request;
 
 class CheckController extends Controller
 {
+    public function __construct()
+    {
+        $this->log = new LogController;
+    }
     public function riwayat()
     {
 
@@ -34,6 +39,7 @@ class CheckController extends Controller
                         'gudang_id' => auth('sanctum')->user()->gudang_id,
                     ]);
             }
+        $this->log->create('membuka pengecekan #'.Carbon::now()->format('Y-m-d'),'user',auth('sanctum')->user()->id);
         }
             $data = Check::whereDate('created_at',Carbon::now())->where('gudang_id', auth('sanctum')->user()->gudang_id)->get();
         
@@ -76,6 +82,7 @@ class CheckController extends Controller
             $c->update([
                 'status' => 'c'
             ]);
+        $this->log->create('check barang #'.$c->barcode->kode,'barcode',$c->barcode->id);
         return response()->json([
             'status' => 'ok',
         ],201);
