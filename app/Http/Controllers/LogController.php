@@ -15,7 +15,7 @@ class LogController extends Controller
     public function create($mes,$ty,$tyid)
     {
         $l = Log::create([
-            'user_id' => auth()->user() == null ? auth('sanctum')->user()->id : auth()->user()->id,
+            'user_id' => auth()->user() == null ? (auth('sanctum')->user() == null ? $tyid : auth('sanctum')->user()->id) : auth()->user()->id,
             'message' => $mes,
             'type' => $ty,
             'type_id' => $tyid
