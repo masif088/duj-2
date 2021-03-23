@@ -159,7 +159,7 @@
                             </a>
 
                             @endif
-                            @if ($s->serviceAfter->status != 'batal' && $s->serviceAfter->status != 'tolak'&& $s->serviceAfter->status != 'tidak' && auth()->user()->role == 'head' || auth()->user()->role == 'ketua')
+                            @if ($s->serviceAfter->status == 'pengajuan' && auth()->user()->role == 'head' || auth()->user()->role == 'ketua')
                             <a href="{{route('serviceAfter.batal',$s->id)}}">
                               <button type="button" class="btn btn-info btn-sm" >Batal</button>
                             </a>
