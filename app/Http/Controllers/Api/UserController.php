@@ -45,6 +45,7 @@ class UserController extends Controller
     }
     public function isAuth()
     {
+      
         $status = null;
         $data=null;
         $statuscode = null;

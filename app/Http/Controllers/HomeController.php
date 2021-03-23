@@ -32,9 +32,9 @@ class HomeController extends Controller
     public function index()
     {
         if(auth()->user()->role == 'admin'){
-            $barangMasuk = Masuk::count();
             $barangKeluar = Barcode::where('status','terjual')->count();
             $stok = Barcode::where('status','aktif')->count();
+            $barangMasuk = $stok-$barangKeluar;
             $service = After::whereHas('serviceAfter',function($z){
                 return $z->where('status','pengajuan');
             })->whereDate('created_at',date('Y-m-d'))->orderByDesc('created_at')->get();

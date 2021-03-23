@@ -20,7 +20,7 @@ class MasukService
         if(auth()->user()->role != 'admin'){
             $masuk = Masuk::where('gudang_id',auth()->user()->gudang_id)->orderByDesc('created_at')->paginate(30);
         }else{
-            if($r->masuk != 'masuk'){
+            if($r->masuk != null){
                 $masuk = Masuk::where('id',$r->masuk)->orderByDesc('created_at')->paginate(30);
             }else{
                 $masuk = Masuk::orderByDesc('created_at')->paginate(30);
