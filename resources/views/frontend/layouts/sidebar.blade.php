@@ -37,7 +37,9 @@
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('log.index')}}"><i data-feather="file-text"></i><span>Riwayat aktivitas</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('barang.index')}}"><i data-feather="file-text"></i><span>Semua Barang</span></a></li>
           @endif
+          @if (auth()->user()->role == 'head')
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('barcode.edit')}}"><i data-feather="check-square"> </i><span>Aktifasi Barcode</span></a></li>
+          @endif
           <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{route('barcode.terjual')}}"><i data-feather="box"> </i><span>barang terjual</span></a></li>
           <li class="dropdown"><a class="nav-link menu-title " href="#"><i data-feather="box"> </i><span>Kelola Barang</span></a>
             <ul class="nav-submenu menu-content">

@@ -98,6 +98,13 @@ class MutasiController extends Controller
             'gudang' => $g,
         ],201);
     }
+    public function delete(Mutasi $id)
+    {
+        $id->delete();
+        return response()->json([
+            'status' => 'ok'
+        ],200);
+    }
     public function batal(Mutasi $id)
     {
         DB::transaction(function() use($id){
