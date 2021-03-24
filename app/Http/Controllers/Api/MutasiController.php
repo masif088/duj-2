@@ -39,8 +39,10 @@ class MutasiController extends Controller
         });
         $m = (clone $mutasi)->select('created_at', DB::raw('count(*) as total'))
         ->groupBy('created_at')
-        ->get();;
-        $mutasi = (clone $mutasi)->get();
+        ->get();
+        $mutasi = (clone $mutasi)->with(['barcode.masuk' => function($x){
+            $x->with(['gudang','barang']);
+        }])->get();
         return response()->json([
             'status' => 'ok',
             'data' => $mutasi,
