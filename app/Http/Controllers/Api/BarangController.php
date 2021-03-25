@@ -64,7 +64,7 @@ class BarangController extends Controller
         }])->first();
         $a = After::where('barcode_id',$b->id)->with(['barcode.masuk'=>function($c){
             $c->with(['gudang','suplier','barang']);
-        }],'serviceAfters')->first();
+        },'serviceAfters'])->first();
         return response()->json([
             'status' => 'ok',
             'data' => $a,
