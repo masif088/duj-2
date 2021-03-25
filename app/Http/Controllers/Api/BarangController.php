@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LogController;
+use App\Models\After;
 use App\Models\Barang;
 use App\Models\Barcode;
 use Illuminate\Http\Request;
@@ -58,11 +59,15 @@ class BarangController extends Controller
     }
     public function detailterjual($kode)
     {
+        $b = Barcode::where('kode',$kode)->where('status','terjual')->with(['masuk'=>function($c){
+            $c->with(['gudang','suplier','barang']);
+        }])->first();
+        $a = After::where('barcode_id',$b->id)->with(['barcode.masuk'=>function($c){
+            $c->with(['gudang','suplier','barang']);
+        }],'serviceAfters')->get();
         return response()->json([
             'status' => 'ok',
-            'data' => Barcode::where('kode',$kode)->where('status','terjual')->with(['masuk'=>function($c){
-                $c->with(['gudang','suplier','barang']);
-            }])->first(),
+            'data' => $a,
         ]);
     }
 }
