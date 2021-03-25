@@ -40,6 +40,12 @@ class AfterController extends Controller
         if($data == null){
             toastr()->warning('maaf kode yang anda masukan salah');
         }
+        if(After::where('barcode_id',$data->id)->whereHas('serviceAfters',function($x){
+            return $x->where('status','pengajuan')->orWhere('status','tidak');
+        })->exists()){
+            toastr()->warning('maaf barang anda sedang dalam proses pengajuan atau perbaikan');
+            return redirect()->back();
+        }
         if($request->file == null){
             toastr()->warning('maaf file yang anda masukan salah');
         }
