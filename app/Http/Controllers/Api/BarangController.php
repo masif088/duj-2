@@ -56,4 +56,13 @@ class BarangController extends Controller
             })->where('status','terjual')->get(),
         ]);
     }
+    public function detailterjual($kode)
+    {
+        return response()->json([
+            'status' => 'ok',
+            'data' => Barcode::where('kode',$kode)->where('status','terjual')->with(['masuk'=>function($c){
+                $c->with(['gudang','suplier','barang']);
+            }])->first(),
+        ]);
+    }
 }

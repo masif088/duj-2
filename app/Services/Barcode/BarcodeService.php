@@ -9,7 +9,7 @@ class BarcodeService
     {   
         $data->barcode()->create([
             'user_id' => auth()->user()->id,
-            'kode' => mt_rand(10000000, 99999999),
+            'kode' => $data->kode_akuntan.'_'.mt_rand(10000000, 99999999),
         ]);
         return true;
     }

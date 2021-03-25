@@ -32,6 +32,14 @@ class AfterController extends Controller
                 'msg' => 'kode tidak ditemukan'
             ],400);
         }
+        if(After::where('barcode_id',$data->id)->whereHas('serviceAfters',function($x){
+            return $x->where('status','pengajuan')->orWhere('status','tidak');
+        })->exists()){
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'barang sedang dalam proses pengajuan'
+            ],400);
+        }
         if($request->file == null){
             return response()->json([
                 'status' => 'error',
