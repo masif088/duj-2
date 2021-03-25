@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('barang')->group(function () {
         Route::get('/',[BarangController::class,'index']);
         Route::get('/status/terjual',[BarangController::class,'status']);
+        Route::get('/detail/terjual/{kode}',[BarangController::class,'detailterjual']);
         Route::post('/terjual',[BarangController::class,'terjual']);
 
         
