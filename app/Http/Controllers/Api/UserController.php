@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $user = User::where(function($z){
             $z->where('role','ketua')->orWhere('role','checker');
-        })->where('email', $request->email)->first();
+        })->where('email', $request->email)->with('gudang')->first();
         // print_r($data);
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
@@ -51,7 +51,7 @@ class UserController extends Controller
         $statuscode = null;
         if (auth('sanctum')->check()) {
             $status = 'ok';
-            $data = auth('sanctum')->user();
+            $data = User::where('id',auth('sanctum')->user()->id)->with('gudang')->first();
             $statuscode = 200;
         } else {
             $status = 'unauth';
