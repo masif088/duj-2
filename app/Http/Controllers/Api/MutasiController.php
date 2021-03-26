@@ -110,8 +110,13 @@ class MutasiController extends Controller
     public function batal(Mutasi $id)
     {
         DB::transaction(function() use($id){
-            MutasiService::batal($id);
-            BarcodeService::update($id->barcode(), 'aktif');
+            $m = Mutasi::where('kode_mutasi',$id->kode_mutasi)->get();
+            foreach ($m as $idd) {
+                MutasiService::batal($idd);
+                BarcodeService::update($idd->barcode(), 'aktif');
+            }
+            $this->log->create('membatalkan mutasi #'.$idd->kode,'mutasi',$idd->id);
+
         });
         return response()->json([
             'status' => 'ok'

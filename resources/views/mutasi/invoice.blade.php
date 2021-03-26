@@ -4,13 +4,13 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-12" id="printJS-form">
+        <div class="col-sm-12" >
             <div class="card">
                 <div class="card-body">
-                    <div class="invoice">
+                    <div class="invoice" id="printJS-form">
                         <div>
                             <div>
-                                <div class="row">
+                                <div class="row" >
                                     <div class="col-sm-6">
                                         <div class="media">
                                             <div class="media-left">
@@ -78,8 +78,11 @@
                                                 <td class="Rate">
                                                     <h6 class="p-2 mb-0">Gudang Tujuan</h6>
                                                 </td>
+                                                <td class="item">
+                                                    <h6 class="p-2 mb-0">Kode Barang</h6>
+                                                </td>
                                                 <td class="subtotal">
-                                                    <h6 class="p-2 mb-0">Total</h6>
+                                                    <h6 class="p-2 mb-0">Status</h6>
                                                 </td>
                                             </tr>
                                             @php
@@ -101,10 +104,13 @@
                                                     <p class="itemtext digits">{{$m->gudang->name}}</p>
                                                 </td>
                                                 <td>
-                                                    @php
+                                                    <p class="itemtext digits">{{$m->barcode->kode}}</p>
+                                                </td>
+                                                <td>
+                                                    {{-- @php
                                                     $p+=$m->barcode->masuk->harga_satuan;
-                                                    @endphp
-                                                    <p class="itemtext digits">{{$m->barcode->masuk->harga_satuan}}</p>
+                                                    @endphp --}}
+                                                    <p class="itemtext digits">{{$m->status}}</p>
                                                 </td>
 
                                             <tr>
@@ -116,7 +122,7 @@
                             <h6 class="mb-0 p-2">Total</h6>
                           </td> --}}
                                                 <td class="payment digits">
-                                                    <h6 class="mb-0 p-2">{{$p}}</h6>
+                                                    {{-- <h6 class="mb-0 p-2">{{$p}}</h6> --}}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -131,12 +137,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 text-center mt-3">
-                                <button class="btn btn btn-primary mr-2" type="button"
-                                    onclick="printJS('printJS-form', 'html')">Print</button>
-                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-sm-12 text-center mb-3">
+                    <button class="btn btn btn-primary mr-2" type="button"
+                        onclick="printJS('printJS-form', 'html')">Print</button>
                 </div>
             </div>
         </div>
