@@ -47,7 +47,7 @@
                   @enderror
                 </div>
                 <div class="form-group mb-3">
-                  <label class="form-label">Password</label>
+                  <label class="form-label">Password <span class="text-primary">*Lewati jika tidak ingin mengganti</span></label>
                   <input id="password" type="password"
                                  class="form-control @error('password') is-invalid @enderror" name="password"
                                  autocomplete="current-password">
@@ -84,11 +84,12 @@
                   <label class="col-sm-3 col-form-label">Foto</label>
                   <input class="form-control" type="file" name="img">
                 </div>
+               
                 <div class="form-group">
                   <label for="exampleFormControlSelect9">Penempatan gudang</label>
                   <select name="gudang" class="form-control digits" id="exampleFormControlSelect9">
                     @foreach ($gudang as $g)
-                    <option value="{{$g->id}}">{{$g->name}}</option>
+                    <option value="{{$g->id}}" {!!$user->gudang_id == $g->id ? 'selected' : null !!}>{{$g->name}}</option>
 
                     @endforeach
                   </select>
