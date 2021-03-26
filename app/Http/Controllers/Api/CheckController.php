@@ -19,7 +19,9 @@ class CheckController extends Controller
     public function riwayat()
     {
 
-        $data = Check::whereDate('created_at',Carbon::now())->where('gudang_id', auth('sanctum')->user()->gudang_id)->get();
+        $data = Check::whereDate('created_at',Carbon::now())->where('gudang_id', auth('sanctum')->user()->gudang_id)->with(['user.gudang','barcode.masuk' => function($xx){
+            $xx->with(['barang','gudang','suplier']);
+        }])->get();
         return response()->json([
             'status' => 'ok',
             'data' => $data,
