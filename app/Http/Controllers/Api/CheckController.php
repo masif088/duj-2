@@ -36,7 +36,7 @@ class CheckController extends Controller
             'data' => $data,
         ]);
     }
-    public function start()
+    public function start($d = null)
     {
         $b = Check::latest()->first();
         if ($b == null || Carbon::parse($b->created_at)->format('Y-m-d') < Carbon::now()->format('Y-m-d')) {
@@ -53,11 +53,14 @@ class CheckController extends Controller
             $this->log->create('membuka pengecekan #' . Carbon::now()->format('Y-m-d'), 'user', auth('sanctum')->user()->id);
         }
         $data = Check::whereDate('created_at', Carbon::now())->where('gudang_id', auth('sanctum')->user()->gudang_id)->get();
-
-        return response()->json([
-            'status' => 'ok',
-            'data' => $data
-        ], 200);
+        if($d == null){
+            return response()->json([
+                'status' => 'ok',
+                'data' => $data
+            ], 200);
+        }else{
+            return $data;
+        }
     }
     public function detail(Request $request)
     {
@@ -83,6 +86,10 @@ class CheckController extends Controller
     }
     public function store($id)
     {
+        $b = Check::latest()->first();
+        if ($b == null || Carbon::parse($b->created_at)->format('Y-m-d') < Carbon::now()->format('Y-m-d')) {
+            $this->start('s');
+        }
         $c = Check::whereDate('created_at', Carbon::now())->where([['gudang_id', auth('sanctum')->user()->gudang_id], ['barcode_id', $id]])->first();
         if ($c == null) {
             return response()->json([
