@@ -33,9 +33,9 @@ class BarangController extends Controller
     {
         if(auth()->user()->role == 'admin'){
             if($request->barang != null){
-                $barang = Barang::where('id',$request->barang)->orderByDesc('created_at')->paginate(30);
+                $barang = Barang::has('masuk')->where('id',$request->barang)->orderByDesc('created_at')->paginate(30);
             }else{
-                $barang = Barang::orderByDesc('created_at')->paginate(30);
+                $barang = Barang::has('masuk')->orderByDesc('created_at')->paginate(30);
             }
         }else{
             $barang = Barang::whereHas('masuk',function($z){
