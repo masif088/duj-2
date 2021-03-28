@@ -29,19 +29,7 @@ class UserSeeder extends Seeder
         Gudang::create([
             'name' => 'pusat'
         ]);
-        Gudang::create([
-            'name' => 'gudang A'
-        ]);
-       $h =  User::create([
-            'name' => 'HO',
-            'email' => 'h@h.com',
-            'password' => bcrypt('h'),
-            'no_hp' => '0836347637',
-            'alamat' => 'jl. jawa',
-            'role' => 'head',
-            'gudang_id' => 1,
-
-        ]);
+    
         User::create([
             'name' => 'admin',
             'email' => 'a@a.com',
