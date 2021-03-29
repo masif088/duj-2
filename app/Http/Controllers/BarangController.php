@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Barang\StoreRequest;
 use App\Models\Barang;
 use App\Models\Barcode;
+use App\Models\Gudang;
 use Illuminate\Http\Request;
 use Services\Barang\BarangService;
 
@@ -24,11 +25,29 @@ class BarangController extends Controller
             if($request->barcode != null){
                 $barcode = Barcode::where('id',$request->barcode)->with('masuk')->get();
             }else{
-                $barcode = $id->barcodes()->with('masuk')->get();
+                $barcode = $id->barcodes();
+                if($request->gudang != null){
+                    $barcode = $barcode->whereHas('masuk',function($m) use($request){
+                        return $m->where('gudang_id',$request->gudang); 
+                     });
+                }
+                $barcode = $barcode->with('masuk')->get();
             }
         }
         return view('backend.barcode',compact('barcode'));
     }
+    public function detailGudang(Request $request)
+    {
+       if($request->gudang == null){
+         return redirect()->route('barang.index');
+       }
+            $barang = Barang::whereHas('masuk',function($z) use($request){
+                return $z->where('gudang_id',$request->gudang);
+            })->orderByDesc('created_at')->paginate(30);
+        $gudang = Gudang::get(['id','name']);
+        return view('barang.semuabarang',compact(['barang','gudang']));
+    }
+    
     public function index(Request $request)
     {
         if(auth()->user()->role == 'admin'){
@@ -42,7 +61,8 @@ class BarangController extends Controller
                 return $z->where('gudang_id',auth()->user()->gudang_id);
             })->orderByDesc('created_at')->paginate(30);
         }
-        return view('barang.semuabarang',compact('barang'));
+        $gudang = Gudang::get(['id','name']);
+        return view('barang.semuabarang',compact(['barang','gudang']));
     }
     public function create()
     {
