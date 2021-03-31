@@ -20,6 +20,7 @@
                                     <th>Nama User</th>
                                     <th>Tipe Data</th>
                                     <th>Deskripsi</th>
+                                    <th>tanggal</th>
                                     <th>action</th>
                                 </tr>
                             </thead>
@@ -31,7 +32,7 @@
                                     <td>{{$l->user->name}}</td>
                                     <td>{{$l->type}}</td>
                                     <td>{{$l->message}}</td>
-                                    
+                                    <td>{{$l->created_at->format('d-M-Y H:i')}}</td>
                                     <td>
                                         <a target="__blank" href="{{
                                             $l->type == 'user' ? route('user.lihat',$l->type_id) :
