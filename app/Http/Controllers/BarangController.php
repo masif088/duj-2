@@ -6,8 +6,10 @@ use App\Http\Requests\Barang\StoreRequest;
 use App\Models\Barang;
 use App\Models\Barcode;
 use App\Models\Gudang;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Services\Barang\BarangService;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BarangController extends Controller
 {
@@ -34,6 +36,12 @@ class BarangController extends Controller
                 $barcode = $barcode->with('masuk')->get();
             }
         }
+        foreach ($barcode as $bk) {
+        $bk['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($bk->kode));
+        }
+        $customPaper = array(0,0,567.00,283.80);
+    $pdf = PDF::loadView('backend.barcode',compact('barcode'))->setPaper($customPaper, 'landscape');
+    return $pdf->stream();
         return view('backend.barcode',compact('barcode'));
     }
     public function detailGudang(Request $request)
