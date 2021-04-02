@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController as ApiUserController;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\CheckController;
 use App\Http\Controllers\Api\InfraController;
+use App\Http\Controllers\Api\MonitorController;
 use App\Http\Controllers\Api\MutasiController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,6 +32,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/create', [ApiUserController::class, 'store']);
         Route::put('/edit', [ApiUserController::class, 'edit']);
         Route::put('/delete', [ApiUserController::class, 'delete']);
+    });
+    Route::prefix('monitor')->group(function () {
+        Route::get('/', [MonitorController::class, 'index']);
     });
     Route::prefix('masuk')->group(function () {
         Route::get('/riwayat', [MasukController::class, 'riwayat']);
