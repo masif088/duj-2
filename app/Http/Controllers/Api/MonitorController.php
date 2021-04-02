@@ -16,7 +16,7 @@ class MonitorController extends Controller
         },'masuk' => function($q){
             $q->with(['barang','gudang','suplier','user']);
         }])->orderByDesc('updated_at')->get();
-        $data['aktivasi'] = Log::where([['type_id',$data->id],['message','LIKE','%aktifasi barcode%']])->first();
+        $data['aktivasi'] = Log::where([['type_id',$data->id],['message','LIKE','%aktifasi barcode%']])->with('user')->first();
         return response()->json([
             'status' => 'ok',
             'data' => $data,
