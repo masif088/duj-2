@@ -49,7 +49,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors($request->validator->messages());
         }
         $ss = UserService::store($request);
-        $this->log->create('membuat akun'.$ss->role.' baru #'.$ss->name,'user',$ss->id);
+        $this->log->create('membuat akun '.$ss->role.' baru #'.$ss->name,'user',$ss->id);
 
         toastr()->success('berhasil membuat');
         return redirect()->back();
