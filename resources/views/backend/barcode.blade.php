@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
-
+    <style>
+        @page { size: 3cm 4cm landscape; }
+      </style>
 </head>
 <body>
     <div>
