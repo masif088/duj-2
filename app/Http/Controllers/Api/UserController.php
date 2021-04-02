@@ -20,7 +20,7 @@ class UserController extends Controller
     function login(Request $request)
     {
         $user = User::where(function($z){
-            $z->where('role','ketua')->orWhere('role','checker');
+            $z->where('role','ketua')->orWhere('role','checker')->orWhere('role','monitor');
         })->where('email', $request->email)->with('gudang')->first();
         // print_r($data);
         if (!$user || !Hash::check($request->password, $user->password)) {
