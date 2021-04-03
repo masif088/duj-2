@@ -16,6 +16,7 @@ class BarcodeController extends Controller
     public function index($id)
     {
         $barcode = Barcode::where('masuk_id',$id)->get();
+set_time_limit(300);
 foreach ($barcode as $bk) {
         $bk['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($bk->kode));
         }
