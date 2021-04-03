@@ -37,6 +37,7 @@ class BarangController extends Controller
             }
         }
 set_time_limit(300);
+ini_set('memory_limit', '8192M');
         foreach ($barcode as $bk) {
         $bk['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($bk->kode));
         }
