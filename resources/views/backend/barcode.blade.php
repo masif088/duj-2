@@ -12,20 +12,31 @@
     </style>
 </head>
 <body>
-    @foreach ($barcode as $b)
+@foreach ($barcode as $b)
     <div class="flex-container">
-        <div style="width:3cm:height:4cm;margin:0.1cm">
+        <div>
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 70%;">
+                        <img src="data:image/png;base64, {!! $b->bb !!}"
+                             style="float: none; width: 6.8cm; height: auto;"
+                             alt="">
+                    </td>
+                    <td style="width: 30%;">
+                        <p>Nama: {{$b->masuk->barang->name}}</p>
+                        <p>kode: {{$b->kode}}</p>
+                        @if (auth()->user()->role == 'admin')
+                            <p>status: {{$b->status}}</p>
+                            <p>gudang:{{$b->masuk->gudang_id}}</p>
+                            <p>harga: {{$b->masuk->harga_satuan}}</p>
+                        @endif
+                    </td>
+                </tr>
+            </table>
 
-            <img src="data:image/png;base64, {!! $b->bb !!}" alt="">
-            <p>Nama: {{$b->masuk->barang->name}}</p>
-            <p>kode: {{$b->kode}}</p>
-            @if (auth()->user()->role == 'admin')
-            <p>status: {{$b->status}}</p>
-            <p>gudang:{{$b->masuk->gudang_id}}</p>
-            <p>harga: {{$b->masuk->harga_satuan}}</p>
-            @endif
+
+        </div>
     </div>
-</div>
-    @endforeach
+@endforeach
 </body>
 </html>

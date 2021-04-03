@@ -6,6 +6,7 @@ use App\Models\Barcode;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Services\Barcode\BarcodeService;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BarcodeController extends Controller
 {
@@ -23,7 +24,6 @@ foreach ($barcode as $bk) {
         $customPaper = array(0,0,567.00,283.80);
     $pdf = PDF::loadView('backend.barcode',compact('barcode'))->setPaper($customPaper);
     return $pdf->stream();
-        return view('backend.barcode',compact('barcode'));
     }
     public function edit()
     {

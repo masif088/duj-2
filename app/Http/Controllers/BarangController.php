@@ -43,7 +43,6 @@ set_time_limit(300);
         $customPaper = array(0,0,567.00,283.80);
     $pdf = PDF::loadView('backend.barcode',compact('barcode'))->setPaper($customPaper);
     return $pdf->stream();
-        return view('backend.barcode',compact('barcode'));
     }
     public function detailGudang(Request $request)
     {

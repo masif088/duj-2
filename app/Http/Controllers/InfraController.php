@@ -6,6 +6,8 @@ use App\Http\Requests\Infra\StoreRequest;
 use App\Models\Infra;
 use Illuminate\Http\Request;
 use Services\Infra\InfraService;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class InfraController extends Controller
 {
@@ -40,10 +42,17 @@ class InfraController extends Controller
     }
     public function barcode(Infra $b)
     {
-        return view('backend.infraBarcode',compact('b'));
+        set_time_limit(300);
+    
+        $b['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($b->kode));
+        
+        $customPaper = array(0,0,567.00,283.80);
+    $pdf = PDF::loadView('backend.infraBarcode',compact('b'))->setPaper($customPaper);
+    return $pdf->stream();
     }
     public function edit(Infra $id)
     {
+       
         return view('infra.edit',compact('id'));
     }
     public function update(StoreRequest $request,Infra $id)
