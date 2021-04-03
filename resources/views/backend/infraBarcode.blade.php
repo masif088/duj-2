@@ -5,24 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
-
+    <style>
+        .flex-container {
+            display: inline;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <button onclick="printJS('printJS-form', 'html')">Print</button>
-    </div>
-    <div id="printJS-form">
 
-        <div style="display:inline-block; margin: 20px;">
-            {!! QrCode::size(100)->generate($b->kode); !!}
-            <p>Nama: {{$b->name}}</p>
-            <p>kode: {{$b->kode}}</p>
-            <p>gudang: {{$b->gudang_id}}</p>
-            
+    <div class="flex-container">
+        <div>
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 70%;">
+                        <img src="data:image/png;base64, {!! $b->bb !!}"
+                             style="float: none; width: 6.8cm; height: auto;"
+                             alt="">
+                    </td>
+                    <td style="width: 30%;">
+                        <p>Nama: {{$b->name}}</p>
+                        <p>kode: {{$b->kode}}</p>
+                        <p>gudang: {{$b->gudang_id}}</p>
+                    </td>
+                </tr>
+            </table>
+
+
         </div>
     </div>
-<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
-
 </body>
 </html>
