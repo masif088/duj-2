@@ -36,6 +36,7 @@ class BarangController extends Controller
                 $barcode = $barcode->with('masuk')->get();
             }
         }
+set_time_limit(300);
         foreach ($barcode as $bk) {
         $bk['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($bk->kode));
         }
