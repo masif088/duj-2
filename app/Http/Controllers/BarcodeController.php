@@ -21,7 +21,7 @@ foreach ($barcode as $bk) {
         $bk['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($bk->kode));
         }
         $customPaper = array(0,0,567.00,283.80);
-    $pdf = PDF::loadView('backend.barcode',compact('barcode'))->setPaper($customPaper, 'landscape');
+    $pdf = PDF::loadView('backend.barcode',compact('barcode'))->setPaper($customPaper);
     return $pdf->stream();
         return view('backend.barcode',compact('barcode'));
     }
