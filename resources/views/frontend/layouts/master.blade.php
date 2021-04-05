@@ -77,7 +77,7 @@
                   </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
-                  @if (in_array(auth()->user()->role,['admin','head','ketua']))
+                  @if (auth()->user()->role == 'admin')
                   <a href="{{route('user.create')}}">
                     <li><i data-feather="user"></i><span>Register </span></li>
                   </a>
