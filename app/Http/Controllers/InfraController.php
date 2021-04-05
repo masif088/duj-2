@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Infra\StoreRequest;
+use App\Models\Gudang;
 use App\Models\Infra;
 use Illuminate\Http\Request;
 use Services\Infra\InfraService;
@@ -27,7 +28,8 @@ class InfraController extends Controller
     }
     public function create()
     {
-        return view('infra.create');
+        $gudang = Gudang::get(['id','name']);
+        return view('infra.create',compact('gudang'));
     }
     public function store(StoreRequest $request)
     {
@@ -52,8 +54,8 @@ class InfraController extends Controller
     }
     public function edit(Infra $id)
     {
-       
-        return view('infra.edit',compact('id'));
+        $gudang = Gudang::get(['id','name']);
+        return view('infra.edit',compact(['id','gudang']));
     }
     public function update(StoreRequest $request,Infra $id)
     {

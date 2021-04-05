@@ -18,6 +18,21 @@
               @csrf
               @method('put')
               <div class="form-group mb-3">
+                <label class="col-form-label">Gudang penempatan</label>
+                <select name="gudang" class="js-example-basic-single form-control @error('gudang') is-invalid @enderror" placeholder="Nama gudang" name="gudang"
+                value="{{ old('gudang') }}" required autocomplete="gudang"  autofocus>
+                  @foreach ($gudang as $g)
+                  <option value="{{$g->id}}" {!!$g->id == $id->gudang_id ? 'selected' : null !!}>{{$g->name}}</option>
+                      
+                  @endforeach
+                </select>
+                @error('gudang')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+              <div class="form-group mb-3">
                 <label class="col-form-label">Nama</label>
                 <input  id="name" type="text"
                               class="form-control @error('name') is-invalid @enderror" placeholder="Nama" name="name"
