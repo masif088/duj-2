@@ -34,6 +34,10 @@
                                     <button class="btn btn-warning btn-lg" type="button" data-toggle="modal"
                                         data-target="#addReward">Mutasi</button>
                                 </a>
+                                <a href="{{route('infra.jual')}}">
+                                    <button class="btn btn-warning btn-lg" type="button" data-toggle="modal"
+                                        data-target="#addReward">Terjual</button>
+                                </a>
                                 @endif
                             </div>
                         </div>
