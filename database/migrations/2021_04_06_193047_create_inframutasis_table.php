@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInfrasTable extends Migration
+class CreateInframutasisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateInfrasTable extends Migration
      */
     public function up()
     {
-        Schema::create('infras', function (Blueprint $table) {
+        Schema::create('inframutasis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->references('id')->on('users');
+            $table->foreignId('infra_id')->references('id')->on('infras');
             $table->foreignId('gudang_id')->references('id')->on('gudangs');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('name');
-            $table->string('kode');
-            $table->enum('status',['nonaktif','ready','rusak','mutasi','terjual'])->default('nonaktif');
+            $table->string('kode_mutasi');
+            $table->enum('status',['proses','selesai','batal'])->default('proses');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateInfrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('infras');
+        Schema::dropIfExists('inframutasis');
     }
 }

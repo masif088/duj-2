@@ -5,6 +5,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\InfraController;
+use App\Http\Controllers\InframutasiController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\MutasiController;
@@ -93,17 +94,33 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/reset', [MutasiController::class, 'reset'])->name('reset');
             Route::get('/invoice/{id}', [MutasiController::class, 'invoice'])->name('invoice');
             Route::get('/delete/{id}', [MutasiController::class, 'delete'])->name('delete');
-        
+            Route::get('/terima', [MutasiController::class, 'terima'])->name('terima');
+            Route::post('/terima', [MutasiController::class, 'terimaa'])->name('terima');
+            
         });
         Route::prefix('infra')->name('infra.')->group(function () {
             Route::get('/', [InfraController::class, 'index'])->name('index');
             Route::get('/create', [InfraController::class, 'create'])->name('create');
             Route::post('/create', [InfraController::class, 'store']);
+            Route::get('/aktivasi', [InfraController::class, 'aktivasi'])->name('aktivasi');
+            Route::post('/aktivasi', [InfraController::class, 'aktiv']);
             Route::get('/edit/{id}', [InfraController::class, 'edit'])->name('edit');
             Route::put('/edit/{id}', [InfraController::class, 'update']);
             Route::delete('/delete/{id}',[InfraController::class, 'delete'])->name('delete');
             Route::get('/barcode/{b}', [InfraController::class, 'barcode'])->name('barcode');
             
+        });
+        Route::prefix('infra-mutasi')->name('infraM.')->group(function () {
+            Route::get('/', [InframutasiController::class, 'index'])->name('index');
+            Route::get('/terima', [InframutasiController::class, 'terima'])->name('terima');
+            Route::post('/terima', [InframutasiController::class, 'terimaa'])->name('terima');
+            Route::get('/reset', [InframutasiController::class, 'reset'])->name('reset');
+            Route::get('/create', [InframutasiController::class, 'create'])->name('create');
+            Route::post('/create', [InframutasiController::class, 'store']);
+            Route::get('/delete/{id}', [InframutasiController::class, 'delete'])->name('delete');
+            Route::get('/invoice/{id}', [InframutasiController::class, 'invoice'])->name('invoice');
+            Route::get('/batal/{id}', [InframutasiController::class, 'batal'])->name('batal');
+        
         });
         Route::prefix('service-infra')->name('serviceInfra.')->group(function () {
             Route::get('/', [ServiceInfraController::class, 'index'])->name('index');

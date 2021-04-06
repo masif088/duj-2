@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Services\Barcode\BarcodeService;
+use Services\Masuk\MasukService;
 use Services\Mutasi\MutasiService;
 
 class MutasiController extends Controller
@@ -128,5 +129,24 @@ class MutasiController extends Controller
         $id->delete();
         BarcodeService::update($id->barcode(), 'aktif');
         return redirect()->back();
+    }
+    public function terima()
+    {
+        return view('mutasi.terima');
+    }
+    public function terimaa(Request $request)
+    {
+       
+        $b = BarcodeService::find($request->kode,'mutasi');
+
+        if($b == null || (auth()->user()->gudang_id != $b->mutasi->gudang_id) || ($b->mutasi->status != 'proses')){
+        toastr()->warning('status barang bukan mutasi/gudang penerima salah'); 
+                
+                return redirect()->back();
+            }
+            MasukService::storeMutasi($b);
+        toastr()->success('Berhasil');
+
+            return redirect()->back();
     }
 }

@@ -19,6 +19,8 @@
             <ul class="nav-submenu menu-content">
               @if (auth()->user()->role != 'teknisi')
               <li><a href="{{route('infra.index')}}">Infrastruktur</a></li>
+              <li><a href="{{route('infraM.index')}}">Riwayat Mutasi</a></li>
+
               @endif
               {{-- @if (auth()->user()->role != 'teknisi') --}}
               <li><a href="{{route('serviceInfra.index')}}">Service Infrastruktur</a></li>
@@ -58,6 +60,7 @@
             <ul class="nav-submenu menu-content">
               @if (auth()->user()->role == 'head')
               <li><a href="{{route('mutasi.create')}}">Mutasi</a></li>
+              <li><a href="{{route('mutasi.terima')}}">Terima mutasi</a></li>
 
               @endif
               {{-- @if (auth()->user()->role != 'teknisi') --}}

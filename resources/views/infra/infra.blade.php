@@ -17,9 +17,22 @@
                         <div class="row justify-content-end">
                             <div style="padding-right: 10px;">
                                 @if (auth()->user()->role != 'admin')
+                                
                                 <a href="{{route('infra.create')}}">
                                     <button class="btn btn-success btn-lg" type="button" data-toggle="modal"
                                         data-target="#addReward">Tambah</button>
+                                </a>
+                                <a href="{{route('infraM.terima')}}">
+                                    <button class="btn btn-primary btn-lg" type="button" data-toggle="modal"
+                                        data-target="#addReward">Terima</button>
+                                </a>
+                                <a href="{{route('infra.aktivasi')}}">
+                                    <button class="btn btn-secondary btn-lg" type="button" data-toggle="modal"
+                                        data-target="#addReward">Aktivasi</button>
+                                </a>
+                                <a href="{{route('infraM.create')}}">
+                                    <button class="btn btn-warning btn-lg" type="button" data-toggle="modal"
+                                        data-target="#addReward">Mutasi</button>
                                 </a>
                                 @endif
                             </div>

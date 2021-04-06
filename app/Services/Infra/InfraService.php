@@ -11,7 +11,7 @@ class InfraService
     {   
         $data = Infra::create([
             'user_id' => auth()->user()->id,
-            'gudang_id' => $data->gudang,
+            'gudang_id' => auth()->user()->gudang_id,
             'name' => $data->name,
             'kode' => Str::random(6).'_'.$data->gudang,
 
@@ -21,8 +21,15 @@ class InfraService
     static public function update($data,$id)
     {
         $id->update([
-            'gudang_id' => $data->gudang,
+            'gudang_id' => auth()->user()->gudang_id,
             'name' => $data->name,
+        ]);
+        return true;
+    }
+    static public function status($id,$s)
+    {
+        $id->update([
+           'status' => $s
         ]);
         return true;
     }
