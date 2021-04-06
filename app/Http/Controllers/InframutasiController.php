@@ -51,12 +51,8 @@ class InframutasiController extends Controller
     {
         $data = InframutasiService::find($request->kode,'ready',auth()->user()->gudang_id);
         if ($data == null){
-            toastr()->warning('Tidak ditemukan');
+            toastr()->warning('kode Tidak sesuai');
              return redirect()->back();
-        }
-        if ($data->status == 'nonaktif' || $data->status == 'mutasi'){
-            toastr()->warning('barang masih nonaktif/telahh termutasi'); 
-            return redirect()->back();
         }
         $c = DB::transaction(function() use($data,$request){
             InfraService::status($data, 'mutasi');

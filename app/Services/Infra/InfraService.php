@@ -21,7 +21,6 @@ class InfraService
     static public function update($data,$id)
     {
         $id->update([
-            'gudang_id' => auth()->user()->gudang_id,
             'name' => $data->name,
         ]);
         return true;
