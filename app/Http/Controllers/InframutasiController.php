@@ -49,7 +49,7 @@ class InframutasiController extends Controller
     }
     public function store(Request $request)
     {
-        $data = InframutasiService::find($request->kode,null,auth()->user()->gudang_id);
+        $data = InframutasiService::find($request->kode,'ready',auth()->user()->gudang_id);
         if ($data == null){
             toastr()->warning('Tidak ditemukan');
              return redirect()->back();

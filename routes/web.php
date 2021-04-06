@@ -108,6 +108,8 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::put('/edit/{id}', [InfraController::class, 'update']);
             Route::delete('/delete/{id}',[InfraController::class, 'delete'])->name('delete');
             Route::get('/barcode/{b}', [InfraController::class, 'barcode'])->name('barcode');
+            Route::get('/jual', [InfraController::class, 'jual'])->name('jual');
+            Route::post('/jual', [InfraController::class, 'terjual']);
             
         });
         Route::prefix('infra-mutasi')->name('infraM.')->group(function () {
