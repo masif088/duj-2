@@ -17,7 +17,7 @@
             <form action="{{route('infra.edit',$id->id)}}" method="POST" class="form theme-form">
               @csrf
               @method('put')
-              <div class="form-group mb-3">
+              {{-- <div class="form-group mb-3">
                 <label class="col-form-label">Gudang penempatan</label>
                 <select name="gudang" class="js-example-basic-single form-control @error('gudang') is-invalid @enderror" placeholder="Nama gudang" name="gudang"
                 value="{{ old('gudang') }}" required autocomplete="gudang"  autofocus>
@@ -31,7 +31,7 @@
                     <strong>{{ $message }}</strong>
                   </span>
                 @enderror
-              </div>
+              </div> --}}
               <div class="form-group mb-3">
                 <label class="col-form-label">Nama</label>
                 <input  id="name" type="text"

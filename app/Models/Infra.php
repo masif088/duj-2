@@ -18,6 +18,10 @@ class Infra extends Model
     {
         return $this->hasMany(ServiceInfra::class);
     }
+    public function inframutasi()
+    {
+        return $this->hasOne(Inframutasi::class)->latest();
+    }
     public function gudang()
     {
         return $this->belongsTo(Gudang::class);

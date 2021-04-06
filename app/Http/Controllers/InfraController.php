@@ -19,17 +19,17 @@ class InfraController extends Controller
     public function index(Request $request)
     {
         if($request->infra != null){
-            $infra = Infra::where('id',$request->infra)->orderByDesc('created_at')->paginate(30);
+            $infra = Infra::where('status','!=','mutasi')->where('id',$request->infra)->orderByDesc('created_at')->paginate(30);
         }else{
-            $infra = Infra::orderByDesc('created_at')->paginate(30);
+            $infra = Infra::where('status','!=','mutasi')->orderByDesc('created_at')->paginate(30);
 
         }
         return view('infra.infra',compact('infra'));
     }
     public function create()
     {
-        $gudang = Gudang::get(['id','name']);
-        return view('infra.create',compact('gudang'));
+        
+        return view('infra.create');
     }
     public function store(StoreRequest $request)
     {
@@ -54,8 +54,8 @@ class InfraController extends Controller
     }
     public function edit(Infra $id)
     {
-        $gudang = Gudang::get(['id','name']);
-        return view('infra.edit',compact(['id','gudang']));
+       
+        return view('infra.edit');
     }
     public function update(StoreRequest $request,Infra $id)
     {
@@ -65,7 +65,24 @@ class InfraController extends Controller
         InfraService::update($request,$id);
         $this->log->create('mengubah infrastruktur #'.$id->name,'infra',$id->id);
         toastr()->success('Berhasil');
-
+        
         return redirect()->route('infra.index');
+    }
+    public function aktivasi()
+    {
+       
+        return view('infra.aktivasi');
+    }
+    public function aktiv(Request $request)
+    {
+        $b = Infra::where([['kode',$request->kode],['status','nonaktif']])->first();
+        if($b == null){
+        toastr()->warning('Kode tidak ditemukan/barang telah aktif');
+            return redirect()->back();
+        }
+       InfraService::status($b,'ready');
+       toastr()->success('berhasil');
+
+        return view('infra.aktivasi');
     }
 }
