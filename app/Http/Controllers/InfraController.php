@@ -55,7 +55,7 @@ class InfraController extends Controller
     public function edit(Infra $id)
     {
        
-        return view('infra.edit');
+        return view('infra.edit',compact('id'));
     }
     public function update(StoreRequest $request,Infra $id)
     {
