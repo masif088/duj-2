@@ -93,4 +93,19 @@ class InframutasiController extends Controller
             'status' => 'ok',
         ],200);
     }
+    public function terima(Request $request)
+    {
+            $b = InframutasiService::find($request->kode,'mutasi');
+            if($b == null || (auth('sanctum')->user()->gudang_id == $b->gudang_id) || ($b->inframutasi->status != 'proses')){
+          
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'status barang bukan mutasi/gudang penerima salah'
+            ],400);
+            }
+            InframutasiService::masuk($b);
+            return response()->json([
+                'status' => 'ok',
+            ],200);
+    }
 }

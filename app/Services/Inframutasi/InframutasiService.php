@@ -69,8 +69,8 @@ class InframutasiService
             'status' => 'selesai'
         ]);
         $data = Infra::create([
-            'user_id' => auth()->user()->id,
-            'gudang_id' => auth()->user()->gudang_id,
+            'user_id' => auth()->user() == null ? auth('sanctum')->user()->id : auth()->user()->id,
+            'gudang_id' => auth()->user() == null ? auth('sanctum')->user()->gudang_id : auth()->user()->gudang_id,
             'name' => $data->name,
             'kode' => $data->kode,
             'status' => 'ready'
