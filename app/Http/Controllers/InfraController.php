@@ -19,9 +19,19 @@ class InfraController extends Controller
     public function index(Request $request)
     {
         if($request->infra != null){
-            $infra = Infra::where('status','!=','mutasi')->where('id',$request->infra)->orderByDesc('created_at')->paginate(30);
+            $infra = Infra::where('status','!=','mutasi')->where('status','!=','terjual')->where('id',$request->infra)->orderByDesc('created_at')->paginate(30);
         }else{
-            $infra = Infra::where('status','!=','mutasi')->orderByDesc('created_at')->paginate(30);
+            $infra = Infra::where('status','!=','mutasi')->where('status','!=','terjual')->orderByDesc('created_at')->paginate(30);
+
+        }
+        return view('infra.infra',compact('infra'));
+    }
+    public function riwayat(Request $request)
+    {
+        if($request->infra != null){
+            $infra = Infra::where('status','terjual')->where('id',$request->infra)->orderByDesc('created_at')->paginate(30);
+        }else{
+            $infra = Infra::where('status','terjual')->orderByDesc('created_at')->paginate(30);
 
         }
         return view('infra.infra',compact('infra'));
@@ -77,12 +87,27 @@ class InfraController extends Controller
     {
         $b = Infra::where([['kode',$request->kode],['status','nonaktif']])->first();
         if($b == null){
-        toastr()->warning('Kode tidak ditemukan/barang telah aktif');
+        toastr()->warning('Kode tidak ditemukan/barang telah ready');
             return redirect()->back();
         }
        InfraService::status($b,'ready');
        toastr()->success('berhasil');
 
         return view('infra.aktivasi');
+    }
+    public function jual()
+    {
+        return view('infra.mutasi.jual');
+    }
+    public function terjual(Request $request)
+    {
+        $b = Infra::where([['kode',$request->kode],['status','ready'],['gudang_id',auth()->user()->gudang_id]])->latest()->first();
+        if($b == null){
+            toastr()->warning('Kode tidak ditemukan/barang tidak ready');
+                return redirect()->back();
+            }
+            InfraService::status($b,'terjual');
+            toastr()->success('berhasil');
+            return redirect()->back();
     }
 }

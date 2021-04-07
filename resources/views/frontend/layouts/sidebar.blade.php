@@ -20,6 +20,7 @@
               @if (auth()->user()->role != 'teknisi')
               <li><a href="{{route('infra.index')}}">Infrastruktur</a></li>
               <li><a href="{{route('infraM.index')}}">Riwayat Mutasi</a></li>
+              <li><a href="{{route('infra.terjual')}}">Riwayat terjual</a></li>
 
               @endif
               {{-- @if (auth()->user()->role != 'teknisi') --}}

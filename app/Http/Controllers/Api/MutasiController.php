@@ -9,7 +9,6 @@ use App\Models\Barcode;
 use App\Models\Gudang;
 use App\Models\Mutasi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Services\Barcode\BarcodeService;
 use Services\Mutasi\MutasiService;

@@ -35,8 +35,8 @@
                                         data-target="#addReward">Mutasi</button>
                                 </a>
                                 <a href="{{route('infra.jual')}}">
-                                    <button class="btn btn-warning btn-lg" type="button" data-toggle="modal"
-                                        data-target="#addReward">Terjual</button>
+                                    <button class="btn btn-info btn-lg" type="button" data-toggle="modal"
+                                        data-target="#addReward">Jual</button>
                                 </a>
                                 @endif
                             </div>
@@ -68,7 +68,7 @@
                                     <td>{{$in->created_at->format('d-M-Y')}}</td>
                                     <td>{{$in->status}}</td>
                                     <td>
-                                        @if (auth()->user()->role == 'head')
+                                        @if (auth()->user()->role == 'head' && Request::segment(2) != 'terjual')
                                         <a href="{{route('infra.edit',$in->id)}}">
                                             <button type="button" class="btn btn-info btn-sm">Ubah</button>
                                         </a>
