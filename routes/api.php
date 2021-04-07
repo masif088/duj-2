@@ -75,6 +75,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/mutasi/hapus/{id}', [InframutasiController::class, 'delete']);
         Route::get('/mutasi/batal/{id}', [InframutasiController::class, 'batal']);
         Route::get('/mutasi/riwayat', [InframutasiController::class, 'index']);
+        Route::post('/mutasi/terima', [InframutasiController::class, 'terima']);
+
 
 
     });
