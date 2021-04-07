@@ -110,6 +110,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
             Route::get('/barcode/{b}', [InfraController::class, 'barcode'])->name('barcode');
             Route::get('/jual', [InfraController::class, 'jual'])->name('jual');
             Route::post('/jual', [InfraController::class, 'terjual']);
+            Route::get('/terjual', [InfraController::class, 'riwayat'])->name('terjual');
             
         });
         Route::prefix('infra-mutasi')->name('infraM.')->group(function () {

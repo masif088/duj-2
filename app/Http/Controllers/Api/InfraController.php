@@ -7,6 +7,7 @@ use App\Http\Controllers\LogController;
 use App\Models\Infra;
 use App\Models\ServiceInfra;
 use Illuminate\Http\Request;
+use Services\Infra\InfraService;
 
 class InfraController extends Controller
 {
@@ -18,12 +19,12 @@ class InfraController extends Controller
     {
         return response()->json([
             'status' => 'ok',
-            'data' => Infra::where('gudang_id',auth('sanctum')->user()->gudang_id)->with('serviceInfra')->get()
+            'data' => Infra::where('gudang_id',auth('sanctum')->user()->gudang_id)->with(['serviceInfra','gudang'])->get()
         ],200);
     }
     public function scan(Request $request)
     {
-        $i = Infra::where('kode',$request->kode)->with('serviceInfra')->first();
+        $i = Infra::where('kode',$request->kode)->with(['serviceInfra','gudang'])->latest()->first();
         return response()->json([
             'status' => 'ok',
             'data' => $i
@@ -68,5 +69,19 @@ class InfraController extends Controller
         return response()->json([
             'status' => 'ok',
         ],201);
+    }
+    public function terjual(Request $request)
+    {
+        $b = Infra::where([['kode',$request->kode],['status','ready'],['gudang_id',auth('sanctum')->user()->gudang_id]])->latest()->first();
+        if($b == null){
+                return response()->json([
+                    'status' =>'error',
+                    'msg' => 'Kode tidak ditemukan/barang tidak ready'
+                ],400);
+            }
+            InfraService::status($b,'terjual');
+            return response()->json([
+                'status' =>'ok',
+            ],201);
     }
 }

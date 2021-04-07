@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController as ApiUserController;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\CheckController;
 use App\Http\Controllers\Api\InfraController;
+use App\Http\Controllers\Api\InframutasiController;
 use App\Http\Controllers\Api\MonitorController;
 use App\Http\Controllers\Api\MutasiController;
 use App\Models\User;
@@ -69,6 +70,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/', [InfraController::class, 'index']);
         Route::post('/scan', [InfraController::class, 'scan']);
         Route::post('/service', [InfraController::class, 'service']);
+        Route::post('/terjual', [InfraController::class, 'terjual']);
+        Route::post('/mutasi', [InframutasiController::class, 'store']);
+        Route::get('/mutasi/hapus/{id}', [InframutasiController::class, 'delete']);
+        Route::get('/mutasi/batal/{id}', [InframutasiController::class, 'batal']);
+        Route::get('/mutasi/riwayat', [InframutasiController::class, 'index']);
+
+
     });
     Route::prefix('after')->group(function () {
         Route::get('/', [AfterController::class, 'index']);

@@ -95,7 +95,6 @@ class InframutasiController extends Controller
     }
     public function terimaa(Request $request)
     {
-       
             $b = InframutasiService::find($request->kode,'mutasi');
             if($b == null || (auth()->user()->gudang_id == $b->gudang_id) || ($b->inframutasi->status != 'proses')){
             toastr()->warning('status barang bukan mutasi/gudang penerima salah'); 
