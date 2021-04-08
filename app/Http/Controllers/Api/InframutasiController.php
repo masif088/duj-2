@@ -16,7 +16,7 @@ class InframutasiController extends Controller
     {
         $mutasis = Inframutasi::whereHas('infra', function ($m) {
             return $m->where('gudang_id',auth('sanctum')->user()->gudang_id);
-    })->orderByDesc('created_at')->get();
+    })->orderByDesc('created_at')->with(['gudang','infra.gudang'])->get();
     return response()->json([
         'status' => 'ok',
         'data' => $mutasis
