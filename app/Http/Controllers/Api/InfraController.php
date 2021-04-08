@@ -33,7 +33,7 @@ class InfraController extends Controller
     public function detail(Request $request)
     {
         $i = Infra::where('kode',$request->kode)->with(['serviceInfra','gudang','inframutasis.gudang'])->latest()->first();
-        if($i == null || $i->inframutasis->gudang_id != auth('sanctum')->user()->gudang_id || $i->status != 'mutasi'){
+        if($i == null || $i->inframutasi->gudang_id != auth('sanctum')->user()->gudang_id || $i->status != 'mutasi'){
             return response()->json([
                 'status' => 'error',
                 'msg' => 'barang tidak valid'
@@ -69,7 +69,7 @@ class InfraController extends Controller
             $file = $request->file('file');
             $fileName = substr(md5(microtime()), 0, 100).'.'.$file->getClientOriginalExtension();
             $request->file('file')->storeAs('public/infra/',$fileName);
-        
+
         $id->update([
             'status' => 'rusak',
             ]);
@@ -79,7 +79,7 @@ class InfraController extends Controller
             'infra_id' => $id->id
         ]);
         $this->log->create('membuat service infrastruktur #'.$request->kode,'service_infra',$ss->id);
-        
+
         return response()->json([
             'status' => 'ok',
         ],201);
