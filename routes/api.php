@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/scan', [InfraController::class, 'scan']);
         Route::post('/service', [InfraController::class, 'service']);
         Route::post('/terjual', [InfraController::class, 'terjual']);
+        Route::post('/detail', [InfraController::class, 'detail']);
         Route::post('/mutasi', [InframutasiController::class, 'store']);
         Route::get('/mutasi/hapus/{id}', [InframutasiController::class, 'delete']);
         Route::get('/mutasi/batal/{id}', [InframutasiController::class, 'batal']);
