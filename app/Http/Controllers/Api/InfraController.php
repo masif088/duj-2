@@ -30,6 +30,20 @@ class InfraController extends Controller
             'data' => $i
         ],200);
     }
+    public function detail(Request $request)
+    {
+        $i = Infra::where('kode',$request->kode)->with(['serviceInfra','gudang','inframutasis.gudang'])->latest()->first();
+        if($i == null || $i->inframutasis->gudang_id != auth('sanctum')->user()->gudang_id || $i->status != 'mutasi'){
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'barang tidak valid'
+            ],400);
+        }
+        return response()->json([
+            'status' => 'ok',
+            'data' => $i
+        ],200);
+    }
     public function service(Request $request)
     {
         $id = Infra::where('kode',$request->kode)->where('gudang_id',auth('sanctum')->user()->gudang_id)->first();

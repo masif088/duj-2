@@ -22,6 +22,10 @@ class Infra extends Model
     {
         return $this->hasOne(Inframutasi::class)->latest();
     }
+    public function inframutasis()
+    {
+        return $this->hasMany(Inframutasi::class);
+    }
     public function gudang()
     {
         return $this->belongsTo(Gudang::class);
