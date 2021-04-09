@@ -29,7 +29,7 @@ class InframutasiController extends Controller
 
         if ($data == null){
             return response()->json([
-                'status' => 'ok',
+                'status' => 'error',
                 'msg'=>'tidak ditemukan'
             ],200);
         }
