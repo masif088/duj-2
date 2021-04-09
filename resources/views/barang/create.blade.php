@@ -23,17 +23,20 @@
                   <select name="suplier" class="js-example-basic-single col-sm-12">
                     @foreach ($suplier as $s)
                     <option value="{{$s->id}}">{{$s->name}}</option>
-                        
-                    @endforeach  
+
+                    @endforeach
                   </select>
                 </div>
                 <div class="mb-2 col-md-4">
                   <div class="col-form-label">Gudang</div>
                   <select name="gudang" class="js-example-basic-single col-sm-12">
                     @foreach ($gudang as $g)
+                    if($g->id == auth()->user()->gudang_id){
                     <option value="{{$g->id}}">{{$g->name}}</option>
-                        
-                    @endforeach  
+                    }
+
+
+                    @endforeach
                   </select>
                 </div>
               </div>
