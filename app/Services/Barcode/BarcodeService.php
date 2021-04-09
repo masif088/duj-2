@@ -22,16 +22,16 @@ class BarcodeService
     }
     static public function find($d,$status = null,$gudang = null)
     {   
-        $data = Barcode::query();
+        $data = Barcode::where('kode',$d);
         if($status != null){
-            $data->where('status',$status);
+            $data = $data->where('status',$status);
         }
         if($gudang != null){
-            $data->whereHas('masuk',function($x) use($gudang){
+            $data = $data->whereHas('masuk',function($x) use($gudang){
                 return $x->where('gudang_id',$gudang);
             });
         }
-        $data = $data->where('kode',$d)->latest()->first();
+        $data = $data->latest()->first();
         
         return $data;
     }
