@@ -18,7 +18,7 @@ class CreateLogsTable extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('message');
             $table->bigInteger('type_id');
-            $table->enum('type',['mutasi','after','service_after','masuk','infra','service_infra','barang','barcode','Check','gudang','suplier','user']);
+            $table->enum('type',['mutasi','after','service_after','masuk','infra','service_infra','barang','barcode','Check','gudang','suplier','user','inframutasi']);
             $table->timestamps();
         });
     }
