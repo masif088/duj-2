@@ -52,14 +52,14 @@ class InframutasiService
     }
     static public function find($d,$status = null,$gudang = null)
     {   
-        $data = Infra::query();
+        $data = Infra::where('kode',$d);
         if($status != null){
-            $data->where('status',$status);
+           $data = $data->where('status',$status);
         }
         if($gudang != null){
-            $data->where('gudang_id',$gudang);
+            $data = $data->where('gudang_id',$gudang);
         }
-        $data = $data->where('kode',$d)->latest()->first();
+        $data = $data->latest()->first();
         
         return $data;
     }
