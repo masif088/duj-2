@@ -27,7 +27,12 @@ class InframutasiController extends Controller
       
         $data = InframutasiService::find($request->kode,'ready',auth('sanctum')->user()->gudang_id);
 
-        if ($data == null) return 'tidak ditemukan';
+        if ($data == null){
+            return response()->json([
+                'status' => 'ok',
+                'msg'=>'tidak ditemukan'
+            ],200);
+        }
         $c = DB::transaction(function() use($data,$request){
             InfraService::status($data, 'mutasi');
 
