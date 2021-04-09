@@ -72,8 +72,8 @@ class MasukService
         $log = new LogController;
         $masuk = Masuk::create([
                 'suplier_id' => $b->masuk->suplier->id,
-                'gudang_id' => auth('sanctum')->user()->gudang_id,
-                'user_id' => auth('sanctum')->user()->id,
+                'gudang_id' => auth('sanctum')->user() == null ? auth()->user()->id : auth('sanctum')->user()->id,
+                'user_id' => auth('sanctum')->user() == null ? auth()->user()->id : auth('sanctum')->user()->id,
                 'barang_id' => $b->masuk->barang->id,
                 'kuantiti' => 1,
                 'harga_satuan' => $b->masuk->harga_satuan,
