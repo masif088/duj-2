@@ -8,7 +8,7 @@ class BarcodeService
     static public function store($data)
     {   
         $data->barcode()->create([
-            'user_id' => auth()->user()->id,
+            'user_id' => auth('sanctum')->user() == null ? auth()->user()->id : auth('sanctum')->user()->id,
             'kode' => $data->kode_akuntan.'_'.mt_rand(10000000, 99999999),
         ]);
         return true;
