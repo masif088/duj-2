@@ -43,7 +43,7 @@ class BarangController extends Controller
         foreach ($barcode as $bk) {
             $bk['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($bk->kode));
         }
-        $customPaper = array(0, 0, 567.00, 283.80);
+        $customPaper = array(0, 0, 283.80, 567.00,'landscape');
         $pdf = PDF::loadView('backend.barcode', compact('barcode'))->setPaper($customPaper);
         return $pdf->stream();
     }
