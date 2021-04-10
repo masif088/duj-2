@@ -170,7 +170,7 @@
             var login_session = localStorage.getItem("login_session");
             if (login_session == null) {
                 console.log('asd');
-                window.location = "/finger-login";
+                window.location = "{{route('finger.login')}}";
             }
         });
     </script>

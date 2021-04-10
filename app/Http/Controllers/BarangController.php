@@ -113,7 +113,7 @@ class BarangController extends Controller
         $data = [
             "action" => 'barang.update',
             'name' => $request->name,
-            'id' => $id,
+            'id' => $id->id,
             'user_id' => Auth::id(),
         ];
 //        dd($data);
