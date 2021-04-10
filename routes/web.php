@@ -189,8 +189,11 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin,head,ketua,checker,tekni
     });
     Route::group(['middleware' => ['CheckRole:admin,head']], function () {
         Route::prefix('barang')->name('barang.')->group(function () {
+
             Route::get('/', [BarangController::class, 'index'])->name('index');
             Route::get('/detail/{id?}', [BarangController::class, 'detail'])->name('detail');
+            Route::get('/nonactive/{id?}', [BarangController::class, 'nonactive'])->name('nonactive');
+            Route::get('/active/{id?}', [BarangController::class, 'active'])->name('active');
             Route::get('/gudang', [BarangController::class, 'detailGudang'])->name('detailGudang');
             Route::get('/create', [BarangController::class, 'create'])->name('create');
         });

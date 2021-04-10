@@ -47,6 +47,65 @@ class BarangController extends Controller
         $pdf = PDF::loadView('backend.barcode', compact('barcode'))->setPaper($customPaper);
         return $pdf->stream();
     }
+
+    public function nonactive(Request $request, Barang $id)
+    {
+        if (auth()->user()->role != 'admin') {
+            $barcode = $id->barcodes()->where('status', 'nonaktif')->whereHas('masuk', function ($m) {
+                return $m->where('gudang_id', auth()->user()->gudang_id);
+            })->get();
+        } else {
+            if ($request->barcode != null) {
+                $barcode = Barcode::where('status', 'nonaktif')->where('id', $request->barcode)->with('masuk')->get();
+            } else {
+                $barcode = $id->barcodes();
+                if ($request->gudang != null) {
+                    $barcode = $barcode->where('status', 'nonaktif')->whereHas('masuk', function ($m) use ($request) {
+                        return $m->where('gudang_id', $request->gudang);
+                    });
+                }
+                $barcode = $barcode->with('masuk')->get();
+            }
+        }
+        set_time_limit(300);
+        ini_set('memory_limit', '8192M');
+        foreach ($barcode as $bk) {
+            $bk['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($bk->kode));
+        }
+        $customPaper = array(0, 0, 567.00, 283.80);
+        $pdf = PDF::loadView('backend.barcode', compact('barcode'))->setPaper($customPaper);
+        return $pdf->stream();
+    }
+
+    public function active(Request $request, Barang $id)
+    {
+        if (auth()->user()->role != 'admin') {
+            $barcode = $id->barcodes()->where('status', 'aktif')->whereHas('masuk', function ($m) {
+                return $m->where('gudang_id', auth()->user()->gudang_id);
+            })->get();
+        } else {
+            if ($request->barcode != null) {
+                $barcode = Barcode::where('status', 'aktif')->where('id', $request->barcode)->with('masuk')->get();
+            } else {
+                $barcode = $id->barcodes();
+                if ($request->gudang != null) {
+                    $barcode = $barcode->where('status', 'aktif')->whereHas('masuk', function ($m) use ($request) {
+                        return $m->where('gudang_id', $request->gudang);
+                    });
+                }
+                $barcode = $barcode->with('masuk')->get();
+            }
+        }
+        set_time_limit(300);
+        ini_set('memory_limit', '8192M');
+        foreach ($barcode as $bk) {
+            $bk['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($bk->kode));
+        }
+        $customPaper = array(0, 0, 567.00, 283.80);
+        $pdf = PDF::loadView('backend.barcode', compact('barcode'))->setPaper($customPaper);
+        return $pdf->stream();
+    }
+
     public function detailGudang(Request $request)
     {
         if ($request->gudang == null) {

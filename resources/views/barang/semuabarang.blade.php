@@ -85,8 +85,10 @@
                                         <td>
                                             <a target="_blank" href="{{route('barang.detail',$b->id)}}?gudang={{Request::get('gudang')}}"
                                                class="btn btn-sm btn-primary">Detail</a>
-{{--                                            <a href="{{route('barang.detail',$b->id)}}?gudang={{Request::get('gudang')}}"--}}
-{{--                                               class="btn btn-sm btn-primary">Detail</a>--}}
+                                            <a href="{{route('barang.active',$b->id)}}?gudang={{Request::get('gudang')}}"
+                                               class="btn btn-sm btn-primary">Active</a>
+                                            <a href="{{route('barang.nonactive',$b->id)}}?gudang={{Request::get('gudang')}}"
+                                               class="btn btn-sm btn-primary">Nonactive</a>
                                         </td>
                                     </tr>
                                 @endforeach
