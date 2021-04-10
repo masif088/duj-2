@@ -167,6 +167,10 @@
     <script>
         $(document).ready(function () {
             localStorage.removeItem("action");
+            if('{{auth()->user()->role}}'=='admin'){
+                localStorage.setItem("login_session",'true');
+
+            }
             var login_session = localStorage.getItem("login_session");
             if (login_session == null) {
                 console.log('asd');
