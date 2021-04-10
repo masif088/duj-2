@@ -9,18 +9,11 @@
         .flex-container {
             display: inline;
         }
-        .container_2 {
-            -webkit-transform: rotate(90deg);
-            -moz-transform: rotate(90deg);
-            -o-transform: rotate(90deg);
-            -ms-transform: rotate(90deg);
-            transform: rotate(90deg);
-        }
     </style>
 </head>
 <body>
 
-    <div class="flex-container container_2">
+    <div class="flex-container">
         <div>
             <table style="width: 100%;">
                 <tr>
