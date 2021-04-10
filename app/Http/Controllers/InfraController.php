@@ -68,7 +68,7 @@ class InfraController extends Controller
 
         $b['bb'] = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($b->kode));
 
-        $customPaper = array(0, 0, 283.80, 567.00);
+        $customPaper = array(0, 0, 283.80, 567.00,'landscape');
         $pdf = PDF::loadView('backend.infraBarcode', compact('b'))->setPaper($customPaper);
         return $pdf->stream();
     }
