@@ -164,6 +164,16 @@
     <script src="{{asset('/assets/js/typeahead-search/typeahead-custom.j')}}s"></script>
     <script src="{{asset('/assets/js/tooltip-init.js')}}"></script>
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            localStorage.removeItem("action");
+            var login_session = localStorage.getItem("login_session");
+            if (login_session == null) {
+                console.log('asd');
+                window.location = "/finger-login";
+            }
+        });
+    </script>
     @yield('script')
     <!-- Plugins JS Ends-->
     <!-- Theme js-->

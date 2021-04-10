@@ -41,6 +41,7 @@
                 </div>
                   <div class="card-footer ">
                     <button class="btn btn-primary">Simpan</button>
+                      <a href="{{route('barang.index')}}" class="btn btn-success">Selesai</a>
                     {{-- <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button> --}}
                   </div>
               </form>
@@ -55,8 +56,8 @@
 <script type="text/javascript">
   var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
   scanner.addListener('scan',function(content){
-    document.getElementById('Barcode').value = content; 
-   
+    document.getElementById('Barcode').value = content;
+
   });
   Instascan.Camera.getCameras().then(function (cameras){
       if(cameras.length>0){

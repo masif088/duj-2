@@ -20,25 +20,25 @@
         <div class="card">
           <div class="card-header">
             <!-- <div class="pull-right mr-4"><a href="#">Edit Profile Playlist</a></div> -->
-            
+
             <h5>Barang Keluar</h5>
-            <p>Kode Mutasi:{{Cookie::get('kodeMts') ?? 'null'}} <a href="{{route('mutasi.reset')}}"><span style="cursor:pointer" class="badge badge-primary">Reset</span></a>
+            <p>Kode Mutasi:{{Cookie::get('kodeMts') ?? 'null'}} <a href="{{route('fingers','mutasi.reset')}}"><span style="cursor:pointer" class="badge badge-primary">Reset</span></a>
             <br>
             Yang telah discan: {{$b}}
-            <a href="{{route('mutasi.reset')}}" class="btn btn-success pull-right" >
+            <a href="{{route('fingers','mutasi.reset')}}" class="btn btn-success pull-right" >
               Selesai
             </a>
             <br>
             Gudang tujuan: {{$g->name ?? null}}
             </p>
-            
+
           </div>
           <div class="card-body">
         <video id="preview"></video>
 
             <form action="{{route('mutasi.create')}}" method="POST" class="form theme-form">
-              @csrf 
-              @if($g == 'null') 
+              @csrf
+              @if($g == 'null')
               <div class="form-group mb-3">
               <div class="col-form-label">Gudang Tujuan</div>
                 <select name="gudang" class="js-example-basic-single col-sm-12 @error('barang') is-invalid @enderror" name="gudang"
@@ -46,9 +46,9 @@
                 @foreach ($gudang as $gu)
                 @if ($gu->id != auth()->user()->gudang_id)
                 <option value="{{$gu->id}}" {{ old('gudang') == $gu->id ? 'selected' : null }}>{{$gu->name}}</option>
-                    
+
                 @endif
-                @endforeach  
+                @endforeach
                 </select>
                 @error('gudang')
                   <span class="invalid-feedback" role="alert">
@@ -73,16 +73,16 @@
                 <div class="form-footer">
                   <div class="form-group">
                     <div class="row">
-  
+
                       <div class="col-md-2">
-                        
+
                         <button type="submit" class="btn btn-primary" >
                           Tambah
                         </button>
                       </div>
-                      
+
                     </div>
-                   
+
                   </div>
                 </div>
 <div class="row">
@@ -101,7 +101,7 @@
               </thead>
           <tbody>
             @foreach ($gud as $gudd)
-           
+
             <tr>
               <td>
                 <input type="text"  name="Tanggal[]"  class="form-control" placeholder="20/3/2021" value="{{$gudd->created_at->format('d-M-Y')}}" disabled/>
@@ -127,10 +127,10 @@
               </tbody>
       </table>
     </div>
-  
+
   </div>
 </div>
-            
+
 
             </form>
           </div>
@@ -143,8 +143,8 @@
 <script type="text/javascript">
   var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
   scanner.addListener('scan',function(content){
-    document.getElementById('kode').value = content; 
-   
+    document.getElementById('kode').value = content;
+
   });
   Instascan.Camera.getCameras().then(function (cameras){
       if(cameras.length>0){
